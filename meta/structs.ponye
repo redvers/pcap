@@ -1,0 +1,907 @@
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:8
+  Original Name: timeval
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(long int) size=64]: tv_sec  
+     000064: [FundamentalType(long int) size=64]: tv_usec  
+*/
+struct Timeval
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:11
+  Original Name: timespec
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(long int) size=64]: tv_sec  
+     000064: [FundamentalType(long int) size=64]: tv_nsec  
+*/
+struct Timespec
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:51
+  Original Name: __pthread_internal_list
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[Struct size=128,fid: f20]: __prev  
+     000064: [PointerType size=64]->[Struct size=128,fid: f20]: __next  
+*/
+struct Pthreadinternallist
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:57
+  Original Name: __pthread_internal_slist
+  Struct Size (bits):  64
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[Struct size=64,fid: f20]: __next  
+*/
+struct Pthreadinternalslist
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:22
+  Original Name: __pthread_mutex_s
+  Struct Size (bits):  320
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: __lock  
+     000032: [FundamentalType(unsigned int) size=32]: __count  
+     000064: [FundamentalType(int) size=32]: __owner  
+     000096: [FundamentalType(unsigned int) size=32]: __nusers  
+     000128: [FundamentalType(int) size=32]: __kind  
+     000160: [FundamentalType(short int) size=16]: __spins  
+     000176: [FundamentalType(short int) size=16]: __elision  
+     000192: [Struct size=128,fid: f20]: __list  
+*/
+struct Pthreadmutexs
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:23
+  Original Name: __pthread_rwlock_arch_t
+  Struct Size (bits):  448
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: __readers  
+     000032: [FundamentalType(unsigned int) size=32]: __writers  
+     000064: [FundamentalType(unsigned int) size=32]: __wrphase_futex  
+     000096: [FundamentalType(unsigned int) size=32]: __writers_futex  
+     000128: [FundamentalType(unsigned int) size=32]: __pad3  
+     000160: [FundamentalType(unsigned int) size=32]: __pad4  
+     000192: [FundamentalType(int) size=32]: __cur_writer  
+     000224: [FundamentalType(int) size=32]: __shared  
+     000256: [FundamentalType(signed char) size=8]: __rwelision  
+     000264: [ArrayType size=(0-6)]->[FundamentalType(unsigned char) size=8] -- UNSUPPORTED - FIXME: __pad1  
+     000320: [FundamentalType(long unsigned int) size=64]: __pad2  
+     000384: [FundamentalType(unsigned int) size=32]: __flags  
+*/
+struct Pthreadrwlockarcht
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:94
+  Original Name: __pthread_cond_s
+  Struct Size (bits):  384
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [UNION size=64] -- UNSUPPORTED FIXME: __wseq  
+     000064: [UNION size=64] -- UNSUPPORTED FIXME: __g1_start  
+     000128: [ArrayType size=(0-1)]->[FundamentalType(unsigned int) size=32] -- UNSUPPORTED - FIXME: __g_refs  
+     000192: [ArrayType size=(0-1)]->[FundamentalType(unsigned int) size=32] -- UNSUPPORTED - FIXME: __g_size  
+     000256: [FundamentalType(unsigned int) size=32]: __g1_orig_size  
+     000288: [FundamentalType(unsigned int) size=32]: __wrefs  
+     000320: [ArrayType size=(0-1)]->[FundamentalType(unsigned int) size=32] -- UNSUPPORTED - FIXME: __g_signals  
+*/
+struct Pthreadconds
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/sys/time.h:52
+  Original Name: timezone
+  Struct Size (bits):  64
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: tz_minuteswest  
+     000032: [FundamentalType(int) size=32]: tz_dsttime  
+*/
+struct Timezone
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/sys/time.h:130
+  Original Name: itimerval
+  Struct Size (bits):  256
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [Struct size=128,fid: f16]: it_interval  
+     000128: [Struct size=128,fid: f16]: it_value  
+*/
+struct Itimerval
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:26
+  Original Name: iovec
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(void) size=0]: iov_base  
+     000064: [FundamentalType(long unsigned int) size=64]: iov_len  
+*/
+struct Iovec
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/socket.h:180
+  Original Name: sockaddr
+  Struct Size (bits):  128
+  Struct Align (bits): 16
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(short unsigned int) size=16]: sa_family  
+     000016: [ArrayType size=(0-13)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: sa_data  
+*/
+struct Sockaddr
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/socket.h:193
+  Original Name: sockaddr_storage
+  Struct Size (bits):  1024
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(short unsigned int) size=16]: ss_family  
+     000016: [ArrayType size=(0-117)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: __ss_padding  
+     000960: [FundamentalType(long unsigned int) size=64]: __ss_align  
+*/
+struct Sockaddrstorage
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/socket.h:259
+  Original Name: msghdr
+  Struct Size (bits):  448
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(void) size=0]: msg_name  
+     000064: [FundamentalType(unsigned int) size=32]: msg_namelen  
+     000128: [PointerType size=64]->[Struct size=128,fid: f25]: msg_iov  
+     000192: [FundamentalType(long unsigned int) size=64]: msg_iovlen  
+     000256: [PointerType size=64]->[FundamentalType(void) size=0]: msg_control  
+     000320: [FundamentalType(long unsigned int) size=64]: msg_controllen  
+     000384: [FundamentalType(int) size=32]: msg_flags  
+*/
+struct Msghdr
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/socket.h:277
+  Original Name: cmsghdr
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(long unsigned int) size=64]: cmsg_len  
+     000064: [FundamentalType(int) size=32]: cmsg_level  
+     000096: [FundamentalType(int) size=32]: cmsg_type  
+     000128: [ArrayType size=(0-)]->[FundamentalType(unsigned char) size=8] -- UNSUPPORTED - FIXME: __cmsg_data  
+*/
+struct Cmsghdr
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/socket.h:363
+  Original Name: linger
+  Struct Size (bits):  64
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: l_onoff  
+     000032: [FundamentalType(int) size=32]: l_linger  
+*/
+struct Linger
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h:6
+  Original Name: osockaddr
+  Struct Size (bits):  128
+  Struct Align (bits): 16
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(short unsigned int) size=16]: sa_family  
+     000016: [ArrayType size=(0-13)]->[FundamentalType(unsigned char) size=8] -- UNSUPPORTED - FIXME: sa_data  
+*/
+struct Osockaddr
+
+
+/*
+  Source: /usr/include/netinet/in.h:31
+  Original Name: in_addr
+  Struct Size (bits):  32
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: s_addr  
+*/
+struct Inaddr
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/in.h:143
+  Original Name: ip_opts
+  Struct Size (bits):  352
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [Struct size=32,fid: f34]: ip_dst  
+     000032: [ArrayType size=(0-39)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: ip_opts  
+*/
+struct Ipopts
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/in.h:150
+  Original Name: ip_mreqn
+  Struct Size (bits):  96
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [Struct size=32,fid: f34]: imr_multiaddr  
+     000032: [Struct size=32,fid: f34]: imr_address  
+     000064: [FundamentalType(int) size=32]: imr_ifindex  
+*/
+struct Ipmreqn
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/in.h:158
+  Original Name: in_pktinfo
+  Struct Size (bits):  96
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: ipi_ifindex  
+     000032: [Struct size=32,fid: f34]: ipi_spec_dst  
+     000064: [Struct size=32,fid: f34]: ipi_addr  
+*/
+struct Inpktinfo
+
+
+/*
+  Source: /usr/include/netinet/in.h:219
+  Original Name: in6_addr
+  Struct Size (bits):  128
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [UNION size=128] -- UNSUPPORTED FIXME: __in6_u  
+*/
+struct In6addr
+
+
+/*
+  Source: /usr/include/netinet/in.h:245
+  Original Name: sockaddr_in
+  Struct Size (bits):  128
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(short unsigned int) size=16]: sin_family  
+     000016: [FundamentalType(short unsigned int) size=16]: sin_port  
+     000032: [Struct size=32,fid: f34]: sin_addr  
+     000064: [ArrayType size=(0-7)]->[FundamentalType(unsigned char) size=8] -- UNSUPPORTED - FIXME: sin_zero  
+*/
+struct Sockaddrin
+
+
+/*
+  Source: /usr/include/netinet/in.h:260
+  Original Name: sockaddr_in6
+  Struct Size (bits):  224
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(short unsigned int) size=16]: sin6_family  
+     000016: [FundamentalType(short unsigned int) size=16]: sin6_port  
+     000032: [FundamentalType(unsigned int) size=32]: sin6_flowinfo  
+     000064: [Struct size=128,fid: f34]: sin6_addr  
+     000192: [FundamentalType(unsigned int) size=32]: sin6_scope_id  
+*/
+struct Sockaddrin6
+
+
+/*
+  Source: /usr/include/netinet/in.h:272
+  Original Name: ip_mreq
+  Struct Size (bits):  64
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [Struct size=32,fid: f34]: imr_multiaddr  
+     000032: [Struct size=32,fid: f34]: imr_interface  
+*/
+struct Ipmreq
+
+
+/*
+  Source: /usr/include/netinet/in.h:281
+  Original Name: ip_mreq_source
+  Struct Size (bits):  96
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [Struct size=32,fid: f34]: imr_multiaddr  
+     000032: [Struct size=32,fid: f34]: imr_interface  
+     000064: [Struct size=32,fid: f34]: imr_sourceaddr  
+*/
+struct Ipmreqsource
+
+
+/*
+  Source: /usr/include/netinet/in.h:296
+  Original Name: ipv6_mreq
+  Struct Size (bits):  160
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [Struct size=128,fid: f34]: ipv6mr_multiaddr  
+     000128: [FundamentalType(unsigned int) size=32]: ipv6mr_interface  
+*/
+struct Ipv6mreq
+
+
+/*
+  Source: /usr/include/netinet/in.h:308
+  Original Name: group_req
+  Struct Size (bits):  1088
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: gr_interface  
+     000064: [Struct size=1024,fid: f26]: gr_group  
+*/
+struct Groupreq
+
+
+/*
+  Source: /usr/include/netinet/in.h:317
+  Original Name: group_source_req
+  Struct Size (bits):  2112
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: gsr_interface  
+     000064: [Struct size=1024,fid: f26]: gsr_group  
+     001088: [Struct size=1024,fid: f26]: gsr_source  
+*/
+struct Groupsourcereq
+
+
+/*
+  Source: /usr/include/netinet/in.h:331
+  Original Name: ip_msfilter
+  Struct Size (bits):  160
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [Struct size=32,fid: f34]: imsf_multiaddr  
+     000032: [Struct size=32,fid: f34]: imsf_interface  
+     000064: [FundamentalType(unsigned int) size=32]: imsf_fmode  
+     000096: [FundamentalType(unsigned int) size=32]: imsf_numsrc  
+     000128: [ArrayType size=(0-0)]->[Struct size=32,fid: f34] -- UNSUPPORTED - FIXME: imsf_slist  
+*/
+struct Ipmsfilter
+
+
+/*
+  Source: /usr/include/netinet/in.h:352
+  Original Name: group_filter
+  Struct Size (bits):  2176
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: gf_interface  
+     000064: [Struct size=1024,fid: f26]: gf_group  
+     001088: [FundamentalType(unsigned int) size=32]: gf_fmode  
+     001120: [FundamentalType(unsigned int) size=32]: gf_numsrc  
+     001152: [ArrayType size=(0-0)]->[Struct size=1024,fid: f26] -- UNSUPPORTED - FIXME: gf_slist  
+*/
+struct Groupfilter
+
+
+/*
+  Source: /usr/include/rpc/netdb.h:46
+  Original Name: rpcent
+  Struct Size (bits):  192
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(char) size=8]: r_name  
+     000064: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: r_aliases  
+     000128: [FundamentalType(int) size=32]: r_number  
+*/
+struct Rpcent
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/netdb.h:26
+  Original Name: netent
+  Struct Size (bits):  192
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(char) size=8]: n_name  
+     000064: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: n_aliases  
+     000128: [FundamentalType(int) size=32]: n_addrtype  
+     000160: [FundamentalType(unsigned int) size=32]: n_net  
+*/
+struct Netent
+
+
+/*
+  Source: /usr/include/netdb.h:98
+  Original Name: hostent
+  Struct Size (bits):  256
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(char) size=8]: h_name  
+     000064: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: h_aliases  
+     000128: [FundamentalType(int) size=32]: h_addrtype  
+     000160: [FundamentalType(int) size=32]: h_length  
+     000192: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: h_addr_list  
+*/
+struct Hostent
+
+
+/*
+  Source: /usr/include/netdb.h:255
+  Original Name: servent
+  Struct Size (bits):  256
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(char) size=8]: s_name  
+     000064: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: s_aliases  
+     000128: [FundamentalType(int) size=32]: s_port  
+     000192: [PointerType size=64]->[FundamentalType(char) size=8]: s_proto  
+*/
+struct Servent
+
+
+/*
+  Source: /usr/include/netdb.h:324
+  Original Name: protoent
+  Struct Size (bits):  192
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(char) size=8]: p_name  
+     000064: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: p_aliases  
+     000128: [FundamentalType(int) size=32]: p_proto  
+*/
+struct Protoent
+
+
+/*
+  Source: /usr/include/netdb.h:565
+  Original Name: addrinfo
+  Struct Size (bits):  384
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: ai_flags  
+     000032: [FundamentalType(int) size=32]: ai_family  
+     000064: [FundamentalType(int) size=32]: ai_socktype  
+     000096: [FundamentalType(int) size=32]: ai_protocol  
+     000128: [FundamentalType(unsigned int) size=32]: ai_addrlen  
+     000192: [PointerType size=64]->[Struct size=128,fid: f26]: ai_addr  
+     000256: [PointerType size=64]->[FundamentalType(char) size=8]: ai_canonname  
+     000320: [PointerType size=64]->[Struct size=384,fid: f38]: ai_next  
+*/
+struct Addrinfo
+
+
+/*
+  Source: /usr/include/pcap/bpf.h:117
+  Original Name: bpf_program
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: bf_len  
+     000064: [PointerType size=64]->[Struct size=64,fid: f40]: bf_insns  
+*/
+struct Bpfprogram
+
+
+/*
+  Source: /usr/include/pcap/bpf.h:245
+  Original Name: bpf_insn
+  Struct Size (bits):  64
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(short unsigned int) size=16]: code  
+     000016: [FundamentalType(unsigned char) size=8]: jt  
+     000024: [FundamentalType(unsigned char) size=8]: jf  
+     000032: [FundamentalType(unsigned int) size=32]: k  
+*/
+struct Bpfinsn
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:10
+  Original Name: _G_fpos_t
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(long int) size=64]: __pos  
+     000064: [Struct size=64,fid: f42]: __state  
+*/
+struct Gfpost
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:10
+  Original Name: _G_fpos64_t
+  Struct Size (bits):  128
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(long int) size=64]: __pos  
+     000064: [Struct size=64,fid: f42]: __state  
+*/
+struct Gfpos64t
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:49
+  Original Name: _IO_FILE
+  Struct Size (bits):  1728
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: _flags  
+     000064: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_read_ptr  
+     000128: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_read_end  
+     000192: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_read_base  
+     000256: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_write_base  
+     000320: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_write_ptr  
+     000384: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_write_end  
+     000448: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_buf_base  
+     000512: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_buf_end  
+     000576: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_save_base  
+     000640: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_backup_base  
+     000704: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_save_end  
+     000768: [PointerType size=64]->[Struct size=,fid: f45]: _markers  
+     000832: [PointerType size=64]->[Struct size=1728,fid: f45]: _chain  
+     000896: [FundamentalType(int) size=32]: _fileno  
+     000928: [FundamentalType(int) size=32]: _flags2  
+     000960: [FundamentalType(long int) size=64]: _old_offset  
+     001024: [FundamentalType(short unsigned int) size=16]: _cur_column  
+     001040: [FundamentalType(signed char) size=8]: _vtable_offset  
+     001048: [ArrayType size=(0-0)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: _shortbuf  
+     001088: [PointerType size=64]->[FundamentalType(void) size=0]: _lock  
+     001152: [FundamentalType(long int) size=64]: _offset  
+     001216: [PointerType size=64]->[Struct size=,fid: f45]: _codecvt  
+     001280: [PointerType size=64]->[Struct size=,fid: f45]: _wide_data  
+     001344: [PointerType size=64]->[Struct size=1728,fid: f45]: _freeres_list  
+     001408: [PointerType size=64]->[FundamentalType(void) size=0]: _freeres_buf  
+     001472: [FundamentalType(long unsigned int) size=64]: __pad5  
+     001536: [FundamentalType(int) size=32]: _mode  
+     001568: [ArrayType size=(0-19)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: _unused2  
+*/
+struct IOFILE
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:36
+  Original Name: _IO_marker
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct IOmarker
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:37
+  Original Name: _IO_codecvt
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct IOcodecvt
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:38
+  Original Name: _IO_wide_data
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct IOwidedata
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:163
+  Original Name: pcap
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct Pcap
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:164
+  Original Name: pcap_dumper
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct Pcapdumper
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:301
+  Original Name: pcap_if
+  Struct Size (bits):  320
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[Struct size=320,fid: f50]: next  
+     000064: [PointerType size=64]->[FundamentalType(char) size=8]: name  
+     000128: [PointerType size=64]->[FundamentalType(char) size=8]: description  
+     000192: [PointerType size=64]->[Struct size=320,fid: f50]: addresses  
+     000256: [FundamentalType(unsigned int) size=32]: flags  
+*/
+struct Pcapif
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:322
+  Original Name: pcap_addr
+  Struct Size (bits):  320
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[Struct size=320,fid: f50]: next  
+     000064: [PointerType size=64]->[Struct size=128,fid: f26]: addr  
+     000128: [PointerType size=64]->[Struct size=128,fid: f26]: netmask  
+     000192: [PointerType size=64]->[Struct size=128,fid: f26]: broadaddr  
+     000256: [PointerType size=64]->[Struct size=128,fid: f26]: dstaddr  
+*/
+struct Pcapaddr
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:207
+  Original Name: pcap_file_header
+  Struct Size (bits):  192
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: magic  
+     000032: [FundamentalType(short unsigned int) size=16]: version_major  
+     000048: [FundamentalType(short unsigned int) size=16]: version_minor  
+     000064: [FundamentalType(int) size=32]: thiszone  
+     000096: [FundamentalType(unsigned int) size=32]: sigfigs  
+     000128: [FundamentalType(unsigned int) size=32]: snaplen  
+     000160: [FundamentalType(unsigned int) size=32]: linktype  
+*/
+struct Pcapfileheader
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:245
+  Original Name: pcap_pkthdr
+  Struct Size (bits):  192
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [Struct size=128,fid: f16]: ts  
+     000128: [FundamentalType(unsigned int) size=32]: caplen  
+     000160: [FundamentalType(unsigned int) size=32]: len  
+*/
+struct Pcappkthdr
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:254
+  Original Name: pcap_stat
+  Struct Size (bits):  96
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: ps_recv  
+     000032: [FundamentalType(unsigned int) size=32]: ps_drop  
+     000064: [FundamentalType(unsigned int) size=32]: ps_ifdrop  
+*/
+struct Pcapstat
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:1036
+  Original Name: pcap_rmtauth
+  Struct Size (bits):  192
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: type  
+     000064: [PointerType size=64]->[FundamentalType(char) size=8]: username  
+     000128: [PointerType size=64]->[FundamentalType(char) size=8]: password  
+*/
+struct Pcaprmtauth
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:1168
+  Original Name: pcap_samp
+  Struct Size (bits):  64
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: method  
+     000032: [FundamentalType(int) size=32]: value  
+*/
+struct Pcapsamp
+
+
+/*
+  Source: <builtin>:0
+  Original Name: __NSConstantString_tag
+  Struct Size (bits):  256
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [PointerType size=64]->[FundamentalType(int) size=32]: isa  
+     000064: [FundamentalType(int) size=32]: flags  
+     000128: [PointerType size=64]->[FundamentalType(char) size=8]: str  
+     000192: [FundamentalType(long int) size=64]: length  
+*/
+struct NSConstantStringtag
+
+
+/*
+  Source: :
+  Original Name: 
+  Struct Size (bits):  
+  Struct Align (bits): 
+
+  Fields (Offset in bits):
+*/
+struct 
+
+
+/*
+  Source: <builtin>:0
+  Original Name: __va_list_tag
+  Struct Size (bits):  192
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: gp_offset  
+     000032: [FundamentalType(unsigned int) size=32]: fp_offset  
+     000064: [PointerType size=64]->[FundamentalType(void) size=0]: overflow_arg_area  
+     000128: [PointerType size=64]->[FundamentalType(void) size=0]: reg_save_area  
+*/
+struct Valisttag

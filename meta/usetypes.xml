@@ -1,0 +1,82 @@
+<typedefs>
+  <typedef name="String"
+    ponytypein="String"
+    ponytypeinconv=".cstring()"
+    ponytypeout="String"
+    structtype="Pointer[U8]"
+    structdef="Pointer[U8]"
+    argtype="Pointer[U8] tag"
+    rvtype="Pointer[U8]">
+    <ponytypeconvout>
+      <prefixs>
+        <prefix>var pcstring: Pointer[U8] = </prefix>
+      </prefixs>
+      <suffixes>
+        <suffix>let p: String iso = String.from_cstring(pcstring).clone()</suffix>
+        <suffix>consume p</suffix>
+      </suffixes>
+    </ponytypeconvout>
+  </typedef>
+
+  <typedef name="Array[String]"
+    ponytypein="Array[String]"
+    ponytypeinconv=""
+    ponytypeout="Pointer[Pointer[U8]]"
+    structtype="Pointer[Pointer[U8]]"
+    structdef="Pointer[Pointer[U8]]"
+    argtype="Pointer[Pointer[U8]] tag"
+    rvtype="Pointer[Pointer[U8]]"/>
+
+<typedef name="Pointer[NullablePointer[Hostent]]" ponytypein="Pointer[NullablePointer[Hostent]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Hostent]]" structtype="Pointer[NullablePointer[Hostent]]" structdef="Pointer[NullablePointer[Hostent]]" argtype="Pointer[NullablePointer[Hostent]] tag" rvtype="Pointer[NullablePointer[Hostent]]" decl="  var "/>
+<typedef name="U32" ponytypein="U32" ponytypeinconv="" ponytypeout="U32" structtype="U32" structdef="U32(0)" argtype="U32" rvtype="U32" decl="  var "/>
+<typedef name="Inaddr" ponytypein="Inaddr tag" ponytypeinconv="" ponytypeout="Inaddr" structtype="Inaddr" structdef="Inaddr" argtype="Inaddr tag" rvtype="Inaddr" decl="  embed "/>
+<typedef name="NullablePointer[Sockaddrin6]" ponytypein="NullablePointer[Sockaddrin6] tag" ponytypeinconv="" ponytypeout="NullablePointer[Sockaddrin6]" structtype="NullablePointer[Sockaddrin6]" structdef="NullablePointer[Sockaddrin6].none()" argtype="NullablePointer[Sockaddrin6] tag" rvtype="NullablePointer[Sockaddrin6]" decl="  var "/>
+<typedef name="I64" ponytypein="I64" ponytypeinconv="" ponytypeout="I64" structtype="I64" structdef="I64(0)" argtype="I64" rvtype="I64" decl="  var "/>
+<typedef name="NullablePointer[Inaddr]" ponytypein="NullablePointer[Inaddr] tag" ponytypeinconv="" ponytypeout="NullablePointer[Inaddr]" structtype="NullablePointer[Inaddr]" structdef="NullablePointer[Inaddr].none()" argtype="NullablePointer[Inaddr] tag" rvtype="NullablePointer[Inaddr]" decl="  var "/>
+<typedef name="NullablePointer[Valisttag]" ponytypein="NullablePointer[Valisttag] tag" ponytypeinconv="" ponytypeout="NullablePointer[Valisttag]" structtype="NullablePointer[Valisttag]" structdef="NullablePointer[Valisttag].none()" argtype="NullablePointer[Valisttag] tag" rvtype="NullablePointer[Valisttag]" decl="  var "/>
+<typedef name="NullablePointer[Timezone]" ponytypein="NullablePointer[Timezone] tag" ponytypeinconv="" ponytypeout="NullablePointer[Timezone]" structtype="NullablePointer[Timezone]" structdef="NullablePointer[Timezone].none()" argtype="NullablePointer[Timezone] tag" rvtype="NullablePointer[Timezone]" decl="  var "/>
+<typedef name="Pointer[NullablePointer[Rpcent]]" ponytypein="Pointer[NullablePointer[Rpcent]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Rpcent]]" structtype="Pointer[NullablePointer[Rpcent]]" structdef="Pointer[NullablePointer[Rpcent]]" argtype="Pointer[NullablePointer[Rpcent]] tag" rvtype="Pointer[NullablePointer[Rpcent]]" decl="  var "/>
+<typedef name="..." ponytypein="... tag" ponytypeinconv="" ponytypeout="..." structtype="..." structdef="..." argtype="... tag" rvtype="..." decl="  embed "/>
+<typedef name="NullablePointer[Cmsghdr]" ponytypein="NullablePointer[Cmsghdr] tag" ponytypeinconv="" ponytypeout="NullablePointer[Cmsghdr]" structtype="NullablePointer[Cmsghdr]" structdef="NullablePointer[Cmsghdr].none()" argtype="NullablePointer[Cmsghdr] tag" rvtype="NullablePointer[Cmsghdr]" decl="  var "/>
+<typedef name="NullablePointer[Gfpost]" ponytypein="NullablePointer[Gfpost] tag" ponytypeinconv="" ponytypeout="NullablePointer[Gfpost]" structtype="NullablePointer[Gfpost]" structdef="NullablePointer[Gfpost].none()" argtype="NullablePointer[Gfpost] tag" rvtype="NullablePointer[Gfpost]" decl="  var "/>
+<typedef name="Pointer[U64]" ponytypein="Pointer[U64] tag" ponytypeinconv="" ponytypeout="Pointer[U64]" structtype="Pointer[U64]" structdef="Pointer[U64]" argtype="Pointer[U64] tag" rvtype="Pointer[U64]" decl="  var "/>
+<typedef name="NullablePointer[Bpfinsn]" ponytypein="NullablePointer[Bpfinsn] tag" ponytypeinconv="" ponytypeout="NullablePointer[Bpfinsn]" structtype="NullablePointer[Bpfinsn]" structdef="NullablePointer[Bpfinsn].none()" argtype="NullablePointer[Bpfinsn] tag" rvtype="NullablePointer[Bpfinsn]" decl="  var "/>
+<typedef name="NullablePointer[Netent]" ponytypein="NullablePointer[Netent] tag" ponytypeinconv="" ponytypeout="NullablePointer[Netent]" structtype="NullablePointer[Netent]" structdef="NullablePointer[Netent].none()" argtype="NullablePointer[Netent] tag" rvtype="NullablePointer[Netent]" decl="  var "/>
+<typedef name="Pointer[NullablePointer[Netent]]" ponytypein="Pointer[NullablePointer[Netent]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Netent]]" structtype="Pointer[NullablePointer[Netent]]" structdef="Pointer[NullablePointer[Netent]]" argtype="Pointer[NullablePointer[Netent]] tag" rvtype="Pointer[NullablePointer[Netent]]" decl="  var "/>
+<typedef name="NullablePointer[Pcappkthdr]" ponytypein="NullablePointer[Pcappkthdr] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcappkthdr]" structtype="NullablePointer[Pcappkthdr]" structdef="NullablePointer[Pcappkthdr].none()" argtype="NullablePointer[Pcappkthdr] tag" rvtype="NullablePointer[Pcappkthdr]" decl="  var "/>
+<typedef name="NullablePointer[Pcapstat]" ponytypein="NullablePointer[Pcapstat] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcapstat]" structtype="NullablePointer[Pcapstat]" structdef="NullablePointer[Pcapstat].none()" argtype="NullablePointer[Pcapstat] tag" rvtype="NullablePointer[Pcapstat]" decl="  var "/>
+<typedef name="Pointer[NullablePointer[Servent]]" ponytypein="Pointer[NullablePointer[Servent]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Servent]]" structtype="Pointer[NullablePointer[Servent]]" structdef="Pointer[NullablePointer[Servent]]" argtype="Pointer[NullablePointer[Servent]] tag" rvtype="Pointer[NullablePointer[Servent]]" decl="  var "/>
+<typedef name="Pointer[NullablePointer[Addrinfo]]" ponytypein="Pointer[NullablePointer[Addrinfo]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Addrinfo]]" structtype="Pointer[NullablePointer[Addrinfo]]" structdef="Pointer[NullablePointer[Addrinfo]]" argtype="Pointer[NullablePointer[Addrinfo]] tag" rvtype="Pointer[NullablePointer[Addrinfo]]" decl="  var "/>
+<typedef name="NullablePointer[Pcapdumper]" ponytypein="NullablePointer[Pcapdumper] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcapdumper]" structtype="NullablePointer[Pcapdumper]" structdef="NullablePointer[Pcapdumper].none()" argtype="NullablePointer[Pcapdumper] tag" rvtype="NullablePointer[Pcapdumper]" decl="  var "/>
+<typedef name="Pointer[None]" ponytypein="Pointer[None] tag" ponytypeinconv="" ponytypeout="Pointer[None]" structtype="Pointer[None]" structdef="Pointer[None]" argtype="Pointer[None] tag" rvtype="Pointer[None]" decl="  var "/>
+<typedef name="NullablePointer[Pcaprmtauth]" ponytypein="NullablePointer[Pcaprmtauth] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcaprmtauth]" structtype="NullablePointer[Pcaprmtauth]" structdef="NullablePointer[Pcaprmtauth].none()" argtype="NullablePointer[Pcaprmtauth] tag" rvtype="NullablePointer[Pcaprmtauth]" decl="  var "/>
+<typedef name="I32" ponytypein="I32" ponytypeinconv="" ponytypeout="I32" structtype="I32" structdef="I32(0)" argtype="I32" rvtype="I32" decl="  var "/>
+<typedef name="Pointer[U32]" ponytypein="Pointer[U32] tag" ponytypeinconv="" ponytypeout="Pointer[U32]" structtype="Pointer[U32]" structdef="Pointer[U32]" argtype="Pointer[U32] tag" rvtype="Pointer[U32]" decl="  var "/>
+<typedef name="NullablePointer[]" ponytypein="NullablePointer[] tag" ponytypeinconv="" ponytypeout="NullablePointer[]" structtype="NullablePointer[]" structdef="NullablePointer[].none()" argtype="NullablePointer[] tag" rvtype="NullablePointer[]" decl="  var "/>
+<typedef name="NullablePointer[Addrinfo]" ponytypein="NullablePointer[Addrinfo] tag" ponytypeinconv="" ponytypeout="NullablePointer[Addrinfo]" structtype="NullablePointer[Addrinfo]" structdef="NullablePointer[Addrinfo].none()" argtype="NullablePointer[Addrinfo] tag" rvtype="NullablePointer[Addrinfo]" decl="  var "/>
+<typedef name="NullablePointer[Pcap]" ponytypein="NullablePointer[Pcap] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcap]" structtype="NullablePointer[Pcap]" structdef="NullablePointer[Pcap].none()" argtype="NullablePointer[Pcap] tag" rvtype="NullablePointer[Pcap]" decl="  var "/>
+<typedef name="U64" ponytypein="U64" ponytypeinconv="" ponytypeout="U64" structtype="U64" structdef="U64(0)" argtype="U64" rvtype="U64" decl="  var "/>
+<typedef name="NullablePointer[IOFILE]" ponytypein="NullablePointer[IOFILE] tag" ponytypeinconv="" ponytypeout="NullablePointer[IOFILE]" structtype="NullablePointer[IOFILE]" structdef="NullablePointer[IOFILE].none()" argtype="NullablePointer[IOFILE] tag" rvtype="NullablePointer[IOFILE]" decl="  var "/>
+<typedef name="Pointer[NullablePointer[Pcapif]]" ponytypein="Pointer[NullablePointer[Pcapif]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Pcapif]]" structtype="Pointer[NullablePointer[Pcapif]]" structdef="Pointer[NullablePointer[Pcapif]]" argtype="Pointer[NullablePointer[Pcapif]] tag" rvtype="Pointer[NullablePointer[Pcapif]]" decl="  var "/>
+<typedef name="NullablePointer[Timespec]" ponytypein="NullablePointer[Timespec] tag" ponytypeinconv="" ponytypeout="NullablePointer[Timespec]" structtype="NullablePointer[Timespec]" structdef="NullablePointer[Timespec].none()" argtype="NullablePointer[Timespec] tag" rvtype="NullablePointer[Timespec]" decl="  var "/>
+<typedef name="NullablePointer[Servent]" ponytypein="NullablePointer[Servent] tag" ponytypeinconv="" ponytypeout="NullablePointer[Servent]" structtype="NullablePointer[Servent]" structdef="NullablePointer[Servent].none()" argtype="NullablePointer[Servent] tag" rvtype="NullablePointer[Servent]" decl="  var "/>
+<typedef name="Pointer[I32]" ponytypein="Pointer[I32] tag" ponytypeinconv="" ponytypeout="Pointer[I32]" structtype="Pointer[I32]" structdef="Pointer[I32]" argtype="Pointer[I32] tag" rvtype="Pointer[I32]" decl="  var "/>
+<typedef name="" ponytypein=" tag" ponytypeinconv="" ponytypeout="" structtype="" structdef="" argtype=" tag" rvtype="" decl="  embed "/>
+<typedef name="U16" ponytypein="U16" ponytypeinconv="" ponytypeout="U16" structtype="U16" structdef="U16(0)" argtype="U16" rvtype="U16" decl="  var "/>
+<typedef name="NullablePointer[Protoent]" ponytypein="NullablePointer[Protoent] tag" ponytypeinconv="" ponytypeout="NullablePointer[Protoent]" structtype="NullablePointer[Protoent]" structdef="NullablePointer[Protoent].none()" argtype="NullablePointer[Protoent] tag" rvtype="NullablePointer[Protoent]" decl="  var "/>
+<typedef name="None" ponytypein="None tag" ponytypeinconv="" ponytypeout="None" structtype="None" structdef="None" argtype="None tag" rvtype="None" decl="  embed "/>
+<typedef name="NullablePointer[Pcapsamp]" ponytypein="NullablePointer[Pcapsamp] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcapsamp]" structtype="NullablePointer[Pcapsamp]" structdef="NullablePointer[Pcapsamp].none()" argtype="NullablePointer[Pcapsamp] tag" rvtype="NullablePointer[Pcapsamp]" decl="  var "/>
+<typedef name="NullablePointer[Sockaddrin]" ponytypein="NullablePointer[Sockaddrin] tag" ponytypeinconv="" ponytypeout="NullablePointer[Sockaddrin]" structtype="NullablePointer[Sockaddrin]" structdef="NullablePointer[Sockaddrin].none()" argtype="NullablePointer[Sockaddrin] tag" rvtype="NullablePointer[Sockaddrin]" decl="  var "/>
+<typedef name="NullablePointer[Rpcent]" ponytypein="NullablePointer[Rpcent] tag" ponytypeinconv="" ponytypeout="NullablePointer[Rpcent]" structtype="NullablePointer[Rpcent]" structdef="NullablePointer[Rpcent].none()" argtype="NullablePointer[Rpcent] tag" rvtype="NullablePointer[Rpcent]" decl="  var "/>
+<typedef name="NullablePointer[Pcapif]" ponytypein="NullablePointer[Pcapif] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcapif]" structtype="NullablePointer[Pcapif]" structdef="NullablePointer[Pcapif].none()" argtype="NullablePointer[Pcapif] tag" rvtype="NullablePointer[Pcapif]" decl="  var "/>
+<typedef name="Pointer[NullablePointer[Pcappkthdr]]" ponytypein="Pointer[NullablePointer[Pcappkthdr]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Pcappkthdr]]" structtype="Pointer[NullablePointer[Pcappkthdr]]" structdef="Pointer[NullablePointer[Pcappkthdr]]" argtype="Pointer[NullablePointer[Pcappkthdr]] tag" rvtype="Pointer[NullablePointer[Pcappkthdr]]" decl="  var "/>
+<typedef name="NullablePointer[Bpfprogram]" ponytypein="NullablePointer[Bpfprogram] tag" ponytypeinconv="" ponytypeout="NullablePointer[Bpfprogram]" structtype="NullablePointer[Bpfprogram]" structdef="NullablePointer[Bpfprogram].none()" argtype="NullablePointer[Bpfprogram] tag" rvtype="NullablePointer[Bpfprogram]" decl="  var "/>
+<typedef name="NullablePointer[Sockaddr]" ponytypein="NullablePointer[Sockaddr] tag" ponytypeinconv="" ponytypeout="NullablePointer[Sockaddr]" structtype="NullablePointer[Sockaddr]" structdef="NullablePointer[Sockaddr].none()" argtype="NullablePointer[Sockaddr] tag" rvtype="NullablePointer[Sockaddr]" decl="  var "/>
+<typedef name="NullablePointer[Hostent]" ponytypein="NullablePointer[Hostent] tag" ponytypeinconv="" ponytypeout="NullablePointer[Hostent]" structtype="NullablePointer[Hostent]" structdef="NullablePointer[Hostent].none()" argtype="NullablePointer[Hostent] tag" rvtype="NullablePointer[Hostent]" decl="  var "/>
+<typedef name="NullablePointer[Msghdr]" ponytypein="NullablePointer[Msghdr] tag" ponytypeinconv="" ponytypeout="NullablePointer[Msghdr]" structtype="NullablePointer[Msghdr]" structdef="NullablePointer[Msghdr].none()" argtype="NullablePointer[Msghdr] tag" rvtype="NullablePointer[Msghdr]" decl="  var "/>
+<typedef name="U8" ponytypein="U8" ponytypeinconv="" ponytypeout="U8" structtype="U8" structdef="U8(0)" argtype="U8" rvtype="U8" decl="  var "/>
+<typedef name="NullablePointer[Timeval]" ponytypein="NullablePointer[Timeval] tag" ponytypeinconv="" ponytypeout="NullablePointer[Timeval]" structtype="NullablePointer[Timeval]" structdef="NullablePointer[Timeval].none()" argtype="NullablePointer[Timeval] tag" rvtype="NullablePointer[Timeval]" decl="  var "/>
+<typedef name="NullablePointer[Itimerval]" ponytypein="NullablePointer[Itimerval] tag" ponytypeinconv="" ponytypeout="NullablePointer[Itimerval]" structtype="NullablePointer[Itimerval]" structdef="NullablePointer[Itimerval].none()" argtype="NullablePointer[Itimerval] tag" rvtype="NullablePointer[Itimerval]" decl="  var "/>
+<typedef name="NullablePointer[Pointer[I32]]" ponytypein="NullablePointer[Pointer[I32]] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pointer[I32]]" structtype="NullablePointer[Pointer[I32]]" structdef="NullablePointer[Pointer[I32]].none()" argtype="NullablePointer[Pointer[I32]] tag" rvtype="NullablePointer[Pointer[I32]]" decl="  var "/>
+<typedef name="Pointer[NullablePointer[Protoent]]" ponytypein="Pointer[NullablePointer[Protoent]] tag" ponytypeinconv="" ponytypeout="Pointer[NullablePointer[Protoent]]" structtype="Pointer[NullablePointer[Protoent]]" structdef="Pointer[NullablePointer[Protoent]]" argtype="Pointer[NullablePointer[Protoent]] tag" rvtype="Pointer[NullablePointer[Protoent]]" decl="  var "/></typedefs>
+

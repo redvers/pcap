@@ -1,0 +1,63 @@
+<typedefs>
+  <typedef name="String"
+    ponytypein="String"
+    ponytypeinconv=".cstring()"
+    ponytypeout="String"
+    structtype="Pointer[U8]"
+    structdef="Pointer[U8]"
+    argtype="Pointer[U8] tag"
+    rvtype="Pointer[U8]">
+    <ponytypeconvout>
+      <prefixs>
+        <prefix>var pcstring: Pointer[U8] = </prefix>
+      </prefixs>
+      <suffixes>
+        <suffix>let p: String iso = String.from_cstring(pcstring).clone()</suffix>
+        <suffix>consume p</suffix>
+      </suffixes>
+    </ponytypeconvout>
+  </typedef>
+
+  <typedef name="Array[String]"
+    ponytypein="Array[String]"
+    ponytypeinconv=""
+    ponytypeout="Pointer[Pointer[U8]]"
+    structtype="Pointer[Pointer[U8]]"
+    structdef="Pointer[Pointer[U8]]"
+    argtype="Pointer[Pointer[U8]] tag"
+    rvtype="Pointer[Pointer[U8]]"/>
+
+<typedef name="NullablePointer[Pthreadinternallist]" ponytypein="NullablePointer[Pthreadinternallist] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pthreadinternallist]" structtype="NullablePointer[Pthreadinternallist]" structdef="NullablePointer[Pthreadinternallist].none()" argtype="NullablePointer[Pthreadinternallist] tag" rvtype="NullablePointer[Pthreadinternallist]" decl="  var "/>
+<typedef name="I8" ponytypein="I8" ponytypeinconv="" ponytypeout="I8" structtype="I8" structdef="I8(0)" argtype="I8" rvtype="I8" decl="  var "/>
+<typedef name="Pointer[None]" ponytypein="Pointer[None] tag" ponytypeinconv="" ponytypeout="Pointer[None]" structtype="Pointer[None]" structdef="Pointer[None]" argtype="Pointer[None] tag" rvtype="Pointer[None]" decl="  var "/>
+<typedef name="I32" ponytypein="I32" ponytypeinconv="" ponytypeout="I32" structtype="I32" structdef="I32(0)" argtype="I32" rvtype="I32" decl="  var "/>
+<typedef name="U32" ponytypein="U32" ponytypeinconv="" ponytypeout="U32" structtype="U32" structdef="U32(0)" argtype="U32" rvtype="U32" decl="  var "/>
+<typedef name="NullablePointer[Pthreadinternalslist]" ponytypein="NullablePointer[Pthreadinternalslist] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pthreadinternalslist]" structtype="NullablePointer[Pthreadinternalslist]" structdef="NullablePointer[Pthreadinternalslist].none()" argtype="NullablePointer[Pthreadinternalslist] tag" rvtype="NullablePointer[Pthreadinternalslist]" decl="  var "/>
+<typedef name="Pthreadinternallist" ponytypein="Pthreadinternallist tag" ponytypeinconv="" ponytypeout="Pthreadinternallist" structtype="Pthreadinternallist" structdef="Pthreadinternallist" argtype="Pthreadinternallist tag" rvtype="Pthreadinternallist" decl="  embed "/>
+<typedef name="Pointer[U32]" ponytypein="Pointer[U32] tag" ponytypeinconv="" ponytypeout="Pointer[U32]" structtype="Pointer[U32]" structdef="Pointer[U32]" argtype="Pointer[U32] tag" rvtype="Pointer[U32]" decl="  var "/>
+<typedef name="Timeval" ponytypein="Timeval tag" ponytypeinconv="" ponytypeout="Timeval" structtype="Timeval" structdef="Timeval" argtype="Timeval tag" rvtype="Timeval" decl="  embed "/>
+<typedef name="NullablePointer[Iovec]" ponytypein="NullablePointer[Iovec] tag" ponytypeinconv="" ponytypeout="NullablePointer[Iovec]" structtype="NullablePointer[Iovec]" structdef="NullablePointer[Iovec].none()" argtype="NullablePointer[Iovec] tag" rvtype="NullablePointer[Iovec]" decl="  var "/>
+<typedef name="NullablePointer[Addrinfo]" ponytypein="NullablePointer[Addrinfo] tag" ponytypeinconv="" ponytypeout="NullablePointer[Addrinfo]" structtype="NullablePointer[Addrinfo]" structdef="NullablePointer[Addrinfo].none()" argtype="NullablePointer[Addrinfo] tag" rvtype="NullablePointer[Addrinfo]" decl="  var "/>
+<typedef name="I64" ponytypein="I64" ponytypeinconv="" ponytypeout="I64" structtype="I64" structdef="I64(0)" argtype="I64" rvtype="I64" decl="  var "/>
+<typedef name="U64" ponytypein="U64" ponytypeinconv="" ponytypeout="U64" structtype="U64" structdef="U64(0)" argtype="U64" rvtype="U64" decl="  var "/>
+<typedef name="Pointer[Sockaddrstorage]" ponytypein="Pointer[Sockaddrstorage] tag" ponytypeinconv="" ponytypeout="Pointer[Sockaddrstorage]" structtype="Pointer[Sockaddrstorage]" structdef="Pointer[Sockaddrstorage]" argtype="Pointer[Sockaddrstorage] tag" rvtype="Pointer[Sockaddrstorage]" decl="  var "/>
+<typedef name="NullablePointer[IOFILE]" ponytypein="NullablePointer[IOFILE] tag" ponytypeinconv="" ponytypeout="NullablePointer[IOFILE]" structtype="NullablePointer[IOFILE]" structdef="NullablePointer[IOFILE].none()" argtype="NullablePointer[IOFILE] tag" rvtype="NullablePointer[IOFILE]" decl="  var "/>
+<typedef name="I16" ponytypein="I16" ponytypeinconv="" ponytypeout="I16" structtype="I16" structdef="I16(0)" argtype="I16" rvtype="I16" decl="  var "/>
+<typedef name="Inaddr" ponytypein="Inaddr tag" ponytypeinconv="" ponytypeout="Inaddr" structtype="Inaddr" structdef="Inaddr" argtype="Inaddr tag" rvtype="Inaddr" decl="  embed "/>
+<typedef name="Sockaddrstorage" ponytypein="Sockaddrstorage tag" ponytypeinconv="" ponytypeout="Sockaddrstorage" structtype="Sockaddrstorage" structdef="Sockaddrstorage" argtype="Sockaddrstorage tag" rvtype="Sockaddrstorage" decl="  embed "/>
+<typedef name="Pointer[I32]" ponytypein="Pointer[I32] tag" ponytypeinconv="" ponytypeout="Pointer[I32]" structtype="Pointer[I32]" structdef="Pointer[I32]" argtype="Pointer[I32] tag" rvtype="Pointer[I32]" decl="  var "/>
+<typedef name="" ponytypein=" tag" ponytypeinconv="" ponytypeout="" structtype="" structdef="" argtype=" tag" rvtype="" decl="  embed "/>
+<typedef name="U16" ponytypein="U16" ponytypeinconv="" ponytypeout="U16" structtype="U16" structdef="U16(0)" argtype="U16" rvtype="U16" decl="  var "/>
+<typedef name="NullablePointer[IOwidedata]" ponytypein="NullablePointer[IOwidedata] tag" ponytypeinconv="" ponytypeout="NullablePointer[IOwidedata]" structtype="NullablePointer[IOwidedata]" structdef="NullablePointer[IOwidedata].none()" argtype="NullablePointer[IOwidedata] tag" rvtype="NullablePointer[IOwidedata]" decl="  var "/>
+<typedef name="None" ponytypein="None tag" ponytypeinconv="" ponytypeout="None" structtype="None" structdef="None" argtype="None tag" rvtype="None" decl="  embed "/>
+<typedef name="NullablePointer[IOcodecvt]" ponytypein="NullablePointer[IOcodecvt] tag" ponytypeinconv="" ponytypeout="NullablePointer[IOcodecvt]" structtype="NullablePointer[IOcodecvt]" structdef="NullablePointer[IOcodecvt].none()" argtype="NullablePointer[IOcodecvt] tag" rvtype="NullablePointer[IOcodecvt]" decl="  var "/>
+<typedef name="NullablePointer[Bpfinsn]" ponytypein="NullablePointer[Bpfinsn] tag" ponytypeinconv="" ponytypeout="NullablePointer[Bpfinsn]" structtype="NullablePointer[Bpfinsn]" structdef="NullablePointer[Bpfinsn].none()" argtype="NullablePointer[Bpfinsn] tag" rvtype="NullablePointer[Bpfinsn]" decl="  var "/>
+<typedef name="NullablePointer[Pcapaddr]" ponytypein="NullablePointer[Pcapaddr] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcapaddr]" structtype="NullablePointer[Pcapaddr]" structdef="NullablePointer[Pcapaddr].none()" argtype="NullablePointer[Pcapaddr] tag" rvtype="NullablePointer[Pcapaddr]" decl="  var "/>
+<typedef name="NullablePointer[Pcapif]" ponytypein="NullablePointer[Pcapif] tag" ponytypeinconv="" ponytypeout="NullablePointer[Pcapif]" structtype="NullablePointer[Pcapif]" structdef="NullablePointer[Pcapif].none()" argtype="NullablePointer[Pcapif] tag" rvtype="NullablePointer[Pcapif]" decl="  var "/>
+<typedef name="NullablePointer[IOmarker]" ponytypein="NullablePointer[IOmarker] tag" ponytypeinconv="" ponytypeout="NullablePointer[IOmarker]" structtype="NullablePointer[IOmarker]" structdef="NullablePointer[IOmarker].none()" argtype="NullablePointer[IOmarker] tag" rvtype="NullablePointer[IOmarker]" decl="  var "/>
+<typedef name="NullablePointer[Sockaddr]" ponytypein="NullablePointer[Sockaddr] tag" ponytypeinconv="" ponytypeout="NullablePointer[Sockaddr]" structtype="NullablePointer[Sockaddr]" structdef="NullablePointer[Sockaddr].none()" argtype="NullablePointer[Sockaddr] tag" rvtype="NullablePointer[Sockaddr]" decl="  var "/>
+<typedef name="Pointer[Inaddr]" ponytypein="Pointer[Inaddr] tag" ponytypeinconv="" ponytypeout="Pointer[Inaddr]" structtype="Pointer[Inaddr]" structdef="Pointer[Inaddr]" argtype="Pointer[Inaddr] tag" rvtype="Pointer[Inaddr]" decl="  var "/>
+<typedef name="In6addr" ponytypein="In6addr tag" ponytypeinconv="" ponytypeout="In6addr" structtype="In6addr" structdef="In6addr" argtype="In6addr tag" rvtype="In6addr" decl="  embed "/>
+<typedef name="U8" ponytypein="U8" ponytypeinconv="" ponytypeout="U8" structtype="U8" structdef="U8(0)" argtype="U8" rvtype="U8" decl="  var "/>
+<typedef name="Pointer[U8]" ponytypein="Pointer[U8] tag" ponytypeinconv="" ponytypeout="Pointer[U8]" structtype="Pointer[U8]" structdef="Pointer[U8]" argtype="Pointer[U8] tag" rvtype="Pointer[U8]" decl="  var "/></typedefs>
+

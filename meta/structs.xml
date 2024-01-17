@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include href="./types.xml"/>
+<xi:include href="./renderstructs.xml"/>
+<xi:include href="./pcap.xml"/>
+                    <structs>
+                      <struct name="Timeval" id="_151" size="128" align="64" fid="f16" lineno="8">
+    <field name="_tv_sec" id="_636" type="I64" fieldid="_47" offset="0" fid="f16" line="14"/>
+    <field name="_tv_usec" id="_637" type="I64" fieldid="_49" offset="64" fid="f16" line="15"/>
+  </struct>
+
+  <struct name="Timespec" id="_152" size="128" align="64" fid="f17" lineno="11">
+    <field name="_tv_sec" id="_638" type="I64" fieldid="_47" offset="0" fid="f17" line="16"/>
+    <field name="_tv_nsec" id="_639" type="I64" fieldid="_64" offset="64" fid="f17" line="21"/>
+  </struct>
+
+  <struct name="Pthreadinternallist" id="_166" size="128" align="64" fid="f20" lineno="51">
+    <field name="___prev" id="_650" type="NullablePointer[Pthreadinternallist]" fieldid="_972" offset="0" fid="f20" line="53"/>
+    <field name="___next" id="_651" type="NullablePointer[Pthreadinternallist]" fieldid="_972" offset="64" fid="f20" line="54"/>
+  </struct>
+
+  <struct name="Pthreadinternalslist" id="_168" size="64" align="64" fid="f20" lineno="57">
+    <field name="___next" id="_653" type="NullablePointer[Pthreadinternalslist]" fieldid="_973" offset="0" fid="f20" line="59"/>
+  </struct>
+
+  <struct name="Pthreadmutexs" id="_170" size="320" align="64" fid="f21" lineno="22">
+    <field name="___lock" id="_655" type="I32" fieldid="_622" offset="0" fid="f21" line="24"/>
+    <field name="___count" id="_656" type="U32" fieldid="_618" offset="32" fid="f21" line="25"/>
+    <field name="___owner" id="_657" type="I32" fieldid="_622" offset="64" fid="f21" line="26"/>
+    <field name="___nusers" id="_658" type="U32" fieldid="_618" offset="96" fid="f21" line="28"/>
+    <field name="___kind" id="_659" type="I32" fieldid="_622" offset="128" fid="f21" line="32"/>
+    <field name="___spins" id="_660" type="I16" fieldid="_621" offset="160" fid="f21" line="34"/>
+    <field name="___elision" id="_661" type="I16" fieldid="_621" offset="176" fid="f21" line="35"/>
+    <field name="___list" id="_662" type="Pthreadinternallist" fieldid="_167" offset="192" fid="f21" line="36"/>
+  </struct>
+
+  <struct name="Pthreadrwlockarcht" id="_171" size="448" align="64" fid="f22" lineno="23">
+    <field name="___readers" id="_663" type="U32" fieldid="_618" offset="0" fid="f22" line="25"/>
+    <field name="___writers" id="_664" type="U32" fieldid="_618" offset="32" fid="f22" line="26"/>
+    <field name="___wrphase_futex" id="_665" type="U32" fieldid="_618" offset="64" fid="f22" line="27"/>
+    <field name="___writers_futex" id="_666" type="U32" fieldid="_618" offset="96" fid="f22" line="28"/>
+    <field name="___pad3" id="_667" type="U32" fieldid="_618" offset="128" fid="f22" line="29"/>
+    <field name="___pad4" id="_668" type="U32" fieldid="_618" offset="160" fid="f22" line="30"/>
+    <field name="___cur_writer" id="_669" type="I32" fieldid="_622" offset="192" fid="f22" line="32"/>
+    <field name="___shared" id="_670" type="I32" fieldid="_622" offset="224" fid="f22" line="33"/>
+    <field name="___rwelision" id="_671" type="I8" fieldid="_620" offset="256" fid="f22" line="34"/>
+    <field name="___pad1" id="_672" type="Pointer[U8]" fieldid="_974" offset="264" fid="f22" line="39"/>
+    <field name="___pad2" id="_673" type="U64" fieldid="_619" offset="320" fid="f22" line="42"/>
+    <field name="___flags" id="_674" type="U32" fieldid="_618" offset="384" fid="f22" line="45"/>
+  </struct>
+
+  <struct name="Pthreadconds" id="_172" size="384" align="64" fid="f20" lineno="94">
+    <field name="___wseq" id="_675" type="None" fieldid="_165" offset="0" fid="f20" line="96"/>
+    <field name="___g1_start" id="_676" type="None" fieldid="_165" offset="64" fid="f20" line="97"/>
+    <field name="___g_refs" id="_677" type="Pointer[U32]" fieldid="_975" offset="128" fid="f20" line="98"/>
+    <field name="___g_size" id="_678" type="Pointer[U32]" fieldid="_975" offset="192" fid="f20" line="99"/>
+    <field name="___g1_orig_size" id="_679" type="U32" fieldid="_618" offset="256" fid="f20" line="100"/>
+    <field name="___wrefs" id="_680" type="U32" fieldid="_618" offset="288" fid="f20" line="101"/>
+    <field name="___g_signals" id="_681" type="Pointer[U32]" fieldid="_975" offset="320" fid="f20" line="102"/>
+  </struct>
+
+  <struct name="Timezone" id="_199" size="64" align="32" fid="f24" lineno="52">
+    <field name="_tz_minuteswest" id="_714" type="I32" fieldid="_622" offset="0" fid="f24" line="54"/>
+    <field name="_tz_dsttime" id="_715" type="I32" fieldid="_622" offset="32" fid="f24" line="55"/>
+  </struct>
+
+  <struct name="Itimerval" id="_204" size="256" align="64" fid="f24" lineno="130">
+    <field name="_it_interval" id="_718" type="Timeval" fieldid="_966" offset="0" fid="f24" line="133"/>
+    <field name="_it_value" id="_719" type="Timeval" fieldid="_966" offset="128" fid="f24" line="135"/>
+  </struct>
+
+  <struct name="Iovec" id="_211" size="128" align="64" fid="f25" lineno="26">
+    <field name="_iov_base" id="_723" type="Pointer[None]" fieldid="_626" offset="0" fid="f25" line="28"/>
+    <field name="_iov_len" id="_724" type="U64" fieldid="_133" offset="64" fid="f25" line="29"/>
+  </struct>
+
+  <struct name="Sockaddr" id="_215" size="128" align="16" fid="f26" lineno="180">
+    <field name="_sa_family" id="_725" type="U16" fieldid="_214" offset="0" fid="f26" line="182"/>
+    <field name="_sa_data" id="_726" type="Pointer[U8]" fieldid="_987" offset="16" fid="f26" line="183"/>
+  </struct>
+
+  <struct name="Sockaddrstorage" id="_216" size="1024" align="64" fid="f26" lineno="193">
+    <field name="_ss_family" id="_727" type="U16" fieldid="_214" offset="0" fid="f26" line="195"/>
+    <field name="___ss_padding" id="_728" type="Pointer[U8]" fieldid="_988" offset="16" fid="f26" line="196"/>
+    <field name="___ss_align" id="_729" type="U64" fieldid="_619" offset="960" fid="f26" line="197"/>
+  </struct>
+
+  <struct name="Msghdr" id="_218" size="448" align="64" fid="f26" lineno="259">
+    <field name="_msg_name" id="_730" type="Pointer[None]" fieldid="_626" offset="0" fid="f26" line="261"/>
+    <field name="_msg_namelen" id="_731" type="U32" fieldid="_212" offset="64" fid="f26" line="262"/>
+    <field name="_msg_iov" id="_732" type="NullablePointer[Iovec]" fieldid="_989" offset="128" fid="f26" line="264"/>
+    <field name="_msg_iovlen" id="_733" type="U64" fieldid="_133" offset="192" fid="f26" line="265"/>
+    <field name="_msg_control" id="_734" type="Pointer[None]" fieldid="_626" offset="256" fid="f26" line="267"/>
+    <field name="_msg_controllen" id="_735" type="U64" fieldid="_133" offset="320" fid="f26" line="268"/>
+    <field name="_msg_flags" id="_736" type="I32" fieldid="_622" offset="384" fid="f26" line="273"/>
+  </struct>
+
+  <struct name="Cmsghdr" id="_219" size="128" align="64" fid="f26" lineno="277">
+    <field name="_cmsg_len" id="_737" type="U64" fieldid="_133" offset="0" fid="f26" line="279"/>
+    <field name="_cmsg_level" id="_738" type="I32" fieldid="_622" offset="64" fid="f26" line="284"/>
+    <field name="_cmsg_type" id="_739" type="I32" fieldid="_622" offset="96" fid="f26" line="285"/>
+    <field name="___cmsg_data" id="_740" type="Pointer[U8]" fieldid="_990" offset="128" fid="f26" line="287"/>
+  </struct>
+
+  <struct name="Linger" id="_258" size="64" align="32" fid="f26" lineno="363">
+    <field name="_l_onoff" id="_749" type="I32" fieldid="_622" offset="0" fid="f26" line="365"/>
+    <field name="_l_linger" id="_750" type="I32" fieldid="_622" offset="32" fid="f26" line="366"/>
+  </struct>
+
+  <struct name="Osockaddr" id="_259" size="128" align="16" fid="f32" lineno="6">
+    <field name="_sa_family" id="_751" type="U16" fieldid="_617" offset="0" fid="f32" line="8"/>
+    <field name="_sa_data" id="_752" type="Pointer[U8]" fieldid="_994" offset="16" fid="f32" line="9"/>
+  </struct>
+
+  <struct name="Inaddr" id="_281" size="32" align="32" fid="f34" lineno="31">
+    <field name="_s_addr" id="_760" type="U32" fieldid="_280" offset="0" fid="f34" line="33"/>
+  </struct>
+
+  <struct name="Ipopts" id="_282" size="352" align="32" fid="f35" lineno="143">
+    <field name="_ip_dst" id="_761" type="Inaddr" fieldid="_846" offset="0" fid="f35" line="145"/>
+    <field name="_ip_opts" id="_762" type="Pointer[U8]" fieldid="_979" offset="32" fid="f35" line="146"/>
+  </struct>
+
+  <struct name="Ipmreqn" id="_283" size="96" align="32" fid="f35" lineno="150">
+    <field name="_imr_multiaddr" id="_763" type="Inaddr" fieldid="_846" offset="0" fid="f35" line="152"/>
+    <field name="_imr_address" id="_764" type="Inaddr" fieldid="_846" offset="32" fid="f35" line="153"/>
+    <field name="_imr_ifindex" id="_765" type="I32" fieldid="_622" offset="64" fid="f35" line="154"/>
+  </struct>
+
+  <struct name="Inpktinfo" id="_284" size="96" align="32" fid="f35" lineno="158">
+    <field name="_ipi_ifindex" id="_766" type="I32" fieldid="_622" offset="0" fid="f35" line="160"/>
+    <field name="_ipi_spec_dst" id="_767" type="Inaddr" fieldid="_846" offset="32" fid="f35" line="161"/>
+    <field name="_ipi_addr" id="_768" type="Inaddr" fieldid="_846" offset="64" fid="f35" line="162"/>
+  </struct>
+
+  <struct name="In6addr" id="_289" size="128" align="32" fid="f34" lineno="219">
+    <field name="___in6_u" id="_770" type="None" fieldid="_999" offset="0" fid="f34" line="226"/>
+  </struct>
+
+  <struct name="Sockaddrin" id="_292" size="128" align="32" fid="f34" lineno="245">
+    <field name="_sin_family" id="_772" type="U16" fieldid="_214" offset="0" fid="f34" line="247"/>
+    <field name="_sin_port" id="_773" type="U16" fieldid="_287" offset="16" fid="f34" line="248"/>
+    <field name="_sin_addr" id="_774" type="Inaddr" fieldid="_846" offset="32" fid="f34" line="249"/>
+    <field name="_sin_zero" id="_775" type="Pointer[U8]" fieldid="_1000" offset="64" fid="f34" line="252"/>
+  </struct>
+
+  <struct name="Sockaddrin6" id="_293" size="224" align="32" fid="f34" lineno="260">
+    <field name="_sin6_family" id="_776" type="U16" fieldid="_214" offset="0" fid="f34" line="262"/>
+    <field name="_sin6_port" id="_777" type="U16" fieldid="_287" offset="16" fid="f34" line="263"/>
+    <field name="_sin6_flowinfo" id="_778" type="U32" fieldid="_77" offset="32" fid="f34" line="264"/>
+    <field name="_sin6_addr" id="_779" type="In6addr" fieldid="_771" offset="64" fid="f34" line="265"/>
+    <field name="_sin6_scope_id" id="_780" type="U32" fieldid="_77" offset="192" fid="f34" line="266"/>
+  </struct>
+
+  <struct name="Ipmreq" id="_294" size="64" align="32" fid="f34" lineno="272">
+    <field name="_imr_multiaddr" id="_781" type="Inaddr" fieldid="_846" offset="0" fid="f34" line="275"/>
+    <field name="_imr_interface" id="_782" type="Inaddr" fieldid="_846" offset="32" fid="f34" line="278"/>
+  </struct>
+
+  <struct name="Ipmreqsource" id="_295" size="96" align="32" fid="f34" lineno="281">
+    <field name="_imr_multiaddr" id="_783" type="Inaddr" fieldid="_846" offset="0" fid="f34" line="284"/>
+    <field name="_imr_interface" id="_784" type="Inaddr" fieldid="_846" offset="32" fid="f34" line="287"/>
+    <field name="_imr_sourceaddr" id="_785" type="Inaddr" fieldid="_846" offset="64" fid="f34" line="290"/>
+  </struct>
+
+  <struct name="Ipv6mreq" id="_296" size="160" align="32" fid="f34" lineno="296">
+    <field name="_ipv6mr_multiaddr" id="_786" type="In6addr" fieldid="_771" offset="0" fid="f34" line="299"/>
+    <field name="_ipv6mr_interface" id="_787" type="U32" fieldid="_618" offset="128" fid="f34" line="302"/>
+  </struct>
+
+  <struct name="Groupreq" id="_297" size="1088" align="64" fid="f34" lineno="308">
+    <field name="_gr_interface" id="_788" type="U32" fieldid="_77" offset="0" fid="f34" line="311"/>
+    <field name="_gr_group" id="_789" type="Sockaddrstorage" fieldid="_1001" offset="64" fid="f34" line="314"/>
+  </struct>
+
+  <struct name="Groupsourcereq" id="_298" size="2112" align="64" fid="f34" lineno="317">
+    <field name="_gsr_interface" id="_790" type="U32" fieldid="_77" offset="0" fid="f34" line="320"/>
+    <field name="_gsr_group" id="_791" type="Sockaddrstorage" fieldid="_1001" offset="64" fid="f34" line="323"/>
+    <field name="_gsr_source" id="_792" type="Sockaddrstorage" fieldid="_1001" offset="1088" fid="f34" line="326"/>
+  </struct>
+
+  <struct name="Ipmsfilter" id="_299" size="160" align="32" fid="f34" lineno="331">
+    <field name="_imsf_multiaddr" id="_793" type="Inaddr" fieldid="_846" offset="0" fid="f34" line="334"/>
+    <field name="_imsf_interface" id="_794" type="Inaddr" fieldid="_846" offset="32" fid="f34" line="337"/>
+    <field name="_imsf_fmode" id="_795" type="U32" fieldid="_77" offset="64" fid="f34" line="340"/>
+    <field name="_imsf_numsrc" id="_796" type="U32" fieldid="_77" offset="96" fid="f34" line="343"/>
+    <field name="_imsf_slist" id="_797" type="Pointer[Inaddr]" fieldid="_1002" offset="128" fid="f34" line="345"/>
+  </struct>
+
+  <struct name="Groupfilter" id="_300" size="2176" align="64" fid="f34" lineno="352">
+    <field name="_gf_interface" id="_798" type="U32" fieldid="_77" offset="0" fid="f34" line="355"/>
+    <field name="_gf_group" id="_799" type="Sockaddrstorage" fieldid="_1001" offset="64" fid="f34" line="358"/>
+    <field name="_gf_fmode" id="_800" type="U32" fieldid="_77" offset="1088" fid="f34" line="361"/>
+    <field name="_gf_numsrc" id="_801" type="U32" fieldid="_77" offset="1120" fid="f34" line="364"/>
+    <field name="_gf_slist" id="_802" type="Pointer[Sockaddrstorage]" fieldid="_1003" offset="1152" fid="f34" line="366"/>
+  </struct>
+
+  <struct name="Rpcent" id="_307" size="192" align="64" fid="f36" lineno="46">
+    <field name="_r_name" id="_805" type="String" fieldid="_614" offset="0" fid="f36" line="48"/>
+    <field name="_r_aliases" id="_806" type="Array[String]" fieldid="_631" offset="64" fid="f36" line="49"/>
+    <field name="_r_number" id="_807" type="I32" fieldid="_622" offset="128" fid="f36" line="50"/>
+  </struct>
+
+  <struct name="Netent" id="_316" size="192" align="64" fid="f37" lineno="26">
+    <field name="_n_name" id="_811" type="String" fieldid="_614" offset="0" fid="f37" line="28"/>
+    <field name="_n_aliases" id="_812" type="Array[String]" fieldid="_631" offset="64" fid="f37" line="29"/>
+    <field name="_n_addrtype" id="_813" type="I32" fieldid="_622" offset="128" fid="f37" line="30"/>
+    <field name="_n_net" id="_814" type="U32" fieldid="_77" offset="160" fid="f37" line="31"/>
+  </struct>
+
+  <struct name="Hostent" id="_320" size="256" align="64" fid="f38" lineno="98">
+    <field name="_h_name" id="_815" type="String" fieldid="_614" offset="0" fid="f38" line="100"/>
+    <field name="_h_aliases" id="_816" type="Array[String]" fieldid="_631" offset="64" fid="f38" line="101"/>
+    <field name="_h_addrtype" id="_817" type="I32" fieldid="_622" offset="128" fid="f38" line="102"/>
+    <field name="_h_length" id="_818" type="I32" fieldid="_622" offset="160" fid="f38" line="103"/>
+    <field name="_h_addr_list" id="_819" type="Array[String]" fieldid="_631" offset="192" fid="f38" line="104"/>
+  </struct>
+
+  <struct name="Servent" id="_339" size="256" align="64" fid="f38" lineno="255">
+    <field name="_s_name" id="_824" type="String" fieldid="_614" offset="0" fid="f38" line="257"/>
+    <field name="_s_aliases" id="_825" type="Array[String]" fieldid="_631" offset="64" fid="f38" line="258"/>
+    <field name="_s_port" id="_826" type="I32" fieldid="_622" offset="128" fid="f38" line="259"/>
+    <field name="_s_proto" id="_827" type="String" fieldid="_614" offset="192" fid="f38" line="260"/>
+  </struct>
+
+  <struct name="Protoent" id="_348" size="192" align="64" fid="f38" lineno="324">
+    <field name="_p_name" id="_830" type="String" fieldid="_614" offset="0" fid="f38" line="326"/>
+    <field name="_p_aliases" id="_831" type="Array[String]" fieldid="_631" offset="64" fid="f38" line="327"/>
+    <field name="_p_proto" id="_832" type="I32" fieldid="_622" offset="128" fid="f38" line="328"/>
+  </struct>
+
+  <struct name="Addrinfo" id="_372" size="384" align="64" fid="f38" lineno="565">
+    <field name="_ai_flags" id="_835" type="I32" fieldid="_622" offset="0" fid="f38" line="567"/>
+    <field name="_ai_family" id="_836" type="I32" fieldid="_622" offset="32" fid="f38" line="568"/>
+    <field name="_ai_socktype" id="_837" type="I32" fieldid="_622" offset="64" fid="f38" line="569"/>
+    <field name="_ai_protocol" id="_838" type="I32" fieldid="_622" offset="96" fid="f38" line="570"/>
+    <field name="_ai_addrlen" id="_839" type="U32" fieldid="_212" offset="128" fid="f38" line="571"/>
+    <field name="_ai_addr" id="_840" type="NullablePointer[Sockaddr]" fieldid="_756" offset="192" fid="f38" line="572"/>
+    <field name="_ai_canonname" id="_841" type="String" fieldid="_614" offset="256" fid="f38" line="573"/>
+    <field name="_ai_next" id="_842" type="NullablePointer[Addrinfo]" fieldid="_845" offset="320" fid="f38" line="574"/>
+  </struct>
+
+  <struct name="Bpfprogram" id="_393" size="128" align="64" fid="f40" lineno="117">
+    <field name="_bf_len" id="_850" type="U32" fieldid="_110" offset="0" fid="f40" line="118"/>
+    <field name="_bf_insns" id="_851" type="NullablePointer[Bpfinsn]" fieldid="_1012" offset="64" fid="f40" line="119"/>
+  </struct>
+
+  <struct name="Bpfinsn" id="_394" size="64" align="32" fid="f40" lineno="245">
+    <field name="_code" id="_852" type="U16" fieldid="_109" offset="0" fid="f40" line="246"/>
+    <field name="_jt" id="_853" type="U8" fieldid="_108" offset="16" fid="f40" line="247"/>
+    <field name="_jf" id="_854" type="U8" fieldid="_108" offset="24" fid="f40" line="248"/>
+    <field name="_k" id="_855" type="U32" fieldid="_392" offset="32" fid="f40" line="249"/>
+  </struct>
+
+  <struct name="Gfpost" id="_403" size="128" align="64" fid="f43" lineno="10">
+    <field name="___pos" id="_863" type="I64" fieldid="_38" offset="0" fid="f43" line="12"/>
+    <field name="___state" id="_864" type="" fieldid="_402" offset="64" fid="f43" line="13"/>
+  </struct>
+
+  <struct name="Gfpos64t" id="_405" size="128" align="64" fid="f44" lineno="10">
+    <field name="___pos" id="_866" type="I64" fieldid="_39" offset="0" fid="f44" line="12"/>
+    <field name="___state" id="_867" type="" fieldid="_402" offset="64" fid="f44" line="13"/>
+  </struct>
+
+  <struct name="IOFILE" id="_407" size="1728" align="64" fid="f45" lineno="49">
+    <field name="__flags" id="_869" type="I32" fieldid="_622" offset="0" fid="f45" line="51"/>
+    <field name="__IO_read_ptr" id="_870" type="String" fieldid="_614" offset="64" fid="f45" line="54"/>
+    <field name="__IO_read_end" id="_871" type="String" fieldid="_614" offset="128" fid="f45" line="55"/>
+    <field name="__IO_read_base" id="_872" type="String" fieldid="_614" offset="192" fid="f45" line="56"/>
+    <field name="__IO_write_base" id="_873" type="String" fieldid="_614" offset="256" fid="f45" line="57"/>
+    <field name="__IO_write_ptr" id="_874" type="String" fieldid="_614" offset="320" fid="f45" line="58"/>
+    <field name="__IO_write_end" id="_875" type="String" fieldid="_614" offset="384" fid="f45" line="59"/>
+    <field name="__IO_buf_base" id="_876" type="String" fieldid="_614" offset="448" fid="f45" line="60"/>
+    <field name="__IO_buf_end" id="_877" type="String" fieldid="_614" offset="512" fid="f45" line="61"/>
+    <field name="__IO_save_base" id="_878" type="String" fieldid="_614" offset="576" fid="f45" line="64"/>
+    <field name="__IO_backup_base" id="_879" type="String" fieldid="_614" offset="640" fid="f45" line="65"/>
+    <field name="__IO_save_end" id="_880" type="String" fieldid="_614" offset="704" fid="f45" line="66"/>
+    <field name="__markers" id="_881" type="NullablePointer[IOmarker]" fieldid="_1018" offset="768" fid="f45" line="68"/>
+    <field name="__chain" id="_882" type="NullablePointer[IOFILE]" fieldid="_1019" offset="832" fid="f45" line="70"/>
+    <field name="__fileno" id="_883" type="I32" fieldid="_622" offset="896" fid="f45" line="72"/>
+    <field name="__flags2" id="_884" type="I32" fieldid="_622" offset="928" fid="f45" line="73"/>
+    <field name="__old_offset" id="_885" type="I64" fieldid="_38" offset="960" fid="f45" line="74"/>
+    <field name="__cur_column" id="_886" type="U16" fieldid="_617" offset="1024" fid="f45" line="77"/>
+    <field name="__vtable_offset" id="_887" type="I8" fieldid="_620" offset="1040" fid="f45" line="78"/>
+    <field name="__shortbuf" id="_888" type="Pointer[U8]" fieldid="_1020" offset="1048" fid="f45" line="79"/>
+    <field name="__lock" id="_889" type="Pointer[None]" fieldid="_1021" offset="1088" fid="f45" line="81"/>
+    <field name="__offset" id="_890" type="I64" fieldid="_39" offset="1152" fid="f45" line="89"/>
+    <field name="__codecvt" id="_891" type="NullablePointer[IOcodecvt]" fieldid="_1022" offset="1216" fid="f45" line="91"/>
+    <field name="__wide_data" id="_892" type="NullablePointer[IOwidedata]" fieldid="_1023" offset="1280" fid="f45" line="92"/>
+    <field name="__freeres_list" id="_893" type="NullablePointer[IOFILE]" fieldid="_1019" offset="1344" fid="f45" line="93"/>
+    <field name="__freeres_buf" id="_894" type="Pointer[None]" fieldid="_626" offset="1408" fid="f45" line="94"/>
+    <field name="___pad5" id="_895" type="U64" fieldid="_133" offset="1472" fid="f45" line="95"/>
+    <field name="__mode" id="_896" type="I32" fieldid="_622" offset="1536" fid="f45" line="96"/>
+    <field name="__unused2" id="_897" type="Pointer[U8]" fieldid="_900" offset="1568" fid="f45" line="98"/>
+  </struct>
+
+  <struct name="IOmarker" id="_410" size="" align="" fid="f45" lineno="36">
+
+  </struct>
+
+  <struct name="IOcodecvt" id="_411" size="" align="" fid="f45" lineno="37">
+
+  </struct>
+
+  <struct name="IOwidedata" id="_412" size="" align="" fid="f45" lineno="38">
+
+  </struct>
+
+  <struct name="Pcap" id="_506" size="" align="" fid="f50" lineno="163">
+
+  </struct>
+
+  <struct name="Pcapdumper" id="_508" size="" align="" fid="f50" lineno="164">
+
+  </struct>
+
+  <struct name="Pcapif" id="_510" size="320" align="64" fid="f50" lineno="301">
+    <field name="_next" id="_910" type="NullablePointer[Pcapif]" fieldid="_1024" offset="0" fid="f50" line="302"/>
+    <field name="_name" id="_911" type="String" fieldid="_614" offset="64" fid="f50" line="303"/>
+    <field name="_description" id="_912" type="String" fieldid="_614" offset="128" fid="f50" line="304"/>
+    <field name="_addresses" id="_913" type="NullablePointer[Pcapaddr]" fieldid="_1025" offset="192" fid="f50" line="305"/>
+    <field name="_flags" id="_914" type="U32" fieldid="_392" offset="256" fid="f50" line="306"/>
+  </struct>
+
+  <struct name="Pcapaddr" id="_512" size="320" align="64" fid="f50" lineno="322">
+    <field name="_next" id="_916" type="NullablePointer[Pcapaddr]" fieldid="_1025" offset="0" fid="f50" line="323"/>
+    <field name="_addr" id="_917" type="NullablePointer[Sockaddr]" fieldid="_756" offset="64" fid="f50" line="324"/>
+    <field name="_netmask" id="_918" type="NullablePointer[Sockaddr]" fieldid="_756" offset="128" fid="f50" line="325"/>
+    <field name="_broadaddr" id="_919" type="NullablePointer[Sockaddr]" fieldid="_756" offset="192" fid="f50" line="326"/>
+    <field name="_dstaddr" id="_920" type="NullablePointer[Sockaddr]" fieldid="_756" offset="256" fid="f50" line="327"/>
+  </struct>
+
+  <struct name="Pcapfileheader" id="_514" size="192" align="32" fid="f50" lineno="207">
+    <field name="_magic" id="_922" type="U32" fieldid="_392" offset="0" fid="f50" line="208"/>
+    <field name="_version_major" id="_923" type="U16" fieldid="_109" offset="32" fid="f50" line="209"/>
+    <field name="_version_minor" id="_924" type="U16" fieldid="_109" offset="48" fid="f50" line="210"/>
+    <field name="_thiszone" id="_925" type="I32" fieldid="_391" offset="64" fid="f50" line="211"/>
+    <field name="_sigfigs" id="_926" type="U32" fieldid="_392" offset="96" fid="f50" line="212"/>
+    <field name="_snaplen" id="_927" type="U32" fieldid="_392" offset="128" fid="f50" line="213"/>
+    <field name="_linktype" id="_928" type="U32" fieldid="_392" offset="160" fid="f50" line="214"/>
+  </struct>
+
+  <struct name="Pcappkthdr" id="_517" size="192" align="64" fid="f50" lineno="245">
+    <field name="_ts" id="_930" type="Timeval" fieldid="_966" offset="0" fid="f50" line="246"/>
+    <field name="_caplen" id="_931" type="U32" fieldid="_392" offset="128" fid="f50" line="247"/>
+    <field name="_len" id="_932" type="U32" fieldid="_392" offset="160" fid="f50" line="248"/>
+  </struct>
+
+  <struct name="Pcapstat" id="_518" size="96" align="32" fid="f50" lineno="254">
+    <field name="_ps_recv" id="_933" type="U32" fieldid="_110" offset="0" fid="f50" line="255"/>
+    <field name="_ps_drop" id="_934" type="U32" fieldid="_110" offset="32" fid="f50" line="256"/>
+    <field name="_ps_ifdrop" id="_935" type="U32" fieldid="_110" offset="64" fid="f50" line="257"/>
+  </struct>
+
+  <struct name="Pcaprmtauth" id="_599" size="192" align="64" fid="f50" lineno="1036">
+    <field name="_type" id="_950" type="I32" fieldid="_622" offset="0" fid="f50" line="1046"/>
+    <field name="_username" id="_951" type="String" fieldid="_614" offset="64" fid="f50" line="1054"/>
+    <field name="_password" id="_952" type="String" fieldid="_614" offset="128" fid="f50" line="1062"/>
+  </struct>
+
+  <struct name="Pcapsamp" id="_604" size="64" align="32" fid="f50" lineno="1168">
+    <field name="_method" id="_954" type="I32" fieldid="_622" offset="0" fid="f50" line="1173"/>
+    <field name="_value" id="_955" type="I32" fieldid="_622" offset="32" fid="f50" line="1179"/>
+  </struct>
+
+  <struct name="NSConstantStringtag" id="_613" size="256" align="64" fid="f0" lineno="0">
+    <field name="_isa" id="_958" type="Pointer[I32]" fieldid="_1031" offset="0" fid="" line=""/>
+    <field name="_flags" id="_959" type="I32" fieldid="_622" offset="64" fid="" line=""/>
+    <field name="_str" id="_960" type="String" fieldid="_630" offset="128" fid="" line=""/>
+    <field name="_length" id="_961" type="I64" fieldid="_623" offset="192" fid="" line=""/>
+  </struct>
+
+  <struct name="Valisttag" id="_962" size="192" align="64" fid="f0" lineno="0">
+    <field name="_gp_offset" id="_1032" type="U32" fieldid="_618" offset="0" fid="" line=""/>
+    <field name="_fp_offset" id="_1033" type="U32" fieldid="_618" offset="32" fid="" line=""/>
+    <field name="_overflow_arg_area" id="_1034" type="Pointer[None]" fieldid="_626" offset="64" fid="" line=""/>
+    <field name="_reg_save_area" id="_1035" type="Pointer[None]" fieldid="_626" offset="128" fid="" line=""/>
+  </struct>
+</structs>
+</castxml2pony>
+

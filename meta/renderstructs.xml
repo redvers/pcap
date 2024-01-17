@@ -1,0 +1,16 @@
+<renderstructs>
+  <renderstruct id="_407" render="0"/><!-- IOFILE f45 -->
+  <renderstruct id="_151" render="1"/><!-- Timeval f16 -->
+  <renderstruct id="_215" render="1"/><!-- Sockaddr f26 -->
+  <renderstruct id="_393" render="1"/><!-- Bpfprogram f40 -->
+  <renderstruct id="_394" render="1"/><!-- Bpfinsn f40 -->
+  <renderstruct id="_506" render="1"/><!-- Pcap f50 -->
+  <renderstruct id="_508" render="1"/><!-- Pcapdumper f50 -->
+  <renderstruct id="_510" render="1"/><!-- Pcapif f50 -->
+  <renderstruct id="_512" render="1"/><!-- Pcapaddr f50 -->
+  <renderstruct id="_514" render="1"/><!-- Pcapfileheader f50 -->
+  <renderstruct id="_517" render="1"/><!-- Pcappkthdr f50 -->
+  <renderstruct id="_518" render="1"/><!-- Pcapstat f50 -->
+  <renderstruct id="_599" render="1"/><!-- Pcaprmtauth f50 -->
+  <renderstruct id="_604" render="1"/><!-- Pcapsamp f50 -->
+</renderstructs>
