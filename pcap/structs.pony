@@ -216,9 +216,9 @@ struct Pcapfileheader
 */
 
 struct Pcappkthdr
-  var _ts: Timeval = Timeval
-  var _caplen: U32 = U32(0)
-  var _len: U32 = U32(0)
+  embed ts: Timeval = Timeval
+  var caplen: U32 = U32(0)
+  var len: U32 = U32(0)
 
 
 /*

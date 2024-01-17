@@ -3118,7 +3118,7 @@ use @pcap_lookupdev[Pointer[U8]](parg0: Pointer[U8] tag)
     [PointerType size=64]->[FundamentalType(unsigned int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_lookupnet[I32](parg0: Pointer[U8] tag, parg1: Pointer[U32] tag, parg2: Pointer[U32] tag, parg3: Pointer[U8] tag)
+use @pcap_lookupnet[I32](parg0: Pointer[U8] tag, parg1: IPv4 tag, parg2: IPv4 tag, parg3: Pointer[U8] tag)
 
 
 
@@ -3132,7 +3132,7 @@ use @pcap_lookupnet[I32](parg0: Pointer[U8] tag, parg1: Pointer[U32] tag, parg2:
     [PointerType size=64]->[FundamentalType(char) size=8]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_create[NullablePointer[Pcap]](parg0: Pointer[U8] tag, parg1: Pointer[U8] tag)
+use @pcap_create[NullablePointer[PcapS]](parg0: Pointer[U8] tag, parg1: Pointer[U8] tag)
 
 
 
@@ -3146,7 +3146,7 @@ use @pcap_create[NullablePointer[Pcap]](parg0: Pointer[U8] tag, parg1: Pointer[U
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_snaplen[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_snaplen[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3160,7 +3160,7 @@ use @pcap_set_snaplen[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_promisc[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_promisc[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3173,7 +3173,7 @@ use @pcap_set_promisc[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_can_set_rfmon[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_can_set_rfmon[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3187,7 +3187,7 @@ use @pcap_can_set_rfmon[I32](parg0: NullablePointer[Pcap] tag)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_rfmon[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_rfmon[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3201,7 +3201,7 @@ use @pcap_set_rfmon[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_timeout[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_timeout[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3215,7 +3215,7 @@ use @pcap_set_timeout[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_tstamp_type[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_tstamp_type[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3229,7 +3229,7 @@ use @pcap_set_tstamp_type[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_immediate_mode[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_immediate_mode[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3243,7 +3243,7 @@ use @pcap_set_immediate_mode[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_buffer_size[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_buffer_size[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3257,7 +3257,7 @@ use @pcap_set_buffer_size[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_tstamp_precision[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_tstamp_precision[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3270,7 +3270,7 @@ use @pcap_set_tstamp_precision[I32](parg0: NullablePointer[Pcap] tag, parg1: I32
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_get_tstamp_precision[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_get_tstamp_precision[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3283,7 +3283,7 @@ use @pcap_get_tstamp_precision[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_activate[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_activate[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3297,7 +3297,7 @@ use @pcap_activate[I32](parg0: NullablePointer[Pcap] tag)
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[PointerType size=64]->[FundamentalType(int) size=32]
 */
-use @pcap_list_tstamp_types[I32](parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pointer[I32]] tag)
+use @pcap_list_tstamp_types[I32](parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pointer[I32]] tag)
 
 
 
@@ -3363,7 +3363,7 @@ use @pcap_tstamp_type_val_to_description[Pointer[U8]](parg0: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_protocol_linux[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_protocol_linux[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3380,7 +3380,7 @@ use @pcap_set_protocol_linux[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [FundamentalType(int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_open_live[NullablePointer[Pcap]](parg0: Pointer[U8] tag, parg1: I32, parg2: I32, parg3: I32, parg4: Pointer[U8] tag)
+use @pcap_open_live[NullablePointer[PcapS]](parg0: Pointer[U8] tag, parg1: I32, parg2: I32, parg3: I32, parg4: Pointer[U8] tag)
 
 
 
@@ -3394,7 +3394,7 @@ use @pcap_open_live[NullablePointer[Pcap]](parg0: Pointer[U8] tag, parg1: I32, p
     [FundamentalType(int) size=32]
     [FundamentalType(int) size=32]
 */
-use @pcap_open_dead[NullablePointer[Pcap]](parg0: I32, parg1: I32)
+use @pcap_open_dead[NullablePointer[PcapS]](parg0: I32, parg1: I32)
 
 
 
@@ -3409,7 +3409,7 @@ use @pcap_open_dead[NullablePointer[Pcap]](parg0: I32, parg1: I32)
     [FundamentalType(int) size=32]
     [FundamentalType(unsigned int) size=32]
 */
-use @pcap_open_dead_with_tstamp_precision[NullablePointer[Pcap]](parg0: I32, parg1: I32, parg2: U32)
+use @pcap_open_dead_with_tstamp_precision[NullablePointer[PcapS]](parg0: I32, parg1: I32, parg2: U32)
 
 
 
@@ -3424,7 +3424,7 @@ use @pcap_open_dead_with_tstamp_precision[NullablePointer[Pcap]](parg0: I32, par
     [FundamentalType(unsigned int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_open_offline_with_tstamp_precision[NullablePointer[Pcap]](parg0: Pointer[U8] tag, parg1: U32, parg2: Pointer[U8] tag)
+use @pcap_open_offline_with_tstamp_precision[NullablePointer[PcapS]](parg0: Pointer[U8] tag, parg1: U32, parg2: Pointer[U8] tag)
 
 
 
@@ -3438,7 +3438,7 @@ use @pcap_open_offline_with_tstamp_precision[NullablePointer[Pcap]](parg0: Point
     [PointerType size=64]->[FundamentalType(char) size=8]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_open_offline[NullablePointer[Pcap]](parg0: Pointer[U8] tag, parg1: Pointer[U8] tag)
+use @pcap_open_offline[NullablePointer[PcapS]](parg0: Pointer[U8] tag, parg1: Pointer[U8] tag)
 
 
 
@@ -3453,7 +3453,7 @@ use @pcap_open_offline[NullablePointer[Pcap]](parg0: Pointer[U8] tag, parg1: Poi
     [FundamentalType(unsigned int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_fopen_offline_with_tstamp_precision[NullablePointer[Pcap]](parg0: NullablePointer[IOFILE] tag, parg1: U32, parg2: Pointer[U8] tag)
+use @pcap_fopen_offline_with_tstamp_precision[NullablePointer[PcapS]](parg0: NullablePointer[IOFILE] tag, parg1: U32, parg2: Pointer[U8] tag)
 
 
 
@@ -3467,7 +3467,7 @@ use @pcap_fopen_offline_with_tstamp_precision[NullablePointer[Pcap]](parg0: Null
     [PointerType size=64]->[Struct size=1728,fid: f45]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_fopen_offline[NullablePointer[Pcap]](parg0: NullablePointer[IOFILE] tag, parg1: Pointer[U8] tag)
+use @pcap_fopen_offline[NullablePointer[PcapS]](parg0: NullablePointer[IOFILE] tag, parg1: Pointer[U8] tag)
 
 
 
@@ -3480,7 +3480,7 @@ use @pcap_fopen_offline[NullablePointer[Pcap]](parg0: NullablePointer[IOFILE] ta
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_close[None](parg0: NullablePointer[Pcap] tag)
+use @pcap_close[None](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3496,7 +3496,7 @@ use @pcap_close[None](parg0: NullablePointer[Pcap] tag)
     [PointerType size=64]->[FunctionType]  WRITE MANUALLY
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
-use @pcap_loop[I32](parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: Pointer[None] tag, parg3: Pointer[U8] tag)
+use @pcap_loop[I32](parg0: NullablePointer[PcapS] tag, parg1: I32, parg2: Pointer[None] tag, parg3: Pointer[U8] tag)
 
 
 
@@ -3512,7 +3512,7 @@ use @pcap_loop[I32](parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: Pointer
     [PointerType size=64]->[FunctionType]  WRITE MANUALLY
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
-use @pcap_dispatch[I32](parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: Pointer[None] tag, parg3: Pointer[U8] tag)
+use @pcap_dispatch[I32](parg0: NullablePointer[PcapS] tag, parg1: I32, parg2: Pointer[None] tag, parg3: Pointer[U8] tag)
 
 
 
@@ -3526,7 +3526,7 @@ use @pcap_dispatch[I32](parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: Poi
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=192,fid: f50]
 */
-use @pcap_next[Pointer[U8]](parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pcappkthdr] tag)
+use @pcap_next[Pointer[U8]](parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pcappkthdr] tag)
 
 
 
@@ -3541,7 +3541,7 @@ use @pcap_next[Pointer[U8]](parg0: NullablePointer[Pcap] tag, parg1: NullablePoi
     [PointerType size=64]->[PointerType size=64]->[Struct size=192,fid: f50]
     [PointerType size=64]->[PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
-// use @pcap_next_ex[I32](parg0: NullablePointer[Pcap] tag, parg1: Pointer[NullablePointer[Pcappkthdr]] tag, parg2: Pointer[Pointer[U8]] tag)
+// use @pcap_next_ex[I32](parg0: NullablePointer[PcapS] tag, parg1: Pointer[NullablePointer[Pcappkthdr]] tag, parg2: Pointer[Pointer[U8]] tag)
 
 
 
@@ -3554,7 +3554,7 @@ use @pcap_next[Pointer[U8]](parg0: NullablePointer[Pcap] tag, parg1: NullablePoi
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_breakloop[None](parg0: NullablePointer[Pcap] tag)
+use @pcap_breakloop[None](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3568,7 +3568,7 @@ use @pcap_breakloop[None](parg0: NullablePointer[Pcap] tag)
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=96,fid: f50]
 */
-use @pcap_stats[I32](parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pcapstat] tag)
+use @pcap_stats[I32](parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pcapstat] tag)
 
 
 
@@ -3582,7 +3582,7 @@ use @pcap_stats[I32](parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pc
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=128,fid: f40]
 */
-use @pcap_setfilter[I32](parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Bpfprogram] tag)
+use @pcap_setfilter[I32](parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Bpfprogram] tag)
 
 
 
@@ -3596,7 +3596,7 @@ use @pcap_setfilter[I32](parg0: NullablePointer[Pcap] tag, parg1: NullablePointe
     [PointerType size=64]->[Struct size=,fid: f50]
     [Enumeration size=32,fid: f50]
 */
-use @pcap_setdirection[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_setdirection[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3610,7 +3610,7 @@ use @pcap_setdirection[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_getnonblock[I32](parg0: NullablePointer[Pcap] tag, parg1: Pointer[U8] tag)
+use @pcap_getnonblock[I32](parg0: NullablePointer[PcapS] tag, parg1: Pointer[U8] tag)
 
 
 
@@ -3625,7 +3625,7 @@ use @pcap_getnonblock[I32](parg0: NullablePointer[Pcap] tag, parg1: Pointer[U8] 
     [FundamentalType(int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_setnonblock[I32](parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: Pointer[U8] tag)
+use @pcap_setnonblock[I32](parg0: NullablePointer[PcapS] tag, parg1: I32, parg2: Pointer[U8] tag)
 
 
 
@@ -3640,7 +3640,7 @@ use @pcap_setnonblock[I32](parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: 
     [PointerType size=64]->[FundamentalType(void) size=0]
     [FundamentalType(long unsigned int) size=64]
 */
-use @pcap_inject[I32](parg0: NullablePointer[Pcap] tag, parg1: Pointer[None] tag, parg2: U64)
+use @pcap_inject[I32](parg0: NullablePointer[PcapS] tag, parg1: Pointer[None] tag, parg2: U64)
 
 
 
@@ -3655,7 +3655,7 @@ use @pcap_inject[I32](parg0: NullablePointer[Pcap] tag, parg1: Pointer[None] tag
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
     [FundamentalType(int) size=32]
 */
-use @pcap_sendpacket[I32](parg0: NullablePointer[Pcap] tag, parg1: Pointer[U8] tag, parg2: I32)
+use @pcap_sendpacket[I32](parg0: NullablePointer[PcapS] tag, parg1: Pointer[U8] tag, parg2: I32)
 
 
 
@@ -3694,7 +3694,7 @@ use @pcap_strerror[Pointer[U8]](parg0: I32)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_geterr[Pointer[U8]](parg0: NullablePointer[Pcap] tag)
+use @pcap_geterr[Pointer[U8]](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3708,7 +3708,7 @@ use @pcap_geterr[Pointer[U8]](parg0: NullablePointer[Pcap] tag)
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_perror[None](parg0: NullablePointer[Pcap] tag, parg1: Pointer[U8] tag)
+use @pcap_perror[None](parg0: NullablePointer[PcapS] tag, parg1: Pointer[U8] tag)
 
 
 
@@ -3725,7 +3725,7 @@ use @pcap_perror[None](parg0: NullablePointer[Pcap] tag, parg1: Pointer[U8] tag)
     [FundamentalType(int) size=32]
     [FundamentalType(unsigned int) size=32]
 */
-use @pcap_compile[I32](parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Bpfprogram] tag, parg2: Pointer[U8] tag, parg3: I32, parg4: U32)
+use @pcap_compile[I32](parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Bpfprogram] tag, parg2: Pointer[U8] tag, parg3: I32, parg4: IPv4)
 
 
 
@@ -3784,7 +3784,7 @@ use @pcap_offline_filter[I32](parg0: NullablePointer[Bpfprogram] tag, parg1: Nul
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_datalink[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_datalink[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3797,7 +3797,7 @@ use @pcap_datalink[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_datalink_ext[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_datalink_ext[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3811,7 +3811,7 @@ use @pcap_datalink_ext[I32](parg0: NullablePointer[Pcap] tag)
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[PointerType size=64]->[FundamentalType(int) size=32]
 */
-use @pcap_list_datalinks[I32](parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pointer[I32]] tag)
+use @pcap_list_datalinks[I32](parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pointer[I32]] tag)
 
 
 
@@ -3825,7 +3825,7 @@ use @pcap_list_datalinks[I32](parg0: NullablePointer[Pcap] tag, parg1: NullableP
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-use @pcap_set_datalink[I32](parg0: NullablePointer[Pcap] tag, parg1: I32)
+use @pcap_set_datalink[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
 
 
 
@@ -3903,7 +3903,7 @@ use @pcap_datalink_val_to_description_or_dlt[Pointer[U8]](parg0: I32)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_snapshot[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_snapshot[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3916,7 +3916,7 @@ use @pcap_snapshot[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_is_swapped[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_is_swapped[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3929,7 +3929,7 @@ use @pcap_is_swapped[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_major_version[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_major_version[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3942,7 +3942,7 @@ use @pcap_major_version[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_minor_version[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_minor_version[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3955,7 +3955,7 @@ use @pcap_minor_version[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_bufsize[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_bufsize[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3968,7 +3968,7 @@ use @pcap_bufsize[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_file[NullablePointer[IOFILE]](parg0: NullablePointer[Pcap] tag)
+use @pcap_file[NullablePointer[IOFILE]](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3981,7 +3981,7 @@ use @pcap_file[NullablePointer[IOFILE]](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_fileno[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_fileno[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -3995,7 +3995,7 @@ use @pcap_fileno[I32](parg0: NullablePointer[Pcap] tag)
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_dump_open[NullablePointer[Pcapdumper]](parg0: NullablePointer[Pcap] tag, parg1: Pointer[U8] tag)
+use @pcap_dump_open[NullablePointer[Pcapdumper]](parg0: NullablePointer[PcapS] tag, parg1: Pointer[U8] tag)
 
 
 
@@ -4009,7 +4009,7 @@ use @pcap_dump_open[NullablePointer[Pcapdumper]](parg0: NullablePointer[Pcap] ta
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=1728,fid: f45]
 */
-use @pcap_dump_fopen[NullablePointer[Pcapdumper]](parg0: NullablePointer[Pcap] tag, fp: NullablePointer[IOFILE] tag)
+use @pcap_dump_fopen[NullablePointer[Pcapdumper]](parg0: NullablePointer[PcapS] tag, fp: NullablePointer[IOFILE] tag)
 
 
 
@@ -4023,7 +4023,7 @@ use @pcap_dump_fopen[NullablePointer[Pcapdumper]](parg0: NullablePointer[Pcap] t
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_dump_open_append[NullablePointer[Pcapdumper]](parg0: NullablePointer[Pcap] tag, parg1: Pointer[U8] tag)
+use @pcap_dump_open_append[NullablePointer[Pcapdumper]](parg0: NullablePointer[PcapS] tag, parg1: Pointer[U8] tag)
 
 
 
@@ -4155,7 +4155,7 @@ use @pcap_lib_version[Pointer[U8]]()
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_get_selectable_fd[I32](parg0: NullablePointer[Pcap] tag)
+use @pcap_get_selectable_fd[I32](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -4168,7 +4168,7 @@ use @pcap_get_selectable_fd[I32](parg0: NullablePointer[Pcap] tag)
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_get_required_select_timeout[NullablePointer[Timeval]](parg0: NullablePointer[Pcap] tag)
+use @pcap_get_required_select_timeout[NullablePointer[Timeval]](parg0: NullablePointer[PcapS] tag)
 
 
 
@@ -4186,7 +4186,7 @@ use @pcap_get_required_select_timeout[NullablePointer[Timeval]](parg0: NullableP
     [PointerType size=64]->[Struct size=192,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @pcap_open[NullablePointer[Pcap]](source: Pointer[U8] tag, snaplen: I32, flags: I32, readtimeout: I32, auth: NullablePointer[Pcaprmtauth] tag, errbuf: Pointer[U8] tag)
+use @pcap_open[NullablePointer[PcapS]](source: Pointer[U8] tag, snaplen: I32, flags: I32, readtimeout: I32, auth: NullablePointer[Pcaprmtauth] tag, errbuf: Pointer[U8] tag)
 
 
 
@@ -4251,7 +4251,7 @@ use @pcap_findalldevs_ex[I32](source: Pointer[U8] tag, auth: NullablePointer[Pca
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-use @pcap_setsampling[NullablePointer[Pcapsamp]](p: NullablePointer[Pcap] tag)
+use @pcap_setsampling[NullablePointer[Pcapsamp]](p: NullablePointer[PcapS] tag)
 
 
 

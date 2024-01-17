@@ -3575,9 +3575,9 @@ primitive Clibpcap
     [PointerType size=64]->[FundamentalType(unsigned int) size=32]
     [PointerType size=64]->[FundamentalType(unsigned int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
-*/
   fun pcap_lookupnet(parg0: String, parg1: Pointer[U32] tag, parg2: Pointer[U32] tag, parg3: String): I32 =>
     @pcap_lookupnet(parg0.cstring(), parg1, parg2, parg3.cstring())
+*/
 
 
 /*
@@ -3590,7 +3590,7 @@ primitive Clibpcap
     [PointerType size=64]->[FundamentalType(char) size=8]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_create(parg0: String, parg1: String): NullablePointer[Pcap] =>
+  fun pcap_create(parg0: String, parg1: String): NullablePointer[PcapS] =>
     @pcap_create(parg0.cstring(), parg1.cstring())
 
 
@@ -3604,7 +3604,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_snaplen(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_snaplen(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_snaplen(parg0, parg1)
 
 
@@ -3618,7 +3618,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_promisc(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_promisc(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_promisc(parg0, parg1)
 
 
@@ -3631,7 +3631,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_can_set_rfmon(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_can_set_rfmon(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_can_set_rfmon(parg0)
 
 
@@ -3645,7 +3645,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_rfmon(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_rfmon(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_rfmon(parg0, parg1)
 
 
@@ -3659,7 +3659,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_timeout(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_timeout(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_timeout(parg0, parg1)
 
 
@@ -3673,7 +3673,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_tstamp_type(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_tstamp_type(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_tstamp_type(parg0, parg1)
 
 
@@ -3687,7 +3687,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_immediate_mode(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_immediate_mode(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_immediate_mode(parg0, parg1)
 
 
@@ -3701,7 +3701,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_buffer_size(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_buffer_size(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_buffer_size(parg0, parg1)
 
 
@@ -3715,7 +3715,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_tstamp_precision(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_tstamp_precision(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_tstamp_precision(parg0, parg1)
 
 
@@ -3728,7 +3728,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_get_tstamp_precision(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_get_tstamp_precision(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_get_tstamp_precision(parg0)
 
 
@@ -3741,7 +3741,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_activate(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_activate(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_activate(parg0)
 
 
@@ -3755,7 +3755,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[PointerType size=64]->[FundamentalType(int) size=32]
 */
-  fun pcap_list_tstamp_types(parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pointer[I32]] tag): I32 =>
+  fun pcap_list_tstamp_types(parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pointer[I32]] tag): I32 =>
     @pcap_list_tstamp_types(parg0, parg1)
 
 
@@ -3825,7 +3825,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_protocol_linux(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_protocol_linux(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_protocol_linux(parg0, parg1)
 
 
@@ -3842,7 +3842,7 @@ primitive Clibpcap
     [FundamentalType(int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_open_live(parg0: String, parg1: I32, parg2: I32, parg3: I32, parg4: String): NullablePointer[Pcap] =>
+  fun pcap_open_live(parg0: String, parg1: I32, parg2: I32, parg3: I32, parg4: String): NullablePointer[PcapS] =>
     @pcap_open_live(parg0.cstring(), parg1, parg2, parg3, parg4.cstring())
 
 
@@ -3856,7 +3856,7 @@ primitive Clibpcap
     [FundamentalType(int) size=32]
     [FundamentalType(int) size=32]
 */
-  fun pcap_open_dead(parg0: I32, parg1: I32): NullablePointer[Pcap] =>
+  fun pcap_open_dead(parg0: I32, parg1: I32): NullablePointer[PcapS] =>
     @pcap_open_dead(parg0, parg1)
 
 
@@ -3871,7 +3871,7 @@ primitive Clibpcap
     [FundamentalType(int) size=32]
     [FundamentalType(unsigned int) size=32]
 */
-  fun pcap_open_dead_with_tstamp_precision(parg0: I32, parg1: I32, parg2: U32): NullablePointer[Pcap] =>
+  fun pcap_open_dead_with_tstamp_precision(parg0: I32, parg1: I32, parg2: U32): NullablePointer[PcapS] =>
     @pcap_open_dead_with_tstamp_precision(parg0, parg1, parg2)
 
 
@@ -3886,7 +3886,7 @@ primitive Clibpcap
     [FundamentalType(unsigned int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_open_offline_with_tstamp_precision(parg0: String, parg1: U32, parg2: String): NullablePointer[Pcap] =>
+  fun pcap_open_offline_with_tstamp_precision(parg0: String, parg1: U32, parg2: String): NullablePointer[PcapS] =>
     @pcap_open_offline_with_tstamp_precision(parg0.cstring(), parg1, parg2.cstring())
 
 
@@ -3900,7 +3900,7 @@ primitive Clibpcap
     [PointerType size=64]->[FundamentalType(char) size=8]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_open_offline(parg0: String, parg1: String): NullablePointer[Pcap] =>
+  fun pcap_open_offline(parg0: String, parg1: String): NullablePointer[PcapS] =>
     @pcap_open_offline(parg0.cstring(), parg1.cstring())
 
 
@@ -3915,7 +3915,7 @@ primitive Clibpcap
     [FundamentalType(unsigned int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_fopen_offline_with_tstamp_precision(parg0: NullablePointer[IOFILE] tag, parg1: U32, parg2: String): NullablePointer[Pcap] =>
+  fun pcap_fopen_offline_with_tstamp_precision(parg0: NullablePointer[IOFILE] tag, parg1: U32, parg2: String): NullablePointer[PcapS] =>
     @pcap_fopen_offline_with_tstamp_precision(parg0, parg1, parg2.cstring())
 
 
@@ -3929,7 +3929,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=1728,fid: f45]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_fopen_offline(parg0: NullablePointer[IOFILE] tag, parg1: String): NullablePointer[Pcap] =>
+  fun pcap_fopen_offline(parg0: NullablePointer[IOFILE] tag, parg1: String): NullablePointer[PcapS] =>
     @pcap_fopen_offline(parg0, parg1.cstring())
 
 
@@ -3942,7 +3942,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_close(parg0: NullablePointer[Pcap] tag): None =>
+  fun pcap_close(parg0: NullablePointer[PcapS] tag): None =>
     @pcap_close(parg0)
 
 
@@ -3958,7 +3958,7 @@ primitive Clibpcap
     [PointerType size=64]->[FunctionType]  WRITE MANUALLY
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
-  fun pcap_loop(parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: Pointer[None] tag, parg3: String): I32 =>
+  fun pcap_loop(parg0: NullablePointer[PcapS] tag, parg1: I32, parg2: Pointer[None] tag, parg3: String): I32 =>
     @pcap_loop(parg0, parg1, parg2, parg3.cstring())
 
 
@@ -3974,7 +3974,7 @@ primitive Clibpcap
     [PointerType size=64]->[FunctionType]  WRITE MANUALLY
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
-  fun pcap_dispatch(parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: Pointer[None] tag, parg3: String): I32 =>
+  fun pcap_dispatch(parg0: NullablePointer[PcapS] tag, parg1: I32, parg2: Pointer[None] tag, parg3: String): I32 =>
     @pcap_dispatch(parg0, parg1, parg2, parg3.cstring())
 
 
@@ -3988,7 +3988,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=192,fid: f50]
 */
-  fun pcap_next(parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pcappkthdr] tag): String =>
+  fun pcap_next(parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pcappkthdr] tag): String =>
     var pcstring: Pointer[U8] =  @pcap_next(parg0, parg1)
     let p: String iso = String.from_cstring(pcstring).clone()
     consume p
@@ -4006,7 +4006,7 @@ primitive Clibpcap
     [PointerType size=64]->[PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
 /*
-  fun pcap_next_ex(parg0: NullablePointer[Pcap] tag, parg1: Pointer[NullablePointer[Pcappkthdr]] tag, parg2: Array[String]): I32 =>
+  fun pcap_next_ex(parg0: NullablePointer[PcapS] tag, parg1: Pointer[NullablePointer[Pcappkthdr]] tag, parg2: Array[String]): I32 =>
     @pcap_next_ex(parg0, parg1, parg2)
 */
 
@@ -4020,7 +4020,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_breakloop(parg0: NullablePointer[Pcap] tag): None =>
+  fun pcap_breakloop(parg0: NullablePointer[PcapS] tag): None =>
     @pcap_breakloop(parg0)
 
 
@@ -4034,7 +4034,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=96,fid: f50]
 */
-  fun pcap_stats(parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pcapstat] tag): I32 =>
+  fun pcap_stats(parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pcapstat] tag): I32 =>
     @pcap_stats(parg0, parg1)
 
 
@@ -4048,7 +4048,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=128,fid: f40]
 */
-  fun pcap_setfilter(parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Bpfprogram] tag): I32 =>
+  fun pcap_setfilter(parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Bpfprogram] tag): I32 =>
     @pcap_setfilter(parg0, parg1)
 
 
@@ -4062,7 +4062,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [Enumeration size=32,fid: f50]
 */
-  fun pcap_setdirection(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_setdirection(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_setdirection(parg0, parg1)
 
 
@@ -4076,7 +4076,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_getnonblock(parg0: NullablePointer[Pcap] tag, parg1: String): I32 =>
+  fun pcap_getnonblock(parg0: NullablePointer[PcapS] tag, parg1: String): I32 =>
     @pcap_getnonblock(parg0, parg1.cstring())
 
 
@@ -4091,7 +4091,7 @@ primitive Clibpcap
     [FundamentalType(int) size=32]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_setnonblock(parg0: NullablePointer[Pcap] tag, parg1: I32, parg2: String): I32 =>
+  fun pcap_setnonblock(parg0: NullablePointer[PcapS] tag, parg1: I32, parg2: String): I32 =>
     @pcap_setnonblock(parg0, parg1, parg2.cstring())
 
 
@@ -4106,7 +4106,7 @@ primitive Clibpcap
     [PointerType size=64]->[FundamentalType(void) size=0]
     [FundamentalType(long unsigned int) size=64]
 */
-  fun pcap_inject(parg0: NullablePointer[Pcap] tag, parg1: Pointer[None] tag, parg2: U64): I32 =>
+  fun pcap_inject(parg0: NullablePointer[PcapS] tag, parg1: Pointer[None] tag, parg2: U64): I32 =>
     @pcap_inject(parg0, parg1, parg2)
 
 
@@ -4121,7 +4121,7 @@ primitive Clibpcap
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
     [FundamentalType(int) size=32]
 */
-  fun pcap_sendpacket(parg0: NullablePointer[Pcap] tag, parg1: String, parg2: I32): I32 =>
+  fun pcap_sendpacket(parg0: NullablePointer[PcapS] tag, parg1: String, parg2: I32): I32 =>
     @pcap_sendpacket(parg0, parg1.cstring(), parg2)
 
 
@@ -4164,7 +4164,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_geterr(parg0: NullablePointer[Pcap] tag): String =>
+  fun pcap_geterr(parg0: NullablePointer[PcapS] tag): String =>
     var pcstring: Pointer[U8] =  @pcap_geterr(parg0)
     let p: String iso = String.from_cstring(pcstring).clone()
     consume p
@@ -4180,7 +4180,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_perror(parg0: NullablePointer[Pcap] tag, parg1: String): None =>
+  fun pcap_perror(parg0: NullablePointer[PcapS] tag, parg1: String): None =>
     @pcap_perror(parg0, parg1.cstring())
 
 
@@ -4196,10 +4196,10 @@ primitive Clibpcap
     [PointerType size=64]->[FundamentalType(char) size=8]
     [FundamentalType(int) size=32]
     [FundamentalType(unsigned int) size=32]
-*/
-  fun pcap_compile(parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Bpfprogram] tag, parg2: String, parg3: I32, parg4: U32): I32 =>
-    @pcap_compile(parg0, parg1, parg2.cstring(), parg3, parg4)
 
+  fun pcap_compile(parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Bpfprogram] tag, parg2: String, parg3: I32, parg4: U32): I32 =>
+    @pcap_compile(parg0, parg1, parg2.cstring(), parg3, parg4)
+*/
 
 /*
   Source: /usr/include/pcap/pcap.h:617
@@ -4256,7 +4256,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_datalink(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_datalink(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_datalink(parg0)
 
 
@@ -4269,7 +4269,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_datalink_ext(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_datalink_ext(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_datalink_ext(parg0)
 
 
@@ -4283,7 +4283,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[PointerType size=64]->[FundamentalType(int) size=32]
 */
-  fun pcap_list_datalinks(parg0: NullablePointer[Pcap] tag, parg1: NullablePointer[Pointer[I32]] tag): I32 =>
+  fun pcap_list_datalinks(parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pointer[I32]] tag): I32 =>
     @pcap_list_datalinks(parg0, parg1)
 
 
@@ -4297,7 +4297,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [FundamentalType(int) size=32]
 */
-  fun pcap_set_datalink(parg0: NullablePointer[Pcap] tag, parg1: I32): I32 =>
+  fun pcap_set_datalink(parg0: NullablePointer[PcapS] tag, parg1: I32): I32 =>
     @pcap_set_datalink(parg0, parg1)
 
 
@@ -4381,7 +4381,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_snapshot(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_snapshot(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_snapshot(parg0)
 
 
@@ -4394,7 +4394,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_is_swapped(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_is_swapped(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_is_swapped(parg0)
 
 
@@ -4407,7 +4407,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_major_version(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_major_version(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_major_version(parg0)
 
 
@@ -4420,7 +4420,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_minor_version(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_minor_version(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_minor_version(parg0)
 
 
@@ -4433,7 +4433,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_bufsize(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_bufsize(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_bufsize(parg0)
 
 
@@ -4446,7 +4446,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_file(parg0: NullablePointer[Pcap] tag): NullablePointer[IOFILE] =>
+  fun pcap_file(parg0: NullablePointer[PcapS] tag): NullablePointer[IOFILE] =>
     @pcap_file(parg0)
 
 
@@ -4459,7 +4459,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_fileno(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_fileno(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_fileno(parg0)
 
 
@@ -4473,7 +4473,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_dump_open(parg0: NullablePointer[Pcap] tag, parg1: String): NullablePointer[Pcapdumper] =>
+  fun pcap_dump_open(parg0: NullablePointer[PcapS] tag, parg1: String): NullablePointer[Pcapdumper] =>
     @pcap_dump_open(parg0, parg1.cstring())
 
 
@@ -4487,7 +4487,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[Struct size=1728,fid: f45]
 */
-  fun pcap_dump_fopen(parg0: NullablePointer[Pcap] tag, fp: NullablePointer[IOFILE] tag): NullablePointer[Pcapdumper] =>
+  fun pcap_dump_fopen(parg0: NullablePointer[PcapS] tag, fp: NullablePointer[IOFILE] tag): NullablePointer[Pcapdumper] =>
     @pcap_dump_fopen(parg0, fp)
 
 
@@ -4501,7 +4501,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_dump_open_append(parg0: NullablePointer[Pcap] tag, parg1: String): NullablePointer[Pcapdumper] =>
+  fun pcap_dump_open_append(parg0: NullablePointer[PcapS] tag, parg1: String): NullablePointer[Pcapdumper] =>
     @pcap_dump_open_append(parg0, parg1.cstring())
 
 
@@ -4635,7 +4635,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_get_selectable_fd(parg0: NullablePointer[Pcap] tag): I32 =>
+  fun pcap_get_selectable_fd(parg0: NullablePointer[PcapS] tag): I32 =>
     @pcap_get_selectable_fd(parg0)
 
 
@@ -4648,7 +4648,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_get_required_select_timeout(parg0: NullablePointer[Pcap] tag): NullablePointer[Timeval] =>
+  fun pcap_get_required_select_timeout(parg0: NullablePointer[PcapS] tag): NullablePointer[Timeval] =>
     @pcap_get_required_select_timeout(parg0)
 
 
@@ -4666,7 +4666,7 @@ primitive Clibpcap
     [PointerType size=64]->[Struct size=192,fid: f50]
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun pcap_open(source: String, snaplen: I32, flags: I32, readtimeout: I32, auth: NullablePointer[Pcaprmtauth] tag, errbuf: String): NullablePointer[Pcap] =>
+  fun pcap_open(source: String, snaplen: I32, flags: I32, readtimeout: I32, auth: NullablePointer[Pcaprmtauth] tag, errbuf: String): NullablePointer[PcapS] =>
     @pcap_open(source.cstring(), snaplen, flags, readtimeout, auth, errbuf.cstring())
 
 
@@ -4731,7 +4731,7 @@ primitive Clibpcap
   Arguments:
     [PointerType size=64]->[Struct size=,fid: f50]
 */
-  fun pcap_setsampling(p: NullablePointer[Pcap] tag): NullablePointer[Pcapsamp] =>
+  fun pcap_setsampling(p: NullablePointer[PcapS] tag): NullablePointer[Pcapsamp] =>
     @pcap_setsampling(p)
 
 

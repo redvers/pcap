@@ -1,3 +1,3 @@
 all:
 	ponyc -d .
-	./pcap1
+	sudo ./pcap1
