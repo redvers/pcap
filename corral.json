@@ -1,0 +1,18 @@
+{
+  "packages": [],
+  "deps": [],
+  "info": {
+    "description": "Pony binding for libpcap",
+    "homepage": "",
+    "license": "",
+    "documentation_url": "",
+    "version": "0.1",
+    "name": "pcap"
+  },
+  "scripts": {
+    "posix": {
+      "post_fetch_or_update": "make shim"
+    }
+  }
+
+}

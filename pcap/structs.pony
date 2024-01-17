@@ -1,3 +1,46 @@
+// Manual
+
+
+struct EtherHost
+  var a0: U8 = 0
+  var a1: U8 = 0
+  var a2: U8 = 0
+  var a3: U8 = 0
+  var a4: U8 = 0
+  var a5: U8 = 0
+
+struct Sniffethernet
+  embed ether_dhost: EtherHost = EtherHost
+  embed ether_shost: EtherHost = EtherHost
+  var ether_type: U16 = U16(0)
+
+struct Sniffip
+  var ip_vhl: U8 = U8(0)
+  var ip_tos: U8 = U8(0)
+  var ip_len: U16 = U16(0)
+  var ip_id: U16 = U16(0)
+  var ip_off: U16 = U16(0)
+  var ip_ttl: U8 = U8(0)
+  var ip_p: U8 = U8(0)
+  var ip_sum: U16 = U16(0)
+  embed ip_src: IPv4 = IPv4
+  embed ip_dst: IPv4 = IPv4
+
+  fun ip_offset(): I32 =>
+    ((this.ip_vhl and 0x0f).i32()) * 4
+
+struct Snifftcp
+  var th_sport: U16 = U16(0)
+  var th_dport: U16 = U16(0)
+  var th_seq: U32 = U32(0)
+  var th_ack: U32 = U32(0)
+  var th_offx2: U8 = U8(0)
+  var th_flags: U8 = U8(0)
+  var th_win: U16 = U16(0)
+  var th_sum: U16 = U16(0)
+  var th_urp: U16 = U16(0)
+
+
 
 
 /*

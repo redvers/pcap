@@ -1,4 +1,5 @@
-
+// Manually Added
+use @cast[Pointer[None]](inc: Pointer[None], offset: I32)
 
 /*
   Source: /usr/include/inttypes.h:290

@@ -56,7 +56,7 @@ primitive Pcap
     if (r != 0) then error end
 
   fun next(dev: PcapDevice) =>
-    @pcap_next(dev.pcaps, dev.pcaphdr)
+    dev.packet = @pcap_next(dev.pcaps, dev.pcaphdr)
 
 
 
@@ -69,6 +69,7 @@ class PcapDevice
   var pcaps: NullablePointer[PcapS] = NullablePointer[PcapS].none()
   var bpfp: NullablePointer[Bpfprogram] = NullablePointer[Bpfprogram](Bpfprogram)
   var pcaphdr: NullablePointer[Pcappkthdr] = NullablePointer[Pcappkthdr](Pcappkthdr)
+  var packet: Pointer[U8] = Pointer[U8]
 
   fun device(): String val ? =>
     match str
@@ -76,6 +77,14 @@ class PcapDevice
     | let s: String val => s
     end
 
+  fun eth(): Sniffethernet =>
+    @cast[Sniffethernet](packet, 0)
+
+  fun ip(): Sniffip =>
+    @cast[Sniffip](packet, 14)
+
+  fun tcp(ipS: Sniffip): Snifftcp =>
+    @cast[Snifftcp](packet, 14 + ipS.ip_offset())
 
 struct IPv4
   var a: U8 = 0

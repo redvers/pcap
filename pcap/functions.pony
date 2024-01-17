@@ -1,4 +1,6 @@
 use "lib:pcap"
+use "path:."
+use "lib:shim"
 primitive Clibpcap
 
 

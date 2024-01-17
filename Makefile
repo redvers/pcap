@@ -1,3 +1,3 @@
 all:
-	ponyc -d .
+	corral run -- ponyc -d .
 	sudo ./pcap1
