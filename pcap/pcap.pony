@@ -1,5 +1,82 @@
-use @printf[I32](fmt: Pointer[U8] tag, ...)
 
+use "lib:pcap"
+use @printf[I32](fmt: Pointer[U8] tag, ...)
+use @pcap_open_live[NullablePointer[PcapS]](device: Pointer[U8] tag, snaplen: I32, promisc: I32, to_ms: I32, errbuf: Pointer[U8] tag)
+use @pcap_open_dead[NullablePointer[PcapS]](linktype: I32, snaplen: I32)
+use @pcap_compile[I32](pcaps: NullablePointer[PcapS] tag, bpfprogram: NullablePointer[Bpfprogram] tag, string: Pointer[U8] tag, optimize: I32, netmask: IPv4)
+use @pcap_setfilter[I32](pcaps: NullablePointer[PcapS] tag, bpfprogram: NullablePointer[Bpfprogram] tag)
+use @pcap_loop[I32](pcaps: NullablePointer[PcapS] tag, cnt: I32, cb: Pointer[None], userarg: Any tag)
+use @pcap_dispatch[I32](pcaps: NullablePointer[PcapS] tag, cnt: I32, cb: PcapGotPacket val, userarg: Pointer[None] tag)
+
+type PcapSuccess is {(): None} val
+type PcapFailure is {(String val): None} val
+type PcapGotPacket is @{(Any tag, Pcappkthdr iso, Pointer[U8] ref): None}
+type PcapGotPacketX[A: Any tag] is @{(A tag, Pcappkthdr iso, Pointer[U8] ref): None}
+
+actor PonyPcap
+  let errbuf: String val = String(256)
+  var pcaps:  NullablePointer[PcapS]
+  var bpfprogram: NullablePointer[Bpfprogram] = NullablePointer[Bpfprogram](Bpfprogram)
+  var hasfilter: Bool = false
+
+  new create(device: String = "ens33",
+            snaplen: ISize  = 8192,
+             promis: Bool   = false,
+              to_ms: USize  = 100,
+          successcb: PcapSuccess,
+             failcb: PcapFailure,
+             filter: String val = "") =>
+
+		pcaps = @pcap_open_live(device.cstring(), snaplen.i32(), 0, to_ms.i32(), errbuf.cstring())
+
+		if (pcaps.is_none()) then
+			failcb(errbuf)
+		else
+      var netmask: IPv4 = IPv4
+      var r: I32 = @pcap_compile(pcaps, bpfprogram, filter.cstring(), 0, netmask)
+      if (r != 0) then    // FIXME - should actually return the error
+        failcb(errbuf)
+        return
+      end
+
+      r = @pcap_setfilter(pcaps, bpfprogram)
+      if (r != 0) then    // FIXME - should actually return the error
+        failcb(errbuf)
+        return
+      end
+
+      hasfilter = true
+
+			successcb()
+		end
+    None
+
+  be start_capture_x[A: Any tag](cb: PcapGotPacketX[A], x: A) =>
+    @printf("Starting Capture\n".cstring())
+    @pcap_loop[I32](pcaps, 20, cb, x)
+    @printf("20 cnt\n".cstring())
+    start_capture_x[A](cb, x)
+
+
+
+
+/*
+  Source: /usr/include/pcap/pcap.h:607
+  Original Name: pcap_geterr/usr/include/pcap/pcap.h:607
+
+  Return Value: [PointerType size=64]->[FundamentalType(char) size=8]
+
+  Arguments:
+    [PointerType size=64]->[Struct size=,fid: f50]
+
+  fun pcap_geterr(parg0: NullablePointer[PcapS] tag): String =>
+    var pcstring: Pointer[U8] =  @pcap_geterr(parg0)
+    let p: String iso = String.from_cstring(pcstring).clone()
+    consume p
+*/
+
+
+/*
 primitive Pcap
   fun lookupdev(): PcapDevice =>
     let errbuff: String = String(PcapConstants.max_err_length())
@@ -97,4 +174,4 @@ struct IPv4
     b.string() + "." +
     c.string() + "." +
     d.string()
-
+*/

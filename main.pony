@@ -1,15 +1,39 @@
 use "pcap"
-use "lib:shim"
+use @printf[I32](fmt: Pointer[U8] tag, ...)
 
 actor Main
   let max_err_length: USize = 256
   let max_network_devices: USize = 64
-  var dev: PcapDevice = PcapDevice
-  var netp: U32 = 0
-  var maskp: U32 = 0
+  var thistag: Main tag = recover tag this end
+  let pcap: PonyPcap
+
   new create(env: Env) =>
     env.out.print("Hello")
 
+    pcap =
+      PonyPcap(where device = "ens33",
+                     failcb = thistag~failure(),
+                  successcb = thistag~success(),
+                     filter = "icmp")
+
+
+
+    be success() =>
+    let cb: PcapGotPacketX[Main tag] = @{(obj: Main tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
+        @printf("got me a packet raw CB 0\n".cstring())
+        obj.test()
+      }
+      pcap.start_capture_x[Main tag](cb, thistag)
+
+    be failure(errbuf: String val) =>
+      @printf("failure: %s\n".cstring(), errbuf.cstring())
+
+    be test() =>
+      @printf("TEST\n".cstring())
+
+    fun @ccb(obj: Any tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
+      @printf("A real CB\n".cstring())
+    /*
     dev = Pcap.lookupdev()
     try
       env.out.print(dev.device()?)
@@ -30,6 +54,7 @@ actor Main
       env.out.print("Datalink Type: " + linktype.string())
 
       Pcap.compile_and_set(dev, "tcp", false)?
+    while (true) do
       Pcap.next(dev)
       let e: Sniffethernet = dev.eth()
       env.out.print("dhost: " +
@@ -73,6 +98,7 @@ actor Main
         env.out.print("Didn't get the packet's header")
         error
       end
+    end
 
     else
       env.out.print("Failed Out (final)")
@@ -81,4 +107,4 @@ actor Main
 
 
 
-
+*/

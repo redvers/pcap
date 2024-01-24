@@ -1,9 +1,87 @@
-struct IPv4
-  var a: U8 = 0
-  var b: U8 = 0
-  var c: U8 = 0
-  var d: U8 = 0
+// Manual
 
+/*
+struct EtherHost
+  var a0: U8 = 0
+  var a1: U8 = 0
+  var a2: U8 = 0
+  var a3: U8 = 0
+  var a4: U8 = 0
+  var a5: U8 = 0
+
+struct Sniffethernet
+  embed ether_dhost: EtherHost = EtherHost
+  embed ether_shost: EtherHost = EtherHost
+  var ether_type: U16 = U16(0)
+
+struct Sniffip
+  var ip_vhl: U8 = U8(0)
+  var ip_tos: U8 = U8(0)
+  var ip_len: U16 = U16(0)
+  var ip_id: U16 = U16(0)
+  var ip_off: U16 = U16(0)
+  var ip_ttl: U8 = U8(0)
+  var ip_p: U8 = U8(0)
+  var ip_sum: U16 = U16(0)
+  embed ip_src: IPv4 = IPv4
+  embed ip_dst: IPv4 = IPv4
+
+  fun ip_offset(): I32 =>
+    ((this.ip_vhl and 0x0f).i32()) * 4
+
+struct Snifftcp
+  var th_sport: U16 = U16(0)
+  var th_dport: U16 = U16(0)
+  var th_seq: U32 = U32(0)
+  var th_ack: U32 = U32(0)
+  var th_offx2: U8 = U8(0)
+  var th_flags: U8 = U8(0)
+  var th_win: U16 = U16(0)
+  var th_sum: U16 = U16(0)
+  var th_urp: U16 = U16(0)
+
+*/
+
+
+/*
+  Source: /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:49
+  Original Name: _IO_FILE
+  Struct Size (bits):  1728
+  Struct Align (bits): 64
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(int) size=32]: _flags
+     000064: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_read_ptr
+     000128: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_read_end
+     000192: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_read_base
+     000256: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_write_base
+     000320: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_write_ptr
+     000384: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_write_end
+     000448: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_buf_base
+     000512: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_buf_end
+     000576: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_save_base
+     000640: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_backup_base
+     000704: [PointerType size=64]->[FundamentalType(char) size=8]: _IO_save_end
+     000768: [PointerType size=64]->[Struct size=,fid: f45]: _markers
+     000832: [PointerType size=64]->[Struct size=1728,fid: f45]: _chain
+     000896: [FundamentalType(int) size=32]: _fileno
+     000928: [FundamentalType(int) size=32]: _flags2
+     000960: [FundamentalType(long int) size=64]: _old_offset
+     001024: [FundamentalType(short unsigned int) size=16]: _cur_column
+     001040: [FundamentalType(signed char) size=8]: _vtable_offset
+     001048: [ArrayType size=(0-0)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: _shortbuf
+     001088: [PointerType size=64]->[FundamentalType(void) size=0]: _lock
+     001152: [FundamentalType(long int) size=64]: _offset
+     001216: [PointerType size=64]->[Struct size=,fid: f45]: _codecvt
+     001280: [PointerType size=64]->[Struct size=,fid: f45]: _wide_data
+     001344: [PointerType size=64]->[Struct size=1728,fid: f45]: _freeres_list
+     001408: [PointerType size=64]->[FundamentalType(void) size=0]: _freeres_buf
+     001472: [FundamentalType(long unsigned int) size=64]: __pad5
+     001536: [FundamentalType(int) size=32]: _mode
+     001568: [ArrayType size=(0-19)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: _unused2
+*/
+
+//struct IOFILE
 
 
 /*
@@ -18,8 +96,8 @@ struct IPv4
 */
 
 struct Timeval
-  var tv_sec: I64 = I64(0)
-  var tv_usec: I64 = I64(0)
+  var _tv_sec: I64 = I64(0)
+  var _tv_usec: I64 = I64(0)
 
 
 /*
@@ -34,8 +112,8 @@ struct Timeval
 */
 
 struct Sockaddr
-  var sa_family: U16 = U16(0)
-  var sa_data: Pointer[U8] = Pointer[U8]
+  var _sa_family: U16 = U16(0)
+  var _sa_data: Pointer[U8] = Pointer[U8]
 
 
 /*
@@ -50,8 +128,8 @@ struct Sockaddr
 */
 
 struct Bpfprogram
-  var bf_len: U32 = U32(0)
-  var bf_insns: NullablePointer[Bpfinsn] = NullablePointer[Bpfinsn].none()
+  var _bf_len: U32 = U32(0)
+  var _bf_insns: NullablePointer[Bpfinsn] = NullablePointer[Bpfinsn].none()
 
 
 /*
@@ -68,10 +146,10 @@ struct Bpfprogram
 */
 
 struct Bpfinsn
-  var code: U16 = U16(0)
-  var jt: U8 = U8(0)
-  var jf: U8 = U8(0)
-  var k: U32 = U32(0)
+  var _code: U16 = U16(0)
+  var _jt: U8 = U8(0)
+  var _jf: U8 = U8(0)
+  var _k: U32 = U32(0)
 
 
 /*
@@ -113,11 +191,11 @@ struct Pcapdumper
 */
 
 struct Pcapif
-  var next: NullablePointer[Pcapif] = NullablePointer[Pcapif].none()
-  var name: Pointer[U8] = Pointer[U8]
-  var description: Pointer[U8] = Pointer[U8]
-  var addresses: NullablePointer[Pcapaddr] = NullablePointer[Pcapaddr].none()
-  var flags: U32 = U32(0)
+  var _next: NullablePointer[Pcapif] = NullablePointer[Pcapif].none()
+  var _name: Pointer[U8] = Pointer[U8]
+  var _description: Pointer[U8] = Pointer[U8]
+  var _addresses: NullablePointer[Pcapaddr] = NullablePointer[Pcapaddr].none()
+  var _flags: U32 = U32(0)
 
 
 /*
@@ -135,11 +213,11 @@ struct Pcapif
 */
 
 struct Pcapaddr
-  var next: NullablePointer[Pcapaddr] = NullablePointer[Pcapaddr].none()
-  var addr: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
-  var netmask: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
-  var broadaddr: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
-  var dstaddr: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
+  var _next: NullablePointer[Pcapaddr] = NullablePointer[Pcapaddr].none()
+  var _addr: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
+  var _netmask: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
+  var _broadaddr: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
+  var _dstaddr: NullablePointer[Sockaddr] = NullablePointer[Sockaddr].none()
 
 
 /*
@@ -159,13 +237,13 @@ struct Pcapaddr
 */
 
 struct Pcapfileheader
-  var magic: U32 = U32(0)
-  var version_major: U16 = U16(0)
-  var version_minor: U16 = U16(0)
-  var thiszone: I32 = I32(0)
-  var sigfigs: U32 = U32(0)
-  var snaplen: U32 = U32(0)
-  var linktype: U32 = U32(0)
+  var _magic: U32 = U32(0)
+  var _version_major: U16 = U16(0)
+  var _version_minor: U16 = U16(0)
+  var _thiszone: I32 = I32(0)
+  var _sigfigs: U32 = U32(0)
+  var _snaplen: U32 = U32(0)
+  var _linktype: U32 = U32(0)
 
 
 /*
@@ -199,9 +277,9 @@ struct Pcappkthdr
 */
 
 struct Pcapstat
-  var ps_recv: U32 = U32(0)
-  var ps_drop: U32 = U32(0)
-  var ps_ifdrop: U32 = U32(0)
+  var _ps_recv: U32 = U32(0)
+  var _ps_drop: U32 = U32(0)
+  var _ps_ifdrop: U32 = U32(0)
 
 
 /*
@@ -217,9 +295,9 @@ struct Pcapstat
 */
 
 struct Pcaprmtauth
-  var ptype: I32 = I32(0)
-  var username: Pointer[U8] = Pointer[U8]
-  var password: Pointer[U8] = Pointer[U8]
+  var _type: I32 = I32(0)
+  var _username: Pointer[U8] = Pointer[U8]
+  var _password: Pointer[U8] = Pointer[U8]
 
 
 /*
@@ -234,5 +312,5 @@ struct Pcaprmtauth
 */
 
 struct Pcapsamp
-  var method: I32 = I32(0)
-  var value: I32 = I32(0)
+  var _method: I32 = I32(0)
+  var _value: I32 = I32(0)
