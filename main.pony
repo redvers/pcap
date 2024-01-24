@@ -1,4 +1,6 @@
 use "pcap"
+use "files"
+
 use @printf[I32](fmt: Pointer[U8] tag, ...)
 
 actor Main
@@ -10,12 +12,19 @@ actor Main
   new create(env: Env) =>
     env.out.print("Hello")
 
+    /*
     pcap =
       PonyPcap[Main tag](where device = "ens33",
                      failcb = thistag~failure(),
                   successcb = thistag~success(),
                      filter = "")
+*/
 
+    pcap =
+      PonyPcap[Main tag].create_from_file(where fileauth = FileAuth(env.root),
+                                                filename = "sample-pcaps/SkypeIRC.cap",
+                                                  failcb = thistag~failure(),
+                                               successcb = thistag~success())
 
 
     be success() =>
