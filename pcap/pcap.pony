@@ -67,7 +67,8 @@ primitive PcapInternalCallbacks[A: Any tag]
   fun @internal_callback(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
     let caplen: USize = hdr.caplen.usize()
     var etherHeader: EtherHeader = EtherHeader
-    @memcpy(NullablePointer[EtherHeader](etherHeader), data, 14)
+    @memcpy(NullablePointer[EtherHeader](etherHeader), data, etherHeader.sizeof())
+
     @printf("%02x:%02x:%02x:%02x:%02x:%02x -> %02x:%02x:%02x:%02x:%02x:%02x\n".cstring(),
             etherHeader.ether_shost.a0, etherHeader.ether_shost.a1,
             etherHeader.ether_shost.a2, etherHeader.ether_shost.a3,
@@ -75,6 +76,15 @@ primitive PcapInternalCallbacks[A: Any tag]
             etherHeader.ether_dhost.a0, etherHeader.ether_dhost.a1,
             etherHeader.ether_dhost.a2, etherHeader.ether_dhost.a3,
             etherHeader.ether_dhost.a4, etherHeader.ether_dhost.a5)
+
+    var ipv4Header: IPv4Header = IPv4Header
+    @memcpy(NullablePointer[IPv4Header](ipv4Header), data.offset(etherHeader.sizeof().usize()),
+            20)
+
+    @printf("%d.%d.%d.%d -> %d.%d.%d.%d\n".cstring(),
+            ipv4Header.ip_src.a, ipv4Header.ip_src.b, ipv4Header.ip_src.c, ipv4Header.ip_src.d,
+            ipv4Header.ip_dst.a, ipv4Header.ip_dst.b, ipv4Header.ip_dst.c, ipv4Header.ip_dst.d)
+
 
 
 /*

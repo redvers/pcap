@@ -237,15 +237,16 @@ struct Pcapsamp
   var method: I32 = I32(0)
   var value: I32 = I32(0)
 
+
 /*
-  Source: fromtcpdumporg.h:6
-  Original Name: sniff_ethernet
+  Source: /usr/include/net/ethernet.h:39
+  Original Name: ether_header
   Struct Size (bits):  112
-  Struct Align (bits): 16
+  Struct Align (bits): 8
 
   Fields (Offset in bits):
-     000000: [ArrayType size=(0-5)]->[FundamentalType(unsigned char) size=8] ether_dhost
-     000048: [ArrayType size=(0-5)]->[FundamentalType(unsigned char) size=8] ether_shost
+     000000: [ArrayType size=(0-5)]->[FundamentalType(unsigned char) size=8]: ether_dhost
+     000048: [ArrayType size=(0-5)]->[FundamentalType(unsigned char) size=8]: ether_shost
      000096: [FundamentalType(short unsigned int) size=16]: ether_type
 */
 
@@ -254,6 +255,8 @@ struct EtherHeader
   embed ether_shost: EtherHost = EtherHost
   var ether_type: U16 = U16(0)
 
+	fun sizeof(): U64 => 14
+
 struct EtherHost
   var a0: U8 = 0
   var a1: U8 = 0
@@ -261,6 +264,44 @@ struct EtherHost
   var a3: U8 = 0
   var a4: U8 = 0
   var a5: U8 = 0
+
+
+/*
+  Source: /usr/include/netinet/ip.h:107
+  Original Name: ip
+  Struct Size (bits):  160
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned int) size=32]: ip_hl	  -- Note that these
+     000004: [FundamentalType(unsigned int) size=32]: ip_v		-- offsets are
+     000008: [FundamentalType(unsigned char) size=8]: ip_tos  -- < 8 bits...
+     000016: [FundamentalType(short unsigned int) size=16]: ip_len
+     000032: [FundamentalType(short unsigned int) size=16]: ip_id
+     000048: [FundamentalType(short unsigned int) size=16]: ip_off
+     000064: [FundamentalType(unsigned char) size=8]: ip_ttl
+     000072: [FundamentalType(unsigned char) size=8]: ip_p
+     000080: [FundamentalType(short unsigned int) size=16]: ip_sum
+     000096: [Struct size=32,fid: f31]: ip_src
+     000128: [Struct size=32,fid: f31]: ip_dst
+*/
+
+struct IPv4Header
+  var ip_vhl: U8 = U8(0)
+  var ip_tos: U8 = U8(0)
+  var ip_len: U16 = U16(0)
+  var ip_id: U16 = U16(0)
+  var ip_off: U16 = U16(0)
+  var ip_ttl: U8 = U8(0)
+  var ip_p: U8 = U8(0)
+  var ip_sum: U16 = U16(0)
+  embed ip_src: IPv4 = IPv4
+  embed ip_dst: IPv4 = IPv4
+
+// This means that we currently silently discard any extra options.
+// We will fix that at some point -- FIXME
+	fun sizeof(): U64 => (((this.ip_vhl and 0x0f).i32()) * 4).u64()
+
 
 
 
