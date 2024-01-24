@@ -236,3 +236,33 @@ struct Pcaprmtauth
 struct Pcapsamp
   var method: I32 = I32(0)
   var value: I32 = I32(0)
+
+/*
+  Source: fromtcpdumporg.h:6
+  Original Name: sniff_ethernet
+  Struct Size (bits):  112
+  Struct Align (bits): 16
+
+  Fields (Offset in bits):
+     000000: [ArrayType size=(0-5)]->[FundamentalType(unsigned char) size=8] ether_dhost
+     000048: [ArrayType size=(0-5)]->[FundamentalType(unsigned char) size=8] ether_shost
+     000096: [FundamentalType(short unsigned int) size=16]: ether_type
+*/
+
+struct EtherHeader
+  embed ether_dhost: EtherHost = EtherHost
+  embed ether_shost: EtherHost = EtherHost
+  var ether_type: U16 = U16(0)
+
+struct EtherHost
+  var a0: U8 = 0
+  var a1: U8 = 0
+  var a2: U8 = 0
+  var a3: U8 = 0
+  var a4: U8 = 0
+  var a5: U8 = 0
+
+
+
+
+

@@ -23,7 +23,7 @@ actor Main
         @printf("got me a packet raw CB 0\n".cstring())
         obj.test()
       }
-      pcap.register_callback(cb)
+//      pcap.register_callback(cb)
       pcap.start_capture_x(thistag)
 
     be failure(errbuf: String val) =>

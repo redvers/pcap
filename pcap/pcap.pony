@@ -7,7 +7,7 @@ use @pcap_compile[I32](pcaps: NullablePointer[PcapS] tag, bpfprogram: NullablePo
 use @pcap_setfilter[I32](pcaps: NullablePointer[PcapS] tag, bpfprogram: NullablePointer[Bpfprogram] tag)
 use @pcap_loop[I32](pcaps: NullablePointer[PcapS] tag, cnt: I32, cb: Pointer[None], userarg: Any tag)
 use @pcap_geterr[Pointer[U8]](pcaps: NullablePointer[PcapS] tag)
-use @memcpy[Pointer[U8] iso](dst: Pointer[U8] tag, src: Pointer[U8] tag, size: U64)
+use @memcpy[Pointer[U8] iso](dst: Pointer[None], src: Pointer[U8] tag, size: U64)
 
 
 type PcapSuccess is {(): None} val
@@ -43,7 +43,7 @@ actor PonyPcap[A: Any tag]
       end
 
       r = @pcap_setfilter(pcaps, bpfprogram)
-      if (r != 0) then    // FIXME - should actually return the error
+      if (r != 0) then
         failcb(String.from_cstring(@pcap_geterr(pcaps)).clone())
         return
       end
@@ -59,11 +59,22 @@ actor PonyPcap[A: Any tag]
 
   be start_capture_x(x: A) =>
     @printf("Starting Capture\n".cstring())
-    @pcap_loop[I32](pcaps, 20, cb, x)
+    @pcap_loop[I32](pcaps, 20, addressof PcapInternalCallbacks[A].internal_callback, x)
     @printf("20 cnt\n".cstring())
     start_capture_x(x)
 
-
+primitive PcapInternalCallbacks[A: Any tag]
+  fun @internal_callback(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
+    let caplen: USize = hdr.caplen.usize()
+    var etherHeader: EtherHeader = EtherHeader
+    @memcpy(NullablePointer[EtherHeader](etherHeader), data, 14)
+    @printf("%02x:%02x:%02x:%02x:%02x:%02x -> %02x:%02x:%02x:%02x:%02x:%02x\n".cstring(),
+            etherHeader.ether_shost.a0, etherHeader.ether_shost.a1,
+            etherHeader.ether_shost.a2, etherHeader.ether_shost.a3,
+            etherHeader.ether_shost.a4, etherHeader.ether_shost.a5,
+            etherHeader.ether_dhost.a0, etherHeader.ether_dhost.a1,
+            etherHeader.ether_dhost.a2, etherHeader.ether_dhost.a3,
+            etherHeader.ether_dhost.a4, etherHeader.ether_dhost.a5)
 
 
 /*
