@@ -6,18 +6,20 @@ use @pcap_open_dead[NullablePointer[PcapS]](linktype: I32, snaplen: I32)
 use @pcap_compile[I32](pcaps: NullablePointer[PcapS] tag, bpfprogram: NullablePointer[Bpfprogram] tag, string: Pointer[U8] tag, optimize: I32, netmask: IPv4)
 use @pcap_setfilter[I32](pcaps: NullablePointer[PcapS] tag, bpfprogram: NullablePointer[Bpfprogram] tag)
 use @pcap_loop[I32](pcaps: NullablePointer[PcapS] tag, cnt: I32, cb: Pointer[None], userarg: Any tag)
-use @pcap_dispatch[I32](pcaps: NullablePointer[PcapS] tag, cnt: I32, cb: PcapGotPacket val, userarg: Pointer[None] tag)
+use @pcap_geterr[Pointer[U8]](pcaps: NullablePointer[PcapS] tag)
+use @memcpy[Pointer[U8] iso](dst: Pointer[U8] tag, src: Pointer[U8] tag, size: U64)
+
 
 type PcapSuccess is {(): None} val
 type PcapFailure is {(String val): None} val
-type PcapGotPacket is @{(Any tag, Pcappkthdr iso, Pointer[U8] ref): None}
-type PcapGotPacketX[A: Any tag] is @{(A tag, Pcappkthdr iso, Pointer[U8] ref): None}
+type PcapGotPacket[A: Any tag] is @{(A tag, Pcappkthdr iso, Pointer[U8] ref): None}
 
-actor PonyPcap
-  let errbuf: String val = String(256)
+actor PonyPcap[A: Any tag]
+  let errbuf: String ref = String(256)
   var pcaps:  NullablePointer[PcapS]
   var bpfprogram: NullablePointer[Bpfprogram] = NullablePointer[Bpfprogram](Bpfprogram)
   var hasfilter: Bool = false
+  var cb: PcapGotPacket[A] = @{(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref) => None}
 
   new create(device: String = "ens33",
             snaplen: ISize  = 8192,
@@ -30,18 +32,19 @@ actor PonyPcap
 		pcaps = @pcap_open_live(device.cstring(), snaplen.i32(), 0, to_ms.i32(), errbuf.cstring())
 
 		if (pcaps.is_none()) then
-			failcb(errbuf)
+      errbuf.recalc()
+			failcb(errbuf.clone())
 		else
       var netmask: IPv4 = IPv4
       var r: I32 = @pcap_compile(pcaps, bpfprogram, filter.cstring(), 0, netmask)
-      if (r != 0) then    // FIXME - should actually return the error
-        failcb(errbuf)
+      if (r != 0) then
+        failcb(String.from_cstring(@pcap_geterr(pcaps)).clone())
         return
       end
 
       r = @pcap_setfilter(pcaps, bpfprogram)
       if (r != 0) then    // FIXME - should actually return the error
-        failcb(errbuf)
+        failcb(String.from_cstring(@pcap_geterr(pcaps)).clone())
         return
       end
 
@@ -51,11 +54,14 @@ actor PonyPcap
 		end
     None
 
-  be start_capture_x[A: Any tag](cb: PcapGotPacketX[A], x: A) =>
+  be register_callback(cb': PcapGotPacket[A]) =>
+    cb = cb'
+
+  be start_capture_x(x: A) =>
     @printf("Starting Capture\n".cstring())
     @pcap_loop[I32](pcaps, 20, cb, x)
     @printf("20 cnt\n".cstring())
-    start_capture_x[A](cb, x)
+    start_capture_x(x)
 
 
 

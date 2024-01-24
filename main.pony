@@ -5,13 +5,13 @@ actor Main
   let max_err_length: USize = 256
   let max_network_devices: USize = 64
   var thistag: Main tag = recover tag this end
-  let pcap: PonyPcap
+  let pcap: PonyPcap[Main tag]
 
   new create(env: Env) =>
     env.out.print("Hello")
 
     pcap =
-      PonyPcap(where device = "ens33",
+      PonyPcap[Main tag](where device = "ens33",
                      failcb = thistag~failure(),
                   successcb = thistag~success(),
                      filter = "icmp")
@@ -19,11 +19,12 @@ actor Main
 
 
     be success() =>
-    let cb: PcapGotPacketX[Main tag] = @{(obj: Main tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
+    let cb: PcapGotPacket[Main tag] = @{(obj: Main tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
         @printf("got me a packet raw CB 0\n".cstring())
         obj.test()
       }
-      pcap.start_capture_x[Main tag](cb, thistag)
+      pcap.register_callback(cb)
+      pcap.start_capture_x(thistag)
 
     be failure(errbuf: String val) =>
       @printf("failure: %s\n".cstring(), errbuf.cstring())
@@ -32,7 +33,8 @@ actor Main
       @printf("TEST\n".cstring())
 
     fun @ccb(obj: Any tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
-      @printf("A real CB\n".cstring())
+      let s: Pcappkthdr val = consume hdr
+
     /*
     dev = Pcap.lookupdev()
     try
