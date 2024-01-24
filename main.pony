@@ -14,7 +14,7 @@ actor Main
       PonyPcap[Main tag](where device = "ens33",
                      failcb = thistag~failure(),
                   successcb = thistag~success(),
-                     filter = "icmp")
+                     filter = "")
 
 
 

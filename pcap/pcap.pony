@@ -69,23 +69,52 @@ primitive PcapInternalCallbacks[A: Any tag]
     var etherHeader: EtherHeader = EtherHeader
     @memcpy(NullablePointer[EtherHeader](etherHeader), data, etherHeader.sizeof())
 
-    @printf("%02x:%02x:%02x:%02x:%02x:%02x -> %02x:%02x:%02x:%02x:%02x:%02x\n".cstring(),
-            etherHeader.ether_shost.a0, etherHeader.ether_shost.a1,
-            etherHeader.ether_shost.a2, etherHeader.ether_shost.a3,
-            etherHeader.ether_shost.a4, etherHeader.ether_shost.a5,
-            etherHeader.ether_dhost.a0, etherHeader.ether_dhost.a1,
-            etherHeader.ether_dhost.a2, etherHeader.ether_dhost.a3,
-            etherHeader.ether_dhost.a4, etherHeader.ether_dhost.a5)
 
+    let t: U16 = etherHeader.ether_type.bswap() // FIXME for endianness
+
+    if     (t == 0x0800) then
+      PcapInternalCallbacks[A].ipv4(obj, consume hdr, data, etherHeader)
+    elseif (t == 0x0806) then
+      @printf("[ARP]: %s -> %s\n".cstring(), etherHeader.ether_shost.string().cstring(),
+                                      etherHeader.ether_dhost.string().cstring())
+    elseif (t == 0x8100) then
+      @printf("[VLAN]: %s -> %s\n".cstring(), etherHeader.ether_shost.string().cstring(),
+                                      etherHeader.ether_dhost.string().cstring())
+    elseif (t == 0x81DD) then
+      @printf("[IPv6]: %s -> %s\n".cstring(), etherHeader.ether_shost.string().cstring(),
+                                      etherHeader.ether_dhost.string().cstring())
+    else
+      @printf("[%d]: %s -> %s\n".cstring(), t, etherHeader.ether_shost.string().cstring(),
+                                      etherHeader.ether_dhost.string().cstring())
+    end
+
+
+  fun ipv4(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref, etherHeader: EtherHeader) =>
     var ipv4Header: IPv4Header = IPv4Header
     @memcpy(NullablePointer[IPv4Header](ipv4Header), data.offset(etherHeader.sizeof().usize()),
             20)
 
-    @printf("%d.%d.%d.%d -> %d.%d.%d.%d\n".cstring(),
-            ipv4Header.ip_src.a, ipv4Header.ip_src.b, ipv4Header.ip_src.c, ipv4Header.ip_src.d,
-            ipv4Header.ip_dst.a, ipv4Header.ip_dst.b, ipv4Header.ip_dst.c, ipv4Header.ip_dst.d)
+    if (ipv4Header.ip_p == 1) then
+      PcapInternalCallbacks[A].icmp(obj, consume hdr, data, etherHeader, ipv4Header)
+    elseif (ipv4Header.ip_p == 6) then
+      @printf("tcp\n".cstring())
+    elseif (ipv4Header.ip_p == 17) then
+      @printf("udp\n".cstring())
+    else
+      @printf("Unknown protocol: %d\n".cstring(), ipv4Header.ip_p)
+    end
 
+  fun icmp(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref, etherHeader: EtherHeader, ipv4Header: IPv4Header) =>
+    @printf("[IPv4:ICMP]: [%s]:%s -> [%s]:%s\n".cstring(),
+            etherHeader.ether_shost.string().cstring(), ipv4Header.ip_src.string().cstring(),
+            etherHeader.ether_dhost.string().cstring(), ipv4Header.ip_dst.string().cstring())
 
+    var icmpHeader: IcmpHeader = IcmpHeader
+    @memcpy(NullablePointer[IcmpHeader](icmpHeader),
+            data.offset(etherHeader.sizeof().usize() + ipv4Header.sizeof().usize()),
+            icmpHeader.sizeof())
+
+    @printf("icmp_type/code: %d/%d\n".cstring(), icmpHeader.icmp_type, icmpHeader.icmp_code)
 
 /*
   Source: /usr/include/pcap/pcap.h:607

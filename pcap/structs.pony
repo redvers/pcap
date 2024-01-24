@@ -1,10 +1,22 @@
+use @snprintf[I32](buff: Pointer[U8] tag, size: U64, fmt: Pointer[U8] tag, ...)
+
 struct IPv4
   var a: U8 = 0
   var b: U8 = 0
   var c: U8 = 0
   var d: U8 = 0
 
-
+  fun string(): String iso =>
+    recover iso
+      String(16)
+      .>append(a.string())
+      .>append(".")
+      .>append(b.string())
+      .>append(".")
+      .>append(c.string())
+      .>append(".")
+      .>append(d.string())
+    end
 
 /*
   Source: /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:8
@@ -265,6 +277,16 @@ struct EtherHost
   var a4: U8 = 0
   var a5: U8 = 0
 
+  fun string(): String iso =>
+    recover iso
+      let rvv: String ref = String(20)
+      @snprintf(rvv.cpointer(), 19, "%02x:%02x:%02x:%02x:%02x:%02x".cstring(),
+            a0, a1, a2, a3, a4, a5)
+			rvv.recalc()
+			consume rvv
+    end
+
+
 
 /*
   Source: /usr/include/netinet/ip.h:107
@@ -303,6 +325,26 @@ struct IPv4Header
 	fun sizeof(): U64 => (((this.ip_vhl and 0x0f).i32()) * 4).u64()
 
 
+/*
+  Source: /usr/include/netinet/ip_icmp.h:26
+  Original Name: icmphdr
+  Struct Size (bits):  64
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(unsigned char) size=8]: type
+     000008: [FundamentalType(unsigned char) size=8]: code
+     000016: [FundamentalType(short unsigned int) size=16]: checksum
+     000032: [UNION size=32] -- UNSUPPORTED FIXME: un
+*/
+
+struct IcmpHeader
+  var icmp_type: U8 = U8(0)
+  var icmp_code: U8 = U8(0)
+  var icmp_checksum: U16 = U16(0)
+  var icmp_un: U32 = U32(0)
+
+	fun sizeof(): U64 => 8
 
 
 
