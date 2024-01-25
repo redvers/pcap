@@ -3,11 +3,11 @@ use "files"
 
 use @printf[I32](fmt: Pointer[U8] tag, ...)
 
-actor Main
+actor Main is PcapReceiver
   let max_err_length: USize = 256
   let max_network_devices: USize = 64
   var thistag: Main tag = recover tag this end
-  let pcap: PonyPcap[Main tag]
+  let pcap: PonyPcap
 
   new create(env: Env) =>
     env.out.print("Hello")
@@ -21,7 +21,7 @@ actor Main
 */
 
     pcap =
-      PonyPcap[Main tag].create_from_file(where fileauth = FileAuth(env.root),
+      PonyPcap.create_from_file(where fileauth = FileAuth(env.root),
                                                 filename = "sample-pcaps/SkypeIRC.cap",
                                                   failcb = thistag~failure(),
                                                successcb = thistag~success(),
@@ -29,23 +29,28 @@ actor Main
 
 //    pcap.register_ipv4_icmp(
 
-  be success() =>
-    pcap.register_ipv4_icmp(cb)
+  be success() => None
+//    pcap.register_ipv4_icmp(cb)
     pcap.start_capture_x(thistag)
 
-  be failure(errbuf: String val) =>
+  be failure(errbuf: String val) => None
     @printf("failure: %s\n".cstring(), errbuf.cstring())
 
-  be test() =>
+  be test() => None
     @printf("TEST\n".cstring())
 
-//  fun @ccb(obj: Any tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
-//    let s: Pcappkthdr val = consume hdr
+
+
+
+  be ipv4_icmp(pkt: Pcappkthdr val, ehdr: EtherHeader val, ipv4hdr: IPv4Header val, icmphdr: IcmpHeader val, payload: Array[U8] val) =>
+    @printf("[IPv4:ICMP]: [%s]:%s -> [%s]:%s\n".cstring(),
+            ehdr.ether_shost.string().cstring(), ipv4hdr.ip_src.string().cstring(),
+            ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring())
 
 
 
 
-  be ipv4_icmp(etherHeader: EtherHeader iso, data: Pointer[U8] tag, ipv4Header: IPv4Header iso, icmpHeader: IcmpHeader iso, payload: Array[U8] iso) => None
+//  be ipv4_icmp(etherHeader: EtherHeader iso, data: Pointer[U8] tag, ipv4Header: IPv4Header iso, icmpHeader: IcmpHeader iso, payload: Array[U8] iso) => None
 
     /*
     dev = Pcap.lookupdev()
