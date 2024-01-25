@@ -24,25 +24,28 @@ actor Main
       PonyPcap[Main tag].create_from_file(where fileauth = FileAuth(env.root),
                                                 filename = "sample-pcaps/SkypeIRC.cap",
                                                   failcb = thistag~failure(),
-                                               successcb = thistag~success())
+                                               successcb = thistag~success(),
+                                                  filter = "icmp")
+
+//    pcap.register_ipv4_icmp(
+
+  be success() =>
+    pcap.register_ipv4_icmp(cb)
+    pcap.start_capture_x(thistag)
+
+  be failure(errbuf: String val) =>
+    @printf("failure: %s\n".cstring(), errbuf.cstring())
+
+  be test() =>
+    @printf("TEST\n".cstring())
+
+//  fun @ccb(obj: Any tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
+//    let s: Pcappkthdr val = consume hdr
 
 
-    be success() =>
-    let cb: PcapGotPacket[Main tag] = @{(obj: Main tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
-        @printf("got me a packet raw CB 0\n".cstring())
-        obj.test()
-      }
-//      pcap.register_callback(cb)
-      pcap.start_capture_x(thistag)
 
-    be failure(errbuf: String val) =>
-      @printf("failure: %s\n".cstring(), errbuf.cstring())
 
-    be test() =>
-      @printf("TEST\n".cstring())
-
-    fun @ccb(obj: Any tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
-      let s: Pcappkthdr val = consume hdr
+  be ipv4_icmp(etherHeader: EtherHeader iso, data: Pointer[U8] tag, ipv4Header: IPv4Header iso, icmpHeader: IcmpHeader iso, payload: Array[U8] iso) => None
 
     /*
     dev = Pcap.lookupdev()

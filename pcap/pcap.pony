@@ -16,14 +16,16 @@ use @memcpy[Pointer[U8] iso](dst: Pointer[None], src: Pointer[U8] tag, size: U64
 type PcapSuccess is {(): None} val
 type PcapFailure is {(String val): None} val
 type PcapGotPacket[A: Any tag] is @{(A tag, Pcappkthdr iso, Pointer[U8] ref): None}
+type PcapGotPacketICMP[A: Any tag] is {(A tag, Pcappkthdr iso, Pointer[U8] ref, EtherHeader, IPv4Header, IcmpHeader, Array[U8] iso): None}
 
 actor PonyPcap[A: Any tag]
   let errbuf: String ref = String(256)
   var pcaps:  NullablePointer[PcapS]
   var bpfprogram: NullablePointer[Bpfprogram] = NullablePointer[Bpfprogram](Bpfprogram)
   var hasfilter: Bool = false
-  var cb: PcapGotPacket[A] = @{(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref) => None}
   var is_file: Bool = false
+  let cb: PcapInternalCallbacks[A] = PcapInternalCallbacks[A]
+  var cbicmp: PcapGotPacketICMP[A] = {(obj: A, hdr: Pcappkthdr iso, etherHeader: EtherHeader, ipv4Header: IPv4Header, icmpHeader: IcmpHeader, payload: Array[U8] iso) => None}
 
   new create(device: String = "ens33",
             snaplen: ISize  = 8192,
@@ -90,8 +92,8 @@ actor PonyPcap[A: Any tag]
 			successcb()
 		end
 
-  be register_callback(cb': PcapGotPacket[A]) =>
-    cb = cb'
+  be register_icmp_callback(cb': PcapGotPacketICMP[A] val) =>
+    cbicmp = cb'
 
   be start_capture_x(x: A) =>
     if (is_file) then
@@ -106,6 +108,8 @@ actor PonyPcap[A: Any tag]
     start_capture_x(x)
 
 primitive PcapInternalCallbacks[A: Any tag]
+//  var cb: PcapGotPacket[A] = @{(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref) => None}
+
   fun @internal_callback(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
     let caplen: USize = hdr.caplen.usize()
     var etherHeader: EtherHeader = EtherHeader
@@ -132,12 +136,12 @@ primitive PcapInternalCallbacks[A: Any tag]
 
 
   fun ipv4(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref, etherHeader: EtherHeader) =>
+    @printf("ipv4:".cstring())
     var ipv4Header: IPv4Header = IPv4Header
     @memcpy(NullablePointer[IPv4Header](ipv4Header), data.offset(etherHeader.sizeof().usize()),
             20)
 
     if (ipv4Header.ip_p == 1) then
-      @printf("icmp\n".cstring())
       PcapInternalCallbacks[A].icmp(obj, consume hdr, data, etherHeader, ipv4Header)
     elseif (ipv4Header.ip_p == 6) then
       @printf("tcp\n".cstring())
@@ -148,7 +152,7 @@ primitive PcapInternalCallbacks[A: Any tag]
     end
 
   fun icmp(obj: A, hdr: Pcappkthdr iso, data: Pointer[U8] ref, etherHeader: EtherHeader, ipv4Header: IPv4Header) =>
-    @printf("[IPv4:ICMP]: [%s]:%s -> [%s]:%s\n".cstring(),
+    @printf("[IPv4:ICMP]: [%s]:%s -> [%s]:%s ".cstring(),
             etherHeader.ether_shost.string().cstring(), ipv4Header.ip_src.string().cstring(),
             etherHeader.ether_dhost.string().cstring(), ipv4Header.ip_dst.string().cstring())
 
@@ -157,120 +161,11 @@ primitive PcapInternalCallbacks[A: Any tag]
             data.offset(etherHeader.sizeof().usize() + ipv4Header.sizeof().usize()),
             icmpHeader.sizeof())
 
-    @printf("icmp_type/code: %d/%d\n".cstring(), icmpHeader.icmp_type, icmpHeader.icmp_code)
+    @printf("%d/%d\n".cstring(), icmpHeader.icmp_type, icmpHeader.icmp_code)
 
-/*
-  Source: /usr/include/pcap/pcap.h:607
-  Original Name: pcap_geterr/usr/include/pcap/pcap.h:607
-
-  Return Value: [PointerType size=64]->[FundamentalType(char) size=8]
-
-  Arguments:
-    [PointerType size=64]->[Struct size=,fid: f50]
-
-  fun pcap_geterr(parg0: NullablePointer[PcapS] tag): String =>
-    var pcstring: Pointer[U8] =  @pcap_geterr(parg0)
-    let p: String iso = String.from_cstring(pcstring).clone()
-    consume p
-*/
+//  be ipv4_icmp(
+    cbicmp(obj, consume hdr, consume etherHeader, consume ipv4Header, consume icmpHeader, recover iso Array[U8](0) end)
 
 
-/*
-primitive Pcap
-  fun lookupdev(): PcapDevice =>
-    let errbuff: String = String(PcapConstants.max_err_length())
+//type PcapGotPacketICMP[A: Any tag] is @{(A tag, Pcappkthdr iso, Pointer[U8] ref, EtherHeader, IPv4Header, IcmpHeader, Array[U8] iso): None}
 
-    var pcstring: Pointer[U8] = @pcap_lookupdev(errbuff.cstring())
-    if (pcstring.is_null()) then
-      let rv: PcapDevice = PcapDevice
-      rv.err = errbuff.clone()
-      return rv
-    else
-      let p: String iso = String.from_cstring(pcstring).clone()
-      let rv: PcapDevice = PcapDevice
-      rv.str = consume p
-      return rv
-    end
-
-  fun lookupnet(device: PcapDevice) ? =>
-    if (false) then error end
-
-    match device.str
-    | let n: None => error
-    | let s: String val =>
-      let rv: I32 = @pcap_lookupnet(s.cstring(), device.net, device.mask, device.err.cstring())
-      if (rv != 0) then
-        error
-      end
-    end
-
-  fun open_live(device: PcapDevice, snaplen: I32, promisc: Bool, to_ms: I32) ? =>
-    match device.str
-    | let n: None => error
-    | let s: String val =>
-      if (promisc) then
-        device.pcaps = @pcap_open_live(s.cstring(), snaplen, 1, to_ms, device.err.cstring())
-      else
-        device.pcaps = @pcap_open_live(s.cstring(), snaplen, 0, to_ms, device.err.cstring())
-      end
-
-      if (device.pcaps.is_none()) then
-        @printf("X %d\n".cstring(), device.pcaps)
-        @printf("X %s\n".cstring(), device.err.cstring())
-        error
-      end
-
-    end
-
-  fun datalink(dev: PcapDevice): LinkType =>
-    LinkTypeResolver.apply(Clibpcap.pcap_datalink(dev.pcaps))
-
-  fun compile_and_set(dev: PcapDevice, filter: String val, optimize: Bool) ? => // FIXME - Need to add ability to get errors
-    var r: I32 = @pcap_compile(dev.pcaps, dev.bpfp, filter.cstring(), 0, dev.net)
-    if (r != 0) then error end
-    r = @pcap_setfilter(dev.pcaps, dev.bpfp)
-    if (r != 0) then error end
-
-  fun next(dev: PcapDevice) =>
-    dev.packet = @pcap_next(dev.pcaps, dev.pcaphdr)
-
-
-
-
-class PcapDevice
-  var str: (String val | None) = None
-  var err: String = String(PcapConstants.max_err_length())
-  var net: IPv4 = IPv4
-  var mask: IPv4 = IPv4
-  var pcaps: NullablePointer[PcapS] = NullablePointer[PcapS].none()
-  var bpfp: NullablePointer[Bpfprogram] = NullablePointer[Bpfprogram](Bpfprogram)
-  var pcaphdr: NullablePointer[Pcappkthdr] = NullablePointer[Pcappkthdr](Pcappkthdr)
-  var packet: Pointer[U8] = Pointer[U8]
-
-  fun device(): String val ? =>
-    match str
-    | let b: None => error
-    | let s: String val => s
-    end
-
-  fun eth(): Sniffethernet =>
-    @cast[Sniffethernet](packet, 0)
-
-  fun ip(): Sniffip =>
-    @cast[Sniffip](packet, 14)
-
-  fun tcp(ipS: Sniffip): Snifftcp =>
-    @cast[Snifftcp](packet, 14 + ipS.ip_offset())
-
-struct IPv4
-  var a: U8 = 0
-  var b: U8 = 0
-  var c: U8 = 0
-  var d: U8 = 0
-
-  fun string(): String val =>
-    a.string() + "." +
-    b.string() + "." +
-    c.string() + "." +
-    d.string()
-*/
