@@ -136,7 +136,7 @@ primitive PcapInternalCallbacks
     if (ipv4Header.ip_p == 1) then
       PcapInternalCallbacks.icmp(obj, consume hdr, data, consume etherHeader, consume ipv4Header)
     elseif (ipv4Header.ip_p == 6) then
-      @printf("tcp\n".cstring())
+      PcapInternalCallbacks.tcp(obj, consume hdr, data, consume etherHeader, consume ipv4Header)
     elseif (ipv4Header.ip_p == 17) then
       @printf("udp\n".cstring())
     else
@@ -144,23 +144,22 @@ primitive PcapInternalCallbacks
     end
 
   fun icmp(obj: PcapReceiver tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref, etherHeader: EtherHeader iso, ipv4Header: IPv4Header iso) => None
-          /*
-    @printf("[IPv4:ICMP]: [%s]:%s -> [%s]:%s ".cstring(),
-            etherHeader.ether_shost.string().cstring(), ipv4Header.ip_src.string().cstring(),
-            etherHeader.ether_dhost.string().cstring(), ipv4Header.ip_dst.string().cstring())
-*/
     var icmpHeader: IcmpHeader iso =
     @memcpy[IcmpHeader iso^](NullablePointer[IcmpHeader](IcmpHeader),
             data.offset(etherHeader.sizeof().usize() + ipv4Header.sizeof().usize()),
             IcmpHeader.sizeof())
 
     obj.ipv4_icmp(consume hdr, consume etherHeader, consume ipv4Header, consume icmpHeader, recover iso Array[U8](0) end)
-    /*
 
-    @printf("%d/%d\n".cstring(), icmpHeader.icmp_type, icmpHeader.icmp_code)
+  fun tcp(obj: PcapReceiver tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref, etherHeader: EtherHeader iso, ipv4Header: IPv4Header iso) => None
+    var tcpheader: TCPHeader iso =
+    @memcpy[TCPHeader iso^](NullablePointer[TCPHeader](TCPHeader), data.offset(etherHeader.sizeof().usize() + ipv4Header.sizeof().usize()), 60)
 
-//  be ipv4_icmp(
+    let dptr: U64 = etherHeader.sizeof() + ipv4Header.sizeof() + tcpheader.sizeof()
+    let length: U64 = hdr.caplen.u64() - dptr
 
+    var payload: Array[U8] iso = recover iso Array[U8].init(0, length.usize()) end
+    @memcpy(payload.cpointer(), data.offset(dptr.usize()), length)
 
-//type PcapGotPacketICMP[A: Any tag] is @{(A tag, Pcappkthdr iso, Pointer[U8] ref, EtherHeader, IPv4Header, IcmpHeader, Array[U8] iso): None}
-*/
+    obj.ipv4_tcp(consume hdr, consume etherHeader, consume ipv4Header, consume tcpheader, consume payload)
+

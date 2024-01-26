@@ -347,5 +347,57 @@ struct IcmpHeader
 	fun sizeof(): U64 => 8
 
 
+/*
+  Source: fromtcpdumporg.h:34
+  Original Name: sniff_tcp
+  Struct Size (bits):  160
+  Struct Align (bits): 32
+
+  Fields (Offset in bits):
+     000000: [FundamentalType(short unsigned int) size=16]: th_sport
+     000016: [FundamentalType(short unsigned int) size=16]: th_dport
+     000032: [FundamentalType(unsigned int) size=32]: th_seq
+     000064: [FundamentalType(unsigned int) size=32]: th_ack
+     000096: [FundamentalType(unsigned char) size=8]: th_offx2
+     000104: [FundamentalType(unsigned char) size=8]: th_flags
+     000112: [FundamentalType(short unsigned int) size=16]: th_win
+     000128: [FundamentalType(short unsigned int) size=16]: th_sum
+     000144: [FundamentalType(short unsigned int) size=16]: th_urp
+*/
+
+struct TCPHeader
+  var th_sport: U16 = U16(0)
+  var th_dport: U16 = U16(0)
+  var th_seq: U32 = U32(0)
+  var th_ack: U32 = U32(0)
+  var th_offx2: U8 = U8(0)
+  var th_flags: U8 = U8(0)
+  var th_win: U16 = U16(0)
+  var th_sum: U16 = U16(0)
+  var th_urp: U16 = U16(0)
+  var o0:     U64 = U64(0)	// Allocated
+  var o1:     U64 = U64(0)
+  var o2:     U64 = U64(0)	// For reasons...
+  var o3:     U64 = U64(0)
+  var o4:     U64 = U64(0)
+
+	fun sizeof(): U64 =>
+		var size: U8 = this.th_offx2 and 0xf0
+    size = size / 4
+    size.u64()
+
+  fun tcp_sport(): U16 => this.th_sport.bswap()
+  fun tcp_dport(): U16 => this.th_dport.bswap()
+
+  fun is_cwr(): Bool => ((this.th_flags and 0b10000000) == 0b10000000)
+  fun is_ece(): Bool => ((this.th_flags and 0b01000000) == 0b01000000)
+  fun is_urg(): Bool => ((this.th_flags and 0b00100000) == 0b00100000)
+  fun is_ack(): Bool => ((this.th_flags and 0b00010000) == 0b00010000)
+  fun is_psh(): Bool => ((this.th_flags and 0b00001000) == 0b00001000)
+  fun is_rst(): Bool => ((this.th_flags and 0b00000100) == 0b00000100)
+  fun is_syn(): Bool => ((this.th_flags and 0b00000010) == 0b00000010)
+  fun is_fin(): Bool => ((this.th_flags and 0b00000001) == 0b00000001)
+
+//(((this.ip_vhl and 0x0f).i32()) * 4).u64()
 
 
