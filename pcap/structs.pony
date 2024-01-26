@@ -193,9 +193,22 @@ struct Pcapfileheader
 */
 
 struct Pcappkthdr
-  embed ts: Timeval = Timeval
+  var tv_sec: I64 = I64(0)   // Embedded Timeval
+  var tv_usec: I64 = I64(0)  // Embedded Timeval
   var caplen: U32 = U32(0)
   var len: U32 = U32(0)
+
+  fun clone(): Pcappkthdr iso^ =>
+    var rv: Pcappkthdr iso = recover iso Pcappkthdr end
+    rv.tv_sec = this.tv_sec
+    rv.tv_usec = this.tv_usec
+    rv.caplen = this.caplen
+    rv.len = this.len
+    consume rv
+
+
+
+//struct Timeval
 
 
 /*

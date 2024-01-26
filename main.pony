@@ -52,15 +52,17 @@ actor Main is PcapReceiver
             payload.size())
 
   be ipv4_tcp(pkt: Pcappkthdr val, ehdr: EtherHeader val, ipv4hdr: IPv4Header val, tcphdr: TCPHeader val, payload: Array[U8] val) =>
-    @printf("[IPv4:TCP]: [%s]:%s:%s -> [%s] %s:%s - size: %d\n".cstring(),
+    @printf("[IPv4:TCP]: [%s]:%s:%s -> [%s] %s:%s caplen: %d, plen: %d, PayloadSize: %d\n".cstring(),
             ehdr.ether_shost.string().cstring(), ipv4hdr.ip_src.string().cstring(), tcphdr.tcp_sport().string().cstring(),
             ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring(), tcphdr.tcp_dport().string().cstring(),
+            pkt.caplen, pkt.len,
             payload.size())
 
   be ipv4_udp(pkt: Pcappkthdr val, ehdr: EtherHeader val, ipv4hdr: IPv4Header val, udphdr: UDPHeader val, payload: Array[U8] val) =>
-    @printf("[IPv4:UDP]: [%s]:%s:%s -> [%s] %s:%s PayloadSize: %d \n".cstring(),
+    @printf("[IPv4:UDP]: [%s]:%s:%s -> [%s] %s:%s caplen: %d, plen: %d, PayloadSize: %d \n".cstring(),
             ehdr.ether_shost.string().cstring(), ipv4hdr.ip_src.string().cstring(), udphdr.udp_sport().string().cstring(),
             ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring(), udphdr.udp_dport().string().cstring(),
+            pkt.caplen, pkt.len,
             payload.size())
 
 

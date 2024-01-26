@@ -1,3 +1,3 @@
 all:
 	corral run -- ponyc -d . --noverify
-	./pcap1
+	sudo ./pcap1

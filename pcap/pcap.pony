@@ -105,7 +105,8 @@ actor PonyPcap
     start_capture_x(x)
 
 primitive PcapInternalCallbacks
-  fun @internal_callback(obj: PcapReceiver tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref) =>
+  fun @internal_callback(obj: PcapReceiver tag, hdr': Pcappkthdr iso, data: Pointer[U8] ref) =>
+    var hdr: Pcappkthdr iso = hdr'.clone()
     let caplen: USize = hdr.caplen.usize()
     var etherHeader: EtherHeader iso =
     @memcpy[EtherHeader iso^](NullablePointer[EtherHeader](EtherHeader), data, EtherHeader.sizeof())
