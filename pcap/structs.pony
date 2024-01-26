@@ -398,6 +398,15 @@ struct TCPHeader
   fun is_syn(): Bool => ((this.th_flags and 0b00000010) == 0b00000010)
   fun is_fin(): Bool => ((this.th_flags and 0b00000001) == 0b00000001)
 
-//(((this.ip_vhl and 0x0f).i32()) * 4).u64()
+/* Lovingly crafted by hand for UDP */
 
+struct UDPHeader
+  var uh_sport: U16 = U16(0)
+  var uh_dport: U16 = U16(0)
+  var uh_len: U16 = U16(0)
+  var uh_checksum: U16 = U16(0)
 
+  fun sizeof(): U64 => 8
+
+  fun udp_sport(): U16 => this.uh_sport.bswap()
+  fun udp_dport(): U16 => this.uh_dport.bswap()

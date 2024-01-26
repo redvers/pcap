@@ -14,20 +14,21 @@ actor Main is PcapReceiver
     env = env'
     env.out.print("Hello")
 
-    /*
+
     pcap =
-      PonyPcap[Main tag](where device = "ens33",
+      PonyPcap(where device = "ens33",
                      failcb = thistag~failure(),
                   successcb = thistag~success(),
                      filter = "")
-*/
 
+/*
     pcap =
       PonyPcap.create_from_file(where fileauth = FileAuth(env.root),
                                                 filename = "sample-pcaps/SkypeIRC.cap",
                                                   failcb = thistag~failure(),
                                                successcb = thistag~success(),
-                                                  filter = "")
+                                                  filter = "udp")
+                                                  */
 
 //    pcap.register_ipv4_icmp(
 
@@ -45,16 +46,21 @@ actor Main is PcapReceiver
 
 
   be ipv4_icmp(pkt: Pcappkthdr val, ehdr: EtherHeader val, ipv4hdr: IPv4Header val, icmphdr: IcmpHeader val, payload: Array[U8] val) =>
-    @printf("[IPv4:ICMP]: [%s] %s -> [%s] %s\n".cstring(),
+    @printf("[IPv4:ICMP]: [%s] %s -> [%s] %s - size: %d\n".cstring(),
             ehdr.ether_shost.string().cstring(), ipv4hdr.ip_src.string().cstring(),
-            ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring())
+            ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring(),
+            payload.size())
 
   be ipv4_tcp(pkt: Pcappkthdr val, ehdr: EtherHeader val, ipv4hdr: IPv4Header val, tcphdr: TCPHeader val, payload: Array[U8] val) =>
-    if (tcphdr.is_syn()) then
-    @printf("[IPv4:TCP]: [%s]:%s:%s -> [%s] %s:%s\n".cstring(),
+    @printf("[IPv4:TCP]: [%s]:%s:%s -> [%s] %s:%s - size: %d\n".cstring(),
             ehdr.ether_shost.string().cstring(), ipv4hdr.ip_src.string().cstring(), tcphdr.tcp_sport().string().cstring(),
-            ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring(), tcphdr.tcp_dport().string().cstring())
-    end
+            ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring(), tcphdr.tcp_dport().string().cstring(),
+            payload.size())
 
+  be ipv4_udp(pkt: Pcappkthdr val, ehdr: EtherHeader val, ipv4hdr: IPv4Header val, udphdr: UDPHeader val, payload: Array[U8] val) =>
+    @printf("[IPv4:UDP]: [%s]:%s:%s -> [%s] %s:%s PayloadSize: %d \n".cstring(),
+            ehdr.ether_shost.string().cstring(), ipv4hdr.ip_src.string().cstring(), udphdr.udp_sport().string().cstring(),
+            ehdr.ether_dhost.string().cstring(), ipv4hdr.ip_dst.string().cstring(), udphdr.udp_dport().string().cstring(),
+            payload.size())
 
 

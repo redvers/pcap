@@ -27,7 +27,7 @@ actor PonyPcap
   var cbicmp: PcapGotPacketICMP = {(obj: PcapReceiver, hdr: Pcappkthdr iso, etherHeader: EtherHeader, ipv4Header: IPv4Header, icmpHeader: IcmpHeader, payload: Array[U8] iso) => None}
 
   new create(device: String = "ens33",
-            snaplen: ISize  = 8192,
+            snaplen: ISize  = 65535,
              promis: Bool   = false,
               to_ms: USize  = 100,
           successcb: PcapSuccess,
@@ -99,7 +99,7 @@ actor PonyPcap
         None
       PcapInternalCallbacks.internal_callback(x, consume pcaphdr, data)
     else
-      @pcap_loop[I32](pcaps, 20, addressof PcapInternalCallbacks.internal_callback, x)
+      @pcap_loop[I32](pcaps, 1, addressof PcapInternalCallbacks.internal_callback, x)
       @printf("20 cnt\n".cstring())
     end
     start_capture_x(x)
@@ -138,7 +138,7 @@ primitive PcapInternalCallbacks
     elseif (ipv4Header.ip_p == 6) then
       PcapInternalCallbacks.tcp(obj, consume hdr, data, consume etherHeader, consume ipv4Header)
     elseif (ipv4Header.ip_p == 17) then
-      @printf("udp\n".cstring())
+      PcapInternalCallbacks.udp(obj, consume hdr, data, consume etherHeader, consume ipv4Header)
     else
       @printf("Unknown protocol: %d\n".cstring(), ipv4Header.ip_p)
     end
@@ -162,4 +162,16 @@ primitive PcapInternalCallbacks
     @memcpy(payload.cpointer(), data.offset(dptr.usize()), length)
 
     obj.ipv4_tcp(consume hdr, consume etherHeader, consume ipv4Header, consume tcpheader, consume payload)
+
+  fun udp(obj: PcapReceiver tag, hdr: Pcappkthdr iso, data: Pointer[U8] ref, etherHeader: EtherHeader iso, ipv4Header: IPv4Header iso) => None
+    var udpHeader: UDPHeader iso =
+    @memcpy[UDPHeader iso^](NullablePointer[UDPHeader](UDPHeader), data.offset(etherHeader.sizeof().usize() + ipv4Header.sizeof().usize()), 8)
+
+    let dptr: U64 = (etherHeader.sizeof() + ipv4Header.sizeof() + udpHeader.sizeof())
+    let length: U64 = (hdr.caplen.u64() - dptr) // FIXME -=- Understand what the deal with the sizes is...
+
+    var payload: Array[U8] iso = recover iso Array[U8].init(0, length.usize()) end
+    @memcpy(payload.cpointer(), data.offset(dptr.usize()), length)
+
+    obj.ipv4_udp(consume hdr, consume etherHeader, consume ipv4Header, consume udpHeader, consume payload)
 
