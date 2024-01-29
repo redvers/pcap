@@ -104,3 +104,16 @@ actor PonyPcap
     end
     start_capture_x(x)
 
+  be start_capture_iso(x: PcapReceiver tag) => None
+    if (is_file) then
+      var pcaphdr: Pcappkthdr iso = recover iso Pcappkthdr end
+      var data: Pointer[U8] ref = @pcap_next(pcaps, pcaphdr)
+      if (data.is_null()) then return end
+        None
+      PcapInternalISOCallbacks.internal_callback(x, consume pcaphdr, data)
+    else
+      @pcap_loop[I32](pcaps, 20, addressof PcapInternalISOCallbacks.internal_callback, x)
+      @printf("20 cnt\n".cstring())
+    end
+    start_capture_iso(x)
+

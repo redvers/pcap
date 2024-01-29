@@ -14,27 +14,28 @@ actor Main is PcapReceiver
     env = env'
     env.out.print("Hello")
 
-
+/*
     pcap =
       PonyPcap(where device = "ens33",
                      failcb = thistag~failure(),
                   successcb = thistag~success(),
                      filter = "")
+*/
 
-/*
     pcap =
       PonyPcap.create_from_file(where fileauth = FileAuth(env.root),
                                                 filename = "sample-pcaps/SkypeIRC.cap",
                                                   failcb = thistag~failure(),
                                                successcb = thistag~success(),
-                                                  filter = "udp")
-                                                  */
+                                                  filter = "")
+
 
 //    pcap.register_ipv4_icmp(
 
   be success() => None
 //    pcap.register_ipv4_icmp(cb)
-    pcap.start_capture_x(thistag)
+    pcap.start_capture_iso(thistag)
+//    pcap.start_capture_x(thistag)
 
   be failure(errbuf: String val) => None
     @printf("failure: %s\n".cstring(), errbuf.cstring())
@@ -44,7 +45,7 @@ actor Main is PcapReceiver
 
 
 
-
+/*
   be ipv4_icmp(pkt: Pcappkthdr val, ehdr: EtherHeader val, ipv4hdr: IPv4Header val, icmphdr: IcmpHeader val, payload: Array[U8] val) =>
     @printf("[IPv4:ICMP]: [%s] %s -> [%s] %s - size: %d\n".cstring(),
             ehdr.ether_shost.string().cstring(), ipv4hdr.ip_src.string().cstring(),
@@ -65,4 +66,4 @@ actor Main is PcapReceiver
             pkt.caplen, pkt.len,
             payload.size())
 
-
+*/
