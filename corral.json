@@ -1,18 +1,12 @@
 {
-  "packages": [],
+  "packages": [ "pcap" ],
   "deps": [],
   "info": {
     "description": "Pony binding for libpcap",
-    "homepage": "",
-    "license": "",
+    "homepage": "https://github.com/redvers/pcap",
+    "license": "BSD-2-Clause",
     "documentation_url": "",
-    "version": "0.1",
+    "version": "0.2.0",
     "name": "pcap"
-  },
-  "scripts": {
-    "posix": {
-      "post_fetch_or_update": "make shim"
-    }
   }
-
 }
