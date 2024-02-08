@@ -280,9 +280,85 @@ struct Pcapsamp
 struct EtherHeader
   embed ether_dhost: EtherHost = EtherHost
   embed ether_shost: EtherHost = EtherHost
-  var ether_type: U16 = U16(0)
+  var ether_type: U16 = 0x0800
 
 	fun sizeof(): U64 => 14
+
+  fun ref set_dhost(a: String val) ? =>
+    let lower: String val = a.lower()
+    var set: Array[String val] val = lower.split_by(":")
+    if (set.size() != 6) then error end
+
+    ether_dhost.a0 = hex_to_u8(set(0)?)?
+    ether_dhost.a1 = hex_to_u8(set(1)?)?
+    ether_dhost.a2 = hex_to_u8(set(2)?)?
+    ether_dhost.a3 = hex_to_u8(set(3)?)?
+    ether_dhost.a4 = hex_to_u8(set(4)?)?
+    ether_dhost.a5 = hex_to_u8(set(5)?)?
+
+  fun ref set_shost(a: String val) ? =>
+    let lower: String val = a.lower()
+    var set: Array[String val] val = lower.split_by(":")
+    if (set.size() != 6) then error end
+
+    ether_shost.a0 = hex_to_u8(set(0)?)?
+    ether_shost.a1 = hex_to_u8(set(1)?)?
+    ether_shost.a2 = hex_to_u8(set(2)?)?
+    ether_shost.a3 = hex_to_u8(set(3)?)?
+    ether_shost.a4 = hex_to_u8(set(4)?)?
+    ether_shost.a5 = hex_to_u8(set(5)?)?
+
+
+
+  fun hex_to_u8(a: String val): U8 ? =>
+    if (a.size() == 0) then error end
+    if (a.size() > 2) then error end
+
+    if (a.size() == 1) then
+      return single_hex_to_digit(a.at_offset(0)?)?
+    end
+    if (a.size() == 2) then
+      let u: U8 = (single_hex_to_digit(a.at_offset(0)?)? * 16) + single_hex_to_digit(a.at_offset(1)?)?
+      return u
+    end
+    0
+
+  fun single_hex_to_digit(a: U8): U8 ? =>
+    match a
+    | if ((a >= '0') and (a <= '9')) => return (a - 0x30)
+    | if ((a >= 'a') and (a <= 'f')) => return ((a - 0x61) + 10)
+    | if ((a >= 'A') and (a <= 'F')) => return ((a - 0x41) + 10)
+    else
+      error
+    end
+
+
+
+
+
+
+
+  fun ref serialize(): Array[U8] val =>
+    let rv: Array[U8] trn = recover trn Array[U8] end
+    rv.push_u8(ether_dhost.a0)
+    rv.push_u8(ether_dhost.a1)
+    rv.push_u8(ether_dhost.a2)
+    rv.push_u8(ether_dhost.a3)
+    rv.push_u8(ether_dhost.a4)
+    rv.push_u8(ether_dhost.a5)
+
+    rv.push_u8(ether_dhost.a0)
+    rv.push_u8(ether_dhost.a1)
+    rv.push_u8(ether_dhost.a2)
+    rv.push_u8(ether_dhost.a3)
+    rv.push_u8(ether_dhost.a4)
+    rv.push_u8(ether_dhost.a5)
+
+    rv.push_u16(ether_type.bswap())
+
+    consume rv
+
+
 
 struct EtherHost
   var a0: U8 = 0
@@ -322,21 +398,62 @@ struct EtherHost
 */
 
 struct IPv4Header
-  var ip_vhl: U8 = U8(0)
-  var ip_tos: U8 = U8(0)
-  var ip_len: U16 = U16(0)
-  var ip_id: U16 = U16(0)
-  var ip_off: U16 = U16(0)
-  var ip_ttl: U8 = U8(0)
-  var ip_p: U8 = U8(0)
-  var ip_sum: U16 = U16(0)
-  embed ip_src: IPv4 = IPv4
-  embed ip_dst: IPv4 = IPv4
+  var ip_vhl: U8 = U8(0b0100_0101)          // 0
+  var ip_tos: U8 = U8(0b000_10000)          // 1
+  var ip_len: U16 = U16(60)        // 2
+  var ip_id: U16 = U16(42)         // 4
+  var ip_off: U16 = U16(0b010_00000_0000_0000)        // 6
+  var ip_ttl: U8 = U8(64)          // 8
+  var ip_p: U8 = U8(6)            // 9
+  var ip_sum: U16 = U16(0)        // 10
+  embed ip_src: IPv4 = IPv4       // 12
+  embed ip_dst: IPv4 = IPv4       // 16
 
 // This means that we currently silently discard any extra options.
 // We will fix that at some point -- FIXME
 	fun sizeof(): U64 => (((this.ip_vhl and 0x0f).i32()) * 4).u64()
 
+  fun ref set_saddr(a: String val) ? =>
+    var set: Array[String val] val = a.split_by(".")
+    if (set.size() != 4) then error end
+
+    ip_src.a = set(0)?.u8()?
+    ip_src.b = set(1)?.u8()?
+    ip_src.c = set(2)?.u8()?
+    ip_src.d = set(3)?.u8()?
+
+  fun ref set_daddr(a: String val) ? =>
+    var set: Array[String val] val = a.split_by(".")
+    if (set.size() != 4) then error end
+
+    ip_dst.a = set(0)?.u8()?
+    ip_dst.b = set(1)?.u8()?
+    ip_dst.c = set(2)?.u8()?
+    ip_dst.d = set(3)?.u8()?
+
+
+  fun ref serialize(): Array[U8] val =>
+    let rv: Array[U8] trn = recover trn Array[U8] end
+    rv.push_u8(ip_vhl)
+    rv.push_u8(ip_tos)
+    rv.push_u16(ip_len.bswap())
+    rv.push_u16(ip_id.bswap())
+    rv.push_u16(ip_off.bswap())
+    rv.push_u8(ip_ttl)
+    rv.push_u8(ip_p)
+    rv.push_u16(ip_sum.bswap())
+
+    rv.push_u8(ip_src.a)
+    rv.push_u8(ip_src.b)
+    rv.push_u8(ip_src.c)
+    rv.push_u8(ip_src.d)
+
+    rv.push_u8(ip_dst.a)
+    rv.push_u8(ip_dst.b)
+    rv.push_u8(ip_dst.c)
+    rv.push_u8(ip_dst.d)
+
+    consume rv
 
 /*
   Source: /usr/include/netinet/ip_icmp.h:26
@@ -383,9 +500,9 @@ struct TCPHeader
   var th_dport: U16 = U16(0)
   var th_seq: U32 = U32(0)
   var th_ack: U32 = U32(0)
-  var th_offx2: U8 = U8(0)
-  var th_flags: U8 = U8(0)
-  var th_win: U16 = U16(0)
+  var th_offx2: U8 = 0b1010_0000
+  var th_flags: U8 = 0b0000_0010
+  var th_win: U16 = 0xfaf0
   var th_sum: U16 = U16(0)
   var th_urp: U16 = U16(0)
   var o0:     U64 = U64(0)	// Allocated
@@ -398,6 +515,31 @@ struct TCPHeader
 		var size: U8 = this.th_offx2 and 0xf0
     size = size / 4
     size.u64()
+
+  fun ref set_sport(n: U16) => th_sport = n
+  fun ref set_dport(n: U16) => th_dport = n
+
+  fun ref serialize(): Array[U8] val =>
+    let rv: Array[U8] trn = recover trn Array[U8] end
+    rv.push_u16(th_sport.bswap())
+    rv.push_u16(th_dport.bswap())
+    rv.push_u32(th_seq.bswap())
+    rv.push_u32(th_ack.bswap())
+    rv.push_u8(th_offx2)
+    rv.push_u8(th_flags)
+    rv.push_u16(th_win.bswap())
+    rv.push_u16(th_sum.bswap())
+    rv.push_u16(th_urp.bswap())
+    rv.push_u64(0)
+    rv.push_u64(0)
+    rv.push_u32(0)
+//    rv.push_u64(0)
+//    rv.push_u64(0)
+
+    consume rv
+
+
+
 
   fun tcp_sport(): U16 => this.th_sport.bswap()
   fun tcp_dport(): U16 => this.th_dport.bswap()

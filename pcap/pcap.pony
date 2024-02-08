@@ -11,6 +11,7 @@ use @pcap_loop[I32](pcaps: NullablePointer[PcapS] tag, cnt: I32, cb: Pointer[Non
 use @pcap_geterr[Pointer[U8]](pcaps: NullablePointer[PcapS] tag)
 use @pcap_next[Pointer[U8]](pcaps: NullablePointer[PcapS] tag, hdr: Pcappkthdr tag)
 use @memcpy[Pointer[U8] iso](dst: Pointer[None], src: Pointer[U8] tag, size: U64)
+use @pcap_inject[I32](parg0: NullablePointer[PcapS] tag, parg1: Pointer[None] tag, parg2: U64)
 
 
 type PcapSuccess is {(): None} val
@@ -98,7 +99,10 @@ actor PonyPcap
       if (data.is_null()) then return end
       PcapInternalCallbacks.internal_callback(x, consume pcaphdr, data)
     else
-      @pcap_loop[I32](pcaps, 20, addressof PcapInternalCallbacks.internal_callback, x)
+      @pcap_loop[I32](pcaps, 5, addressof PcapInternalCallbacks.internal_callback, x)
     end
     start_capture_x(x)
 
+  be send_packet(a: Array[U8] val) =>
+    @pcap_inject(pcaps, a.cpointer(), a.size().u64())
+    @printf("Sent Packet %d\n".cstring(), a.size().u64())

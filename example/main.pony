@@ -1,6 +1,8 @@
-use "pcap"
+use "../pcap"
 use "files"
+use "collections"
 
+use @pcap_inject[I32](parg0: NullablePointer[PcapS] tag, parg1: Pointer[None] tag, parg2: U64)
 use @printf[I32](fmt: Pointer[U8] tag, ...)
 
 actor Main is PcapReceiver
@@ -14,14 +16,14 @@ actor Main is PcapReceiver
     env = env'
     env.out.print("Hello")
 
-/*
     pcap =
       PonyPcap(where device = "ens33",
                      failcb = thistag~failure(),
                   successcb = thistag~success(),
                      filter = "")
-*/
 
+
+/*
     pcap =
       PonyPcap.create_from_file(where fileauth = FileAuth(env.root),
                                                 filename = "sample-pcaps/SkypeIRC.cap",
@@ -32,12 +34,22 @@ actor Main is PcapReceiver
                                                successcb = thistag~success(),
                                                   filter = "")
 
+*/
 
-//    pcap.register_ipv4_icmp(
 
   be success() => None
-//    pcap.register_ipv4_icmp(cb)
-    pcap.start_capture_x(thistag)
+    let tcpout: TCPAssemble = TCPAssemble
+    try tcpout.set_shost("00:0c:29:eb:45:fd")? else env.out.print("not6") end
+    try tcpout.set_dhost("00:50:56:e4:05:95")? else env.out.print("not6") end
+    try tcpout.set_saddr("192.168.17.128")? else env.out.print("not4") end
+    try tcpout.set_daddr("138.197.1.107")? else env.out.print("not4") end
+    tcpout.set_sport(44449)
+    for f in Range[U16](0,1024) do
+      tcpout.set_dport(f)
+      pcap.send_packet(tcpout.serialize())
+    end
+
+//    pcap.start_capture_x(thistag)
 
   be failure(errbuf: String val) => None
     @printf("failure: %s\n".cstring(), errbuf.cstring())
