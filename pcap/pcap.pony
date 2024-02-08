@@ -96,11 +96,9 @@ actor PonyPcap
       var pcaphdr: Pcappkthdr iso = recover iso Pcappkthdr end
       var data: Pointer[U8] ref = @pcap_next(pcaps, pcaphdr)
       if (data.is_null()) then return end
-        None
       PcapInternalCallbacks.internal_callback(x, consume pcaphdr, data)
     else
       @pcap_loop[I32](pcaps, 20, addressof PcapInternalCallbacks.internal_callback, x)
-      @printf("20 cnt\n".cstring())
     end
     start_capture_x(x)
 

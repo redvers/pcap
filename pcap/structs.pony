@@ -6,7 +6,8 @@ struct IPv4
   var c: U8 = 0
   var d: U8 = 0
 
-  fun string(): String iso =>
+  fun string(): String iso^ =>
+    let rv: String iso =
     recover iso
       String(16)
       .>append(a.string())
@@ -17,6 +18,7 @@ struct IPv4
       .>append(".")
       .>append(d.string())
     end
+    consume rv
 
 /*
   Source: /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:8
@@ -290,14 +292,12 @@ struct EtherHost
   var a4: U8 = 0
   var a5: U8 = 0
 
-  fun string(): String iso =>
-    recover iso
-      let rvv: String ref = String(20)
-      @snprintf(rvv.cpointer(), 19, "%02x:%02x:%02x:%02x:%02x:%02x".cstring(),
-            a0, a1, a2, a3, a4, a5)
-			rvv.recalc()
-			consume rvv
-    end
+  fun string(): String iso^ =>
+    let rvv: String iso = recover iso String(20) end
+    @snprintf(rvv.cpointer(), 19, "%02x:%02x:%02x:%02x:%02x:%02x".cstring(),
+          a0, a1, a2, a3, a4, a5)
+  	rvv.recalc()
+  	consume rvv
 
 
 
@@ -421,5 +421,15 @@ struct UDPHeader
 
   fun sizeof(): U64 => 8
 
-  fun udp_sport(): U16 => this.uh_sport.bswap()
-  fun udp_dport(): U16 => this.uh_dport.bswap()
+  fun udp_sport(): U16 =>
+    ifdef bigendian then
+      this.uh_sport
+    else
+      this.uh_sport.bswap()
+    end
+  fun udp_dport(): U16 =>
+    ifdef bigendian then
+      this.uh_dport
+    else
+      this.uh_dport.bswap()
+    end
