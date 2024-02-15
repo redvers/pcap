@@ -5,3 +5,4 @@ meta/stdio/
 pcap/libshim.a
 pcap1
 sample-pcaps/archive.wrccdc.org/
+example/example

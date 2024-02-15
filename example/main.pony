@@ -14,7 +14,6 @@ actor Main is PcapReceiver
 
   new create(env': Env) =>
     env = env'
-    env.out.print("Hello")
 
     pcap =
       PonyPcap(where device = "ens33",
@@ -38,7 +37,23 @@ actor Main is PcapReceiver
 
 
   be success() => None
-    let tcpout: TCPAssemble = TCPAssemble
+    pcap.findalldevs(thistag~findalldevs())
+
+  be findalldevs(x: Array[PcapInterface] val) => None
+    for f in x.values() do
+      env.out.print("\n==")
+      env.out.print("Interface: " + f.name)
+      env.out.print("  Description: " + f.description)
+      env.out.print("  Flags: " + f.flags.string())
+      for g in f.addresses.values() do
+        env.out.print("    " + g.addr + " / " + g.netmask)
+      end
+
+    end
+    pcap.start_capture_x(thistag)
+
+
+/*  let tcpout: TCPAssemble = TCPAssemble
     try tcpout.set_shost("00:0c:29:eb:45:fd")? else env.out.print("not6") end
     try tcpout.set_dhost("00:50:56:e4:05:95")? else env.out.print("not6") end
     try tcpout.set_saddr("192.168.17.128")? else env.out.print("not4") end
@@ -48,8 +63,7 @@ actor Main is PcapReceiver
       tcpout.set_dport(f)
       pcap.send_packet(tcpout.serialize())
     end
-
-//    pcap.start_capture_x(thistag)
+*/
 
   be failure(errbuf: String val) => None
     @printf("failure: %s\n".cstring(), errbuf.cstring())

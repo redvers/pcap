@@ -12,8 +12,15 @@ use @pcap_geterr[Pointer[U8]](pcaps: NullablePointer[PcapS] tag)
 use @pcap_next[Pointer[U8]](pcaps: NullablePointer[PcapS] tag, hdr: Pcappkthdr tag)
 use @memcpy[Pointer[U8] iso](dst: Pointer[None], src: Pointer[U8] tag, size: U64)
 use @pcap_inject[I32](parg0: NullablePointer[PcapS] tag, parg1: Pointer[None] tag, parg2: U64)
+use @pcap_set_immediate_mode[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
+use @pcap_set_buffer_size[I32](parg0: NullablePointer[PcapS] tag, parg1: I32)
+use @pcap_stats[I32](parg0: NullablePointer[PcapS] tag, parg1: NullablePointer[Pcapstat] tag)
+use @pcap_close[None](parg0: NullablePointer[PcapS] tag)
+use @pcap_findalldevs[I32](parg0: Pointer[NullablePointer[Pcapif]] tag, parg1: Pointer[U8] tag)
 
 
+
+type PcapFindAllDevs is {(Array[PcapInterface] iso): None} val
 type PcapSuccess is {(): None} val
 type PcapFailure is {(String val): None} val
 type PcapGotPacket is @{(PcapReceiver, Pcappkthdr iso, Pointer[U8] ref): None}
@@ -105,4 +112,41 @@ actor PonyPcap
 
   be send_packet(a: Array[U8] val) =>
     @pcap_inject(pcaps, a.cpointer(), a.size().u64())
-    @printf("Sent Packet %d\n".cstring(), a.size().u64())
+
+  be set_immediate_mode(b: Bool) =>
+    if (b) then
+      @pcap_set_immediate_mode(pcaps, I32(1))
+    else
+      @pcap_set_immediate_mode(pcaps, I32(1))
+    end
+
+  be set_buffer_size(n: USize) =>
+    @pcap_set_buffer_size(pcaps, n.i32())
+
+  be stats(cb: {(Pcapstat val): None} val) =>
+    let pcapstat: Pcapstat ref = Pcapstat
+    @pcap_stats(pcaps, NullablePointer[Pcapstat](pcapstat))
+    cb(pcapstat.clone())
+
+  be findalldevs(cb: PcapFindAllDevs) =>
+    let errbufftag: Pointer[U8] tag = errbuf.cstring()
+    let rvv: Array[PcapInterface] iso = recover iso
+      var pcapif: NullablePointer[Pcapif] = NullablePointer[Pcapif].none()
+      let i: I32 = @pcap_findalldevs(addressof pcapif, errbufftag) // errbuf.cstring())
+
+      var rv: Array[PcapInterface] = Array[PcapInterface]
+
+      try
+        while (true) do
+          let pcapint: PcapInterface  = PcapInterface.create(pcapif)?
+          pcapif = pcapint.apply(pcapif)?
+          rv.push(pcapint)
+        end
+      else
+        None
+      end
+      consume rv
+    end
+    cb(consume rvv)
+
+  fun _final() => @pcap_close(pcaps)

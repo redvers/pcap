@@ -44,12 +44,28 @@ struct Timeval
 
   Fields (Offset in bits):
      000000: [FundamentalType(short unsigned int) size=16]: sa_family
-     000016: [ArrayType size=(0-13)]->[FundamentalType(char) size=8] -- UNSUPPORTED - FIXME: sa_data
+     000016: [ArrayType size=(0-13)]->[FundamentalType(char) size=8]
 */
 
 struct Sockaddr
   var sa_family: U16 = U16(0)
-  var sa_data: Pointer[U8] = Pointer[U8]
+  embed sa_data: SockAddrData = SockAddrData
+
+struct SockAddrData
+  var a0: U8 = 0 // sin_family
+  var a1: U8 = 0 // sin_family
+  var a2: U8 = 0 // sin_port
+  var a3: U8 = 0 // sin_port
+  var a4: U8 = 0 // a
+  var a5: U8 = 0 // b
+  var a6: U8 = 0 // c
+  var a7: U8 = 0 // d
+  var a8: U8 = 0
+  var a9: U8 = 0
+  var a10: U8 = 0
+  var a11: U8 = 0
+  var a12: U8 = 0
+  var a13: U8 = 0
 
 
 /*
@@ -229,6 +245,13 @@ struct Pcapstat
   var ps_recv: U32 = U32(0)
   var ps_drop: U32 = U32(0)
   var ps_ifdrop: U32 = U32(0)
+
+  fun clone(): Pcapstat iso^ =>
+    var rv: Pcapstat iso = recover iso Pcapstat end
+    rv.ps_recv = this.ps_recv
+    rv.ps_drop = this.ps_drop
+    rv.ps_ifdrop = this.ps_ifdrop
+    consume rv
 
 
 /*
