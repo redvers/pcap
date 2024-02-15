@@ -6,7 +6,7 @@
     "homepage": "https://github.com/redvers/pcap",
     "license": "BSD-2-Clause",
     "documentation_url": "",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "name": "pcap"
   }
 }
