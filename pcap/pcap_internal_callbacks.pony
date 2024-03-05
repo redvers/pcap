@@ -13,14 +13,14 @@ primitive PcapInternalCallbacks
     end
     if     (t == 0x0800) then
       PcapInternalCallbacks.ipv4(obj, consume hdr, data, consume etherHeader)
-    elseif (t == 0x0806) then
-      @printf("[ARP]\n".cstring())
-    elseif (t == 0x8100) then
-      @printf("[VLAN]\n".cstring())
-    elseif (t == 0x81DD) then
-      @printf("[IPv6]\n".cstring())
-    else
-      @printf("[%d]\n".cstring(), t)
+    elseif (t == 0x0806) then None
+//      @printf("[ARP]\n".cstring())
+    elseif (t == 0x8100) then None
+//      @printf("[VLAN]\n".cstring())
+    elseif (t == 0x81DD) then None
+//      @printf("[IPv6]\n".cstring())
+    else None
+//      @printf("[%d]\n".cstring(), t)
     end
 
 
