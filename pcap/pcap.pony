@@ -103,7 +103,10 @@ actor PonyPcap
     if (is_file) then
       var pcaphdr: Pcappkthdr iso = recover iso Pcappkthdr end
       var data: Pointer[U8] ref = @pcap_next(pcaps, pcaphdr)
-      if (data.is_null()) then return end
+      if (data.is_null()) then
+        x.completed()
+        return
+      end
       PcapInternalCallbacks.internal_callback(x, consume pcaphdr, data)
     else
       @pcap_loop[I32](pcaps, 5, addressof PcapInternalCallbacks.internal_callback, x)
